@@ -3,25 +3,26 @@ import {CGFobject} from '../lib/CGF.js';
  * MyDiamond
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param coords - Diamond texture coordinates
  */
-export class MyDiamond extends CGFobject {
-	constructor(scene) {
+
+export class MyTriangle extends CGFobject {
+
+    constructor(scene) {
 		super(scene);
 		this.initBuffers();
 	}
-	
-	initBuffers() {
+
+    initBuffers() {
 		this.vertices = [
-			-1, 0, 0,	//0
-			0, -1, 0,	//1
-			0, 1, 0,	//2
-			1, 0, 0		//3
+            1, -1, 0,    //0
+			-1, 1, 0,	//1
+			-1, -1, 0,	//2
 		];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
-			0,1,2,
-			1, 3, 2
+			0, 1, 2,
 		];
 
 		//The defined indices (and corresponding vertices)
@@ -30,5 +31,5 @@ export class MyDiamond extends CGFobject {
 
 		this.initGLBuffers();
 	}
-}
 
+}
