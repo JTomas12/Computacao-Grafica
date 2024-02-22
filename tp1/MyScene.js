@@ -1,6 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import {MyTriangle} from "./MyTriangle.js";
+import { MyTriangleBig } from "./MyTriangleBig.js";
+import { MyTriangleSmall } from "./MyTriangleSmall.js";
 
 /**
  * MyScene
@@ -11,6 +13,8 @@ export class MyScene extends CGFscene {
     super();
     this.displayDiamond = true; // Inicializa para exibir por padrão
     this.displayTriangle = true; // Inicializa para exibir por padrão
+    this.displayTriangleBig = true; // Inicializa para exibir por padrão
+    this.displayTriangleSmall = true; // Inicializa para exibir por padrão
   }
   init(application) {
     super.init(application);
@@ -30,6 +34,8 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.diamond = new MyDiamond(this);
     this.triangle = new MyTriangle(this);
+    this.triangleBig = new MyTriangleBig(this);
+    this.triangleSmall = new MyTriangleSmall(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -101,8 +107,14 @@ export class MyScene extends CGFscene {
   if (this.displayTriangle) {
     this.triangle.display();
   }
-   
-    
+
+  if (this.displayTriangleBig) {
+    this.triangleBig.display();
+  }
+
+  if (this.displayTriangleSmall) {
+    this.triangleSmall.display();
+  }
 
 
     // ---- END Primitive drawing section

@@ -28,6 +28,12 @@ export class MyInterface extends CGFinterface {
         // Controlador para a visibilidade do triângulo
         this.gui.add(this.scene, 'displayTriangle').name('Display Triangle');
 
+        // Controlador para a visibilidade do triângulo grande
+        this.gui.add(this.scene, 'displayTriangleBig').name('Display Triangle Big');
+
+        // Controlador para a visibilidade do triângulo pequeno
+        this.gui.add(this.scene, 'displayTriangleSmall').name('Display Triangle Small');
+
         return true;
     }
 }
