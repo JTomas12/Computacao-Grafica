@@ -23,17 +23,18 @@ export class MyInterface extends CGFinterface {
         //Slider element in GUI
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
-        this.gui.add(this.scene, 'displayDiamond').name('Display Diamond');
+        this.gui.add(this.scene, 'displayDiamond').name(' Diamond');
 
         // Controlador para a visibilidade do triângulo
-        this.gui.add(this.scene, 'displayTriangle').name('Display Triangle');
+        this.gui.add(this.scene, 'displayTriangle').name(' Triangle');
 
         // Controlador para a visibilidade do triângulo grande
-        this.gui.add(this.scene, 'displayTriangleBig').name('Display Triangle Big');
+        this.gui.add(this.scene, 'displayTriangleBig').name(' Triangle Big');
 
         // Controlador para a visibilidade do triângulo pequeno
-        this.gui.add(this.scene, 'displayTriangleSmall').name('Display Triangle Small');
+        this.gui.add(this.scene, 'displayTriangleSmall').name(' Triangle Small');
 
+        this.gui.add(this.scene, 'displayParalelogram').name('Paralelogram');
         return true;
     }
 }
