@@ -28,6 +28,7 @@ export class MyInterface extends CGFinterface {
         // Controlador para a visibilidade do triângulo
         this.gui.add(this.scene, 'displayTriangle').name('Display Triangle');
 
+        this.gui.add(this.scene, 'displayParalelogram').name('Display Paralelogram');
         return true;
     }
 }
