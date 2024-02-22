@@ -3,8 +3,8 @@
 ## Group T06G05
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| André Silva        | 202108724 | ...                |
-| João Teixeira      | 202108738 | ...                |
+| André Silva        | 202108724 | up202108724@up.pt                |
+| João Teixeira      | 202108738 | up202108738@up.pt                |
 
 ----
 
