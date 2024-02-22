@@ -4,8 +4,6 @@
 
 ## TP 1 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
-
 - No início da ficha , foi incluida uma classe MyDiamond que descrevia a representação tridimensional de um losango cujo centro geométrico coincidia com a origem do referencial:
 
 
