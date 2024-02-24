@@ -1,10 +1,10 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T06G05
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| André Silva        | 202108724 | up202108724@up.pt                |
+| João Teixeira      | 202108738 | up202108738@up.pt                |
 
 ----
 
