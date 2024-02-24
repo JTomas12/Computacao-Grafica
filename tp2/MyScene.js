@@ -5,6 +5,7 @@ import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import {MyParalelogram} from "./MyParalelogram.js";
 import { MyUnitCube } from "./myUnitCube.js";
+import {MyQuad} from "./MyQuad.js"
 /**
  * MyScene
  * @constructor
@@ -17,7 +18,8 @@ export class MyScene extends CGFscene {
     this.displayTriangleBig = false; // Inicializa para exibir por padrão
     this.displayTriangleSmall = false; // Inicializa para exibir por padrão
     this.displayParalelogram = false; //Inicializa para exibir por padrão
-    this.displayUnitCube=true;
+    this.displayUnitCube=false;
+    this.displayQuad=true;
   }
   init(application) {
     super.init(application);
@@ -41,6 +43,7 @@ export class MyScene extends CGFscene {
     this.triangleSmall = new MyTriangleSmall(this);
     this.paralelogram = new MyParalelogram(this);
     this.unitcube = new MyUnitCube(this);
+    this.quad= new MyQuad(this);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -126,7 +129,9 @@ export class MyScene extends CGFscene {
   if (this.displayUnitCube){
     this.unitcube.display()
   } 
-    
+  if(this.displayQuad){
+    this.quad.display()
+  } 
 
 
     // ---- END Primitive drawing section
