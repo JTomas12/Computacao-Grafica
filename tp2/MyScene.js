@@ -20,7 +20,7 @@ export class MyScene extends CGFscene {
     this.displayTriangleSmall = false; // Inicializa para exibir por padrão
     this.displayParalelogram = false; //Inicializa para exibir por padrão
     this.displayUnitCube=false;
-    this.displayQuad=true;
+    this.displayQuad=false;
     this.displayNewQuad=true;
   }
   init(application) {
