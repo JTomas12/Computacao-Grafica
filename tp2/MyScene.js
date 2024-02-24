@@ -4,6 +4,7 @@ import {MyTriangle} from "./MyTriangle.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import {MyParalelogram} from "./MyParalelogram.js";
+import { MyUnitCube } from "./myUnitCube.js";
 /**
  * MyScene
  * @constructor
@@ -11,11 +12,12 @@ import {MyParalelogram} from "./MyParalelogram.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
-    this.displayDiamond = true; // Inicializa para exibir por padrão
-    this.displayTriangle = true; // Inicializa para exibir por padrão
-    this.displayTriangleBig = true; // Inicializa para exibir por padrão
-    this.displayTriangleSmall = true; // Inicializa para exibir por padrão
-    this.displayParalelogram = true; //Inicializa para exibir por padrão
+    this.displayDiamond = false; // Inicializa para exibir por padrão
+    this.displayTriangle = false; // Inicializa para exibir por padrão
+    this.displayTriangleBig = false; // Inicializa para exibir por padrão
+    this.displayTriangleSmall = false; // Inicializa para exibir por padrão
+    this.displayParalelogram = false; //Inicializa para exibir por padrão
+    this.displayUnitCube=true;
   }
   init(application) {
     super.init(application);
@@ -38,7 +40,7 @@ export class MyScene extends CGFscene {
     this.triangleBig = new MyTriangleBig(this);
     this.triangleSmall = new MyTriangleSmall(this);
     this.paralelogram = new MyParalelogram(this);
-
+    this.unitcube = new MyUnitCube(this);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -121,7 +123,9 @@ export class MyScene extends CGFscene {
   if (this.displayParalelogram){
       this.paralelogram.display()
     }
-   
+  if (this.displayUnitCube){
+    this.unitcube.display()
+  } 
     
 
 
