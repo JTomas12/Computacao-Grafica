@@ -23,6 +23,7 @@ export class MyScene extends CGFscene {
     this.displayUnitCube=false;
     this.displayQuad=false;
     this.displayNewQuad=true;
+    this.displayTangram = true;
   }
   init(application) {
     super.init(application);
@@ -132,8 +133,11 @@ export class MyScene extends CGFscene {
   if (this.displayParalelogram){
       this.paralelogram.display()
     }
-  
-  this.tangram.display()
+   
+
+  if (this.displayTangram){
+    this.tangram.display()
+  }
 
    
     
