@@ -17,6 +17,7 @@ export class MyScene extends CGFscene {
     this.displayTriangleBig = true; // Inicializa para exibir por padrão
     this.displayTriangleSmall = true; // Inicializa para exibir por padrão
     this.displayParalelogram = true; //Inicializa para exibir por padrão
+    this.displayTangram = true; //Inicializa para exibir por padrão
   }
   init(application) {
     super.init(application);
@@ -123,8 +124,11 @@ export class MyScene extends CGFscene {
   if (this.displayParalelogram){
       this.paralelogram.display()
     }
-  
-  this.tangram.display()
+   
+
+  if (this.displayTangram){
+    this.tangram.display()
+  }
 
    
     

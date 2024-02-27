@@ -52,5 +52,38 @@ export class MyTangram extends CGFobject {
             this.scene.setDiffuse(1, 1, 0, 0)
             this.paralelogram.display()
             this.scene.popMatrix()
+            
+            // Red Triangle
+            this.scene.pushMatrix()
+            this.scene.translate(3, 0, 0)
+            this.scene.rotate( 90* Math.PI / 180, 0, 0, 1)
+            this.scene.setDiffuse(1, 0, 0, 0)
+            this.triangleSmall.display()
+            this.scene.popMatrix()
+
+            // Pink Triangle
+            this.scene.pushMatrix()
+            this.scene.translate(4, 0, 0)
+            this.scene.rotate(0, 0, 0, 1)
+            this.scene.setDiffuse(255 / 255, 153 / 255, 204 / 255, 0)
+            this.triangle.display()
+            this.scene.popMatrix()
+
+            // Orange Triangle
+            this.scene.pushMatrix()
+            this.scene.translate(-0.4, 0.4, 0)
+            this.scene.rotate(135 * Math.PI / 180, 0, 0, 1)
+            this.scene.setDiffuse(255 / 255, 128 / 255, 0 / 255, 0)
+            this.triangleBig.display()
+            this.scene.popMatrix()
+
+            // Blue Triangle
+            this.scene.pushMatrix()
+            this.scene.translate(-3.2, 0.4, 0)
+            this.scene.rotate(225 * Math.PI / 180, 0, 0, 1)
+            this.scene.setDiffuse(0, 0, 1, 0)
+            this.triangleBig.display()
+            this.scene.popMatrix()
+    
 }
 }
