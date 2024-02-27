@@ -12,6 +12,7 @@ export class MyUnitCubeQuad extends CGFobject {
     }
 
     display() {
+
         // Face frontal
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
