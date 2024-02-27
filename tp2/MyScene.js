@@ -5,6 +5,9 @@ import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import {MyParalelogram} from "./MyParalelogram.js";
 import { MyTangram } from "./MyTangram.js";
+import { MyUnitCube } from "./myUnitCube.js";
+import {MyQuad} from "./MyQuad.js"
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 /**
  * MyScene
  * @constructor
@@ -12,11 +15,14 @@ import { MyTangram } from "./MyTangram.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
-    this.displayDiamond = true; // Inicializa para exibir por padrão
-    this.displayTriangle = true; // Inicializa para exibir por padrão
-    this.displayTriangleBig = true; // Inicializa para exibir por padrão
-    this.displayTriangleSmall = true; // Inicializa para exibir por padrão
-    this.displayParalelogram = true; //Inicializa para exibir por padrão
+    this.displayDiamond = false; // Inicializa para exibir por padrão
+    this.displayTriangle = false; // Inicializa para exibir por padrão
+    this.displayTriangleBig = false; // Inicializa para exibir por padrão
+    this.displayTriangleSmall = false; // Inicializa para exibir por padrão
+    this.displayParalelogram = false; //Inicializa para exibir por padrão
+    this.displayUnitCube=false;
+    this.displayQuad=false;
+    this.displayNewQuad=true;
   }
   init(application) {
     super.init(application);
@@ -41,6 +47,9 @@ export class MyScene extends CGFscene {
     this.paralelogram = new MyParalelogram(this);
     this.tangram = new MyTangram(this);
 
+    this.unitcube = new MyUnitCube(this);
+    this.quad= new MyQuad(this);
+    this.unitcubequad= new MyUnitCubeQuad(this);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -129,6 +138,15 @@ export class MyScene extends CGFscene {
    
     
 
+  if (this.displayUnitCube){
+    this.unitcube.display()
+  } 
+  if(this.displayQuad){
+    this.quad.display()
+  } 
+  if(this.displayNewQuad){
+    this.unitcubequad.display()
+  }
 
     // ---- END Primitive drawing section
   }
