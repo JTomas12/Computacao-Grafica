@@ -1,4 +1,9 @@
-# [COPY FROM PREVIOUS TP AND ADJUST]
+# CG 2023/2024
+
+## Group T06G05
+
+## TP 2 Notes
+
 No exercício 1, desenvolvemos uma classe denominada MyTangram com base nas figuras que foram criadas na aula prática anterior. Uma vez que o tangrama consiste numa construção geométrica composta por figuras criadas na TP1, para formar o tangrama pretendido,  criámos as figuras necessárias , organizando-as através de  transformações geométricas ( nomeadamente translações, rotações e escalonamentos) , dispondo-as de uma forma relativa a fim de chegar ao resultado desejado. Implementámos também uma caixa de seleção que possibilita controlar a visibilidade do tangrama.
 
 ![Screenshot 2](screenshots/cg-t06g05-tp2-1.png)
