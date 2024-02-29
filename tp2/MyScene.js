@@ -24,6 +24,7 @@ export class MyScene extends CGFscene {
     this.displayQuad=false;
     this.displayNewQuad=true;
     this.displayTangram = true;
+    this.displayTangram2 = true;
   }
   init(application) {
     super.init(application);
@@ -47,6 +48,7 @@ export class MyScene extends CGFscene {
     this.triangleSmall = new MyTriangleSmall(this);
     this.paralelogram = new MyParalelogram(this);
     this.tangram = new MyTangram(this);
+    this.tangram2 = new MyTangram(this);
 
     this.unitcube = new MyUnitCube(this);
     this.quad= new MyQuad(this);
@@ -144,14 +146,16 @@ export class MyScene extends CGFscene {
       
       this.pushMatrix()
       this.rotate(3 * Math.PI / 2, 1, 0, 0)
-      this.translate(4.5, -3, 0.1);
+      this.translate(4.5, -4.5, 0.1);
       this.scale(0.78,0.78,0.78)
       this.tangram.display()
       this.popMatrix()
     }
 
 
-   
+  if (this.displayTangram2){
+    this.tangram2.display()
+  }
     
 
   if (this.displayUnitCube){

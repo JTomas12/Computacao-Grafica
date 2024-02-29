@@ -39,7 +39,8 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayUnitCube').name('First Cube');
 
         this.gui.add(this.scene, 'displayNewQuad').name('Second Cube');
-        this.gui.add(this.scene, 'displayTangram').name('Tangram');
+        this.gui.add(this.scene, 'displayTangram').name('Tangram and Cube');
+        this.gui.add(this.scene, 'displayTangram2').name('Tangram');
         return true;
     }
 }

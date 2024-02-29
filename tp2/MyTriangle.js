@@ -15,7 +15,7 @@ export class MyTriangle extends CGFobject {
 
     initBuffers() {
 		this.vertices = [
-            1, -1, 0,    //0
+            1, -1, 0,    //0 (sqrt((1+1)^2 + (-1-1)^2))
 			-1, 1, 0,	//1
 			-1, -1, 0,	//2
 		];
