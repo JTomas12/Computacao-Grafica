@@ -10,6 +10,7 @@ import { MyPlane } from "./MyPlane.js";
 export class MyScene extends CGFscene {
     constructor() {
         super();
+        this.globalAmbientLight = [0.3, 0.3, 0.3, 1.0];
     }
     init(application) {
         super.init(application);
@@ -46,7 +47,7 @@ export class MyScene extends CGFscene {
 
     }
     initLights() {
-        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
+        this.setGlobalAmbientLight(...this.globalAmbientLight);
 
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
