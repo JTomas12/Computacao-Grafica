@@ -41,6 +41,8 @@ export class MyPrism extends CGFobject {
                 this.indices.push(index+1, index+3, index+2);
                 this.normals.push(x_normal/modulo, y_normal/modulo, 0);
                 this.normals.push(x_normal/modulo, y_normal/modulo, 0);
+                this.normals.push(x_normal/modulo, y_normal/modulo, 0);
+                this.normals.push(x_normal/modulo, y_normal/modulo, 0);
                 index+=4;
             }
         }
