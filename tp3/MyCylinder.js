@@ -25,19 +25,18 @@ export class MyCylinder extends CGFobject {
 
             let x1 = Math.cos(i*angle);
             let y1 = Math.sin(i*angle);
-            let x2 = Math.cos((i+1)*angle);
-            let y2 = Math.sin((i+1)*angle);
+            let modulo = Math.sqrt(x1*x1 + y1*y1);
+            
             let z_increment = 1 / this.stacks;
             for (let j = 0; j <= this.stacks; j++) {
-                this.vertices.push(x1, y1, j*z_increment);
-                this.vertices.push(x2, y2, j*z_increment);
-                this.vertices.push(x1, y1, (j+1)*z_increment);
-                this.vertices.push(x2, y2, (j+1)*z_increment);
-                this.indices.push(index, index+1, index+2);
-                this.indices.push(index+1, index+3, index+2);
-                //this.normals.push(x1, y1, j*z_increment);
-                index+=4;
+                this.vertices.push(x1, y1, j*z_increment);  //0
+                this.normals.push(x1/modulo, y1/modulo, 0);
             }
+            
+        }
+        for (let k = 0; k < this.slices; k++){
+            this.indices.push(this.stacks*k, this.stacks*k+this.stacks+1, this.stacks*k+1+2*this.stacks);
+            this.indices.push(this.stacks*k+1+this.stacks, this.stacks*k+this.stacks+2, this.stacks*k+this.stacks+1);
         }
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
