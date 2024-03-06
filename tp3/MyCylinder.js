@@ -35,8 +35,25 @@ export class MyCylinder extends CGFobject {
             
         }
         for (let k = 0; k < this.slices; k++){
-            this.indices.push(this.stacks*k, this.stacks*k+this.stacks+1, this.stacks*k+1+2*this.stacks);
-            this.indices.push(this.stacks*k+1+this.stacks, this.stacks*k+this.stacks+2, this.stacks*k+this.stacks+1);
+            for (let j = 0; j < this.stacks; j++) {
+                // First triangle
+                if (k != this.slices - 1){
+                this.indices.push(index, index + this.stacks + 1, index + this.stacks);
+                this.indices.push(index + 1, index + this.stacks + 1, index + this.stacks);
+        
+                this.indices.push(index+this.stacks, index + this.stacks + this.stacks + 1, index + this.stacks+1);
+                this.indices.push(index + this.stacks + this.stacks + 1, index+this.stacks, index + this.stacks+1);
+                // Second triangle (complementary)
+                this.indices.push(index + this.stacks, index + this.stacks + 1, index);
+                this.indices.push(index + 1, index + this.stacks + 1, index + this.stacks);
+        
+                index++;
+                } else {
+                    continue;
+                }
+            }
+            // Move to the next slice
+            index++;
         }
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
