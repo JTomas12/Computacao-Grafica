@@ -41,6 +41,8 @@ export class MyCylinder extends CGFobject {
                 
                 this.indices.push(current, next, currentAbove);
                 this.indices.push(currentAbove, next, nextAbove);
+                this.indices.push(current, currentAbove, next);
+                this.indices.push(currentAbove, nextAbove, next);
             }
         }
 		//The defined indices (and corresponding vertices)
