@@ -21,22 +21,29 @@ export class MyCylinder extends CGFobject {
 
         let angle = 2*Math.PI/this.slices;
         let index =0;
-        for(let i = 0; i < this.slices; i++){
-
-            let x1 = Math.cos(i*angle);
-            let y1 = Math.sin(i*angle);
-            let modulo = Math.sqrt(x1*x1 + y1*y1);
-            
-            let z_increment = 1 / this.stacks;
-            for (let j = 0; j <= this.stacks; j++) {
-                this.vertices.push(x1, y1, j*z_increment);  //0
-                this.normals.push(x1/modulo, y1/modulo, 0);
+        for (let stack = 0; stack <= this.stacks; stack++) {
+            let z = stack / this.stacks;
+            for (let slice = 0; slice < this.slices; slice++) {
+                let x = Math.cos(slice * angle);
+                let y = Math.sin(slice * angle);
+                
+                this.vertices.push(x, y, z);
+                this.normals.push(x, y, 0);
             }
-            
         }
-        for (let k = 0; k < this.slices; k++){
-            this.indices.push(this.stacks*k, this.stacks*k+this.stacks+1, this.stacks*k+1+2*this.stacks);
-            this.indices.push(this.stacks*k+1+this.stacks, this.stacks*k+this.stacks+2, this.stacks*k+this.stacks+1);
+        for (let j = 0; j < this.stacks; j++) {
+            for (let k = 0; k < this.slices; k++) {
+                let nextSlice = (k + 1) % this.slices;
+                let current = j * this.slices + k;
+                let next = j * this.slices + nextSlice;
+                let currentAbove = (j + 1) * this.slices + k;
+                let nextAbove = (j + 1) * this.slices + nextSlice;
+                
+                this.indices.push(current, next, currentAbove);
+                this.indices.push(currentAbove, next, nextAbove);
+                this.indices.push(current, currentAbove, next);
+                this.indices.push(currentAbove, nextAbove, next);
+            }
         }
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles

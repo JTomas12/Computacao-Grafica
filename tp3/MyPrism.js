@@ -39,6 +39,8 @@ export class MyPrism extends CGFobject {
                 this.vertices.push(x2, y2, (j+1)*z_increment);
                 this.indices.push(index, index+1, index+2);
                 this.indices.push(index+1, index+3, index+2);
+                this.indices.push(index+1, index, index+2);
+                this.indices.push(index+3, index+1, index+2);
                 this.normals.push(x_normal/modulo, y_normal/modulo, 0);
                 this.normals.push(x_normal/modulo, y_normal/modulo, 0);
                 this.normals.push(x_normal/modulo, y_normal/modulo, 0);
