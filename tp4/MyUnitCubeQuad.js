@@ -2,9 +2,15 @@ import { CGFobject } from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
 
 export class MyUnitCubeQuad extends CGFobject {
-    constructor(scene) {
+    constructor(scene, textureTop, textureFront, textureBack, textureLeft, textureRigth, textureBottom) {
         super(scene);
         this.initQuads();
+        this.textureTop = textureTop
+        this.textureFront = textureFront
+        this.textureBack = textureBack
+        this.textureLeft = textureLeft
+        this.textureRigth = textureRigth
+        this.textureBottom = textureBottom
     }
 
     initQuads() {
@@ -16,6 +22,7 @@ export class MyUnitCubeQuad extends CGFobject {
         // Face frontal
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
+        this.textureFront.bind();
         this.quad.display();
         this.scene.popMatrix();
 
@@ -23,6 +30,7 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI, 0, 1, 0);
         this.scene.translate(0, 0, 0.5);
+        this.textureBack.bind();
         this.quad.display();
         this.scene.popMatrix();
 
@@ -30,6 +38,7 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.translate(0, 0, 0.5);
+        this.textureRigth.bind();
         this.quad.display();
         this.scene.popMatrix();
 
@@ -37,6 +46,7 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(-Math.PI / 2, 0, 1, 0);
         this.scene.translate(0, 0, 0.5);
+        this.textureLeft.bind();
         this.quad.display();
         this.scene.popMatrix();
 
@@ -44,6 +54,7 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.scene.translate(0, 0, 0.5);
+        this.textureTop.bind();
         this.quad.display();
         this.scene.popMatrix();
 
@@ -51,6 +62,7 @@ export class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.translate(0, 0, 0.5);
+        this.textureBottom.bind();
         this.quad.display();
         this.scene.popMatrix();
     }

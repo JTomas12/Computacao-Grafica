@@ -1,5 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -27,6 +28,8 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
+        
+
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -42,6 +45,9 @@ export class MyScene extends CGFscene {
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.textureTop = new CGFtexture(this, 'images/mineTop.png');
+        this.textureSide = new CGFtexture(this, 'images/mineSide.png');
+        this.textureBottom = new CGFtexture(this, 'images/mineBottom.png');
         //-------
 
         //-------Objects connected to MyInterface
@@ -58,6 +64,8 @@ export class MyScene extends CGFscene {
         this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2 };
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
+
+        this.unitQuad = new MyUnitCubeQuad(this, this.textureTop, this.textureSide, this.textureSide, this.textureSide, this.textureSide, this.textureBottom);
 
       }
 
@@ -103,7 +111,7 @@ export class MyScene extends CGFscene {
         // Initialize Model-View matrix as identity (no transformation
         this.updateProjectionMatrix();
         this.loadIdentity();
-        // Apply transformations corresponding to the camera position relative to the origin
+        // Apply transformations correspo<nding to the camera position relative to the origin
         this.applyViewMatrix();
 
         // Draw axis
@@ -125,6 +133,8 @@ export class MyScene extends CGFscene {
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
         this.quad.display();
+
+        this.unitQuad.display();
 
         // ---- END Primitive drawing section
     }
