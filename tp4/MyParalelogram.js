@@ -2,9 +2,11 @@ import { CGFobject } from "../lib/CGF.js";
 
 export class MyParalelogram extends CGFobject{
 
-    constructor(scene) {
+    constructor(scene, coords) {
 		super(scene);
 		this.initBuffers();
+        if (coords != undefined)
+            this.updateTexCoords(coords);
 	}
 
     initBuffers(){
@@ -20,24 +22,28 @@ export class MyParalelogram extends CGFobject{
         ];
         this.indices =[
             0,1,3,
-            0,3,2,
-            4,5,7,
-            7,6,4,
+            3,2,0,
+            0,3,1,
+            2,3,0
         ];
 
         this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-            0, 0, -1,
 			0, 0, -1,
 			0, 0, -1,
 			0, 0, -1,
+			0, 0, -1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
 		]
 
         this.primitiveType = this.scene.gl.TRIANGLES;
 
 		this.initGLBuffers();
     }
+    updateTexCoords(coords) {
+		this.texCoords = [...coords];
+		this.updateTexCoordsGLBuffers();
+	}
 }
