@@ -9,6 +9,9 @@ import { MyTangram } from "./MyTangram.js";
 export class MyScene extends CGFscene {
     constructor() {
         super();
+        this.displayTangram = true;
+        this.displayUnitCube = true;
+        this.displayQuad = true;
     }
     init(application) {
         super.init(application);
@@ -106,9 +109,16 @@ export class MyScene extends CGFscene {
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
     
-        //this.quad.display();
-        //this.unitQuad.display();
+        if(this.displayQuad){
+            this.quad.display();
+        }
+        if(this.displayUnitCube){
+            
+            this.unitQuad.display();
+        }
+        if (this.displayTangram){
         this.tangram.display();
+        }
         // ---- END Primitive drawing section
     }
 }
