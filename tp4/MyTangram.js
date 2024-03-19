@@ -82,7 +82,8 @@ export class MyTangram extends CGFobject {
             this.scene.translate(-3.64, -0.6, 0)
             this.scene.scale(1.5, 1.5, 1.5)
             this.scene.rotate(225 * Math.PI / 180, 0, 0, 1)
-            this.scene.setDiffuse(0, 0, 1, 0)
+            this.scene.setAmbient(128,128,128,0)
+            this.scene.setDiffuse(0, 0, 128, 0)
             this.triangleBig.display()
             this.scene.popMatrix()
     

@@ -20,9 +20,9 @@ export class MyTriangle extends CGFobject {
             1, -1, 0,    //0 (sqrt((1+1)^2 + (-1-1)^2))
 			-1, 1, 0,	//1
 			-1, -1, 0,	//2
-			1, -1, 0,    //0 
-			-1, 1, 0,	//1
-			-1, -1, 0,	//2
+		//	1, -1, 0,    //0 
+		//	-1, 1, 0,	//1
+		//	-1, -1, 0,	//2
 		];
 
 		//Counter-clockwise reference of vertices
@@ -30,7 +30,11 @@ export class MyTriangle extends CGFobject {
 			0, 1, 2,
             2,1,0,
 		];
-
+		this.texCoords=[
+			0,0.5,
+			0,1,
+			0.5,1,
+		]
 		this.normals = [
             0, 0, 1,  // Normal for vertex 0
             0, 0, 1,  // Normal for vertex 1

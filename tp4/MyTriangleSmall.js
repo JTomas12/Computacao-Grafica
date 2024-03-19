@@ -21,9 +21,6 @@ export class MyTriangleSmall extends CGFobject {
             -1, 0, 0,    //0
             1, 0, 0,	//1
             0, 1, 0,    //2
-            -1, 0, 0,    //3
-            1, 0, 0,	//4
-            0, 1, 0,	//5
         ];
 
         //Counter-clockwise reference of vertices
@@ -31,23 +28,17 @@ export class MyTriangleSmall extends CGFobject {
             0, 1, 2,
             2,1,0
         ];
-
+        this.texCoords = [
+            0,0,
+            0.25,0.25,
+            0,0.5
+            
+        ]
         this.normals = [
             0, 0, 1,  // Normal for vertex 0
             0, 0, 1,  // Normal for vertex 1
             0, 0, 1,  // Normal for vertex 2
             
-    
-            0, 0, -1, // Normal for vertex 0, back face
-            0, 0, -1, // Normal for vertex 1, back face
-            0, 0, -1, // Normal for vertex 2, back face
-            
-        ];
-        this.texCoords = [
-            0,0,
-            0.5,0.5,
-            0.5,0.5,
-            1,0
         ];
         //The defined indices (and corresponding vertices)
         //will be read in groups of three to draw triangles
