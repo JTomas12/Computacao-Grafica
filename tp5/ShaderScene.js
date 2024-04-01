@@ -70,14 +70,18 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setDiffuse(0.7, 0.7, 0.7, 1);
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
-
+		/*
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
 		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
+		*/
+		this.texture = new CGFtexture(this, "textures/waterTex.jpg");
+		this.appearance.setTexture(this.texture);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-		// shaders initialization
+		this.texture2 = new CGFtexture(this, "textures/waterMap.jpg");
 
 		this.testShaders = [
 			new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag"),
@@ -90,7 +94,8 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl, "shaders/teapot.vert", "shaders/teapot.frag"),
-			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/greySepia.frag")
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/greySepia.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -98,7 +103,8 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
-
+		this.testShaders[9].setUniformsValues({ normScale: 1, timeFactor: 0 });
+		this.testShaders[10].setUniformsValues({ normScale: 1, timeFactor: 0 });
 
 		// Shaders interface variables
 
@@ -113,7 +119,8 @@ export class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'Bule': 9,
-			'Grey Sepia': 10
+			'Grey Sepia': 10,
+			'Water': 11
 		};
 
 		// shader code panels references
