@@ -43,7 +43,7 @@ export class MyTangram extends CGFobject {
             // Purple Triangle
             this.scene.pushMatrix()
             this.scene.translate(1, 0, 0)
-            this.scene.setDiffuse(1,0,0,0)
+            this.scene.setDiffuse(0,0,1,0)
             this.triangleSmall2.display()
             this.scene.popMatrix()
 
