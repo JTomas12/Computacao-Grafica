@@ -21,7 +21,9 @@ export class MyTangram extends CGFobject {
             this.triangleBig = new MyTriangleBig(this.scene);
             this.triangleBig2 = new MyTriangleBig(this.scene);
             this.triangleSmall = new MyTriangleSmall(this.scene);
-            this.triangleBig2.settextcoords([0,0,0.5,0.5,1,0])
+            this.triangleSmall2 = new MyTriangleSmall(this.scene);
+            this.triangleBig2.updateTexCoords([0,0,0.5,0.5,1,0])
+            this.triangleSmall2.updateTexCoords([0,0,0,0.5,0.25,0.25,])
         }
     
     
@@ -41,8 +43,8 @@ export class MyTangram extends CGFobject {
             // Purple Triangle
             this.scene.pushMatrix()
             this.scene.translate(1, 0, 0)
-            this.scene.setDiffuse(76 / 255, 0 / 255, 153 / 255, 0)
-            this.triangleSmall.display()
+            this.scene.setDiffuse(1,0,0,0)
+            this.triangleSmall2.display()
             this.scene.popMatrix()
 
             //Parallelogram
@@ -57,7 +59,7 @@ export class MyTangram extends CGFobject {
             this.scene.pushMatrix()
             this.scene.translate(3, 0, 0)
             this.scene.rotate( 90* Math.PI / 180, 0, 0, 1)
-            this.scene.setDiffuse(1, 0, 0, 0)
+            
             this.triangleSmall.display()
             this.scene.popMatrix()
 

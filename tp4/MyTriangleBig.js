@@ -54,5 +54,6 @@ export class MyTriangleBig extends CGFobject {
 	}
     settextcoords(textCoords){
         this.texCoords = textCoords;
+        
     }
 }
