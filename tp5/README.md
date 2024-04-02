@@ -1,3 +1,8 @@
+# CG 2023/2024
+
+## Group T06G05
+
+## TP 5 Notes
 No primeiro exercício, foi nos sugerido que coloríssmos um modelo 3D de um bule (teapot), sendo que as cores que este teria eram decididas pela posição dos seus fragmentos na janela.
 Assim, criando uma nova variável que representasse a posição do vértice a ser mapeado para o shader de fragmento, foi possível definir a sua cor como amarela no caso da posição do vértice estar acima do hemisfério superior do bule, e azul quando este vértice se situasse na metade inferior do bule:
 
