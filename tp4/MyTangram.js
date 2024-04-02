@@ -19,8 +19,9 @@ export class MyTangram extends CGFobject {
             this.paralelogram = new MyParalelogram(this.scene);
             this.triangle = new MyTriangle(this.scene);
             this.triangleBig = new MyTriangleBig(this.scene);
+            this.triangleBig2 = new MyTriangleBig(this.scene);
             this.triangleSmall = new MyTriangleSmall(this.scene);
-
+            this.triangleBig2.settextcoords([0,0,0.5,0.5,1,0])
         }
     
     
@@ -73,7 +74,7 @@ export class MyTangram extends CGFobject {
             this.scene.translate(0.6,-0.6, 0)
             this.scene.scale(1.5, 1.5, 1.5)
             this.scene.rotate(135 * Math.PI / 180, 0, 0, 1)
-            this.scene.setDiffuse(255 / 255, 128 / 255, 0 / 255, 0)
+            
             this.triangleBig.display()
             this.scene.popMatrix()
 
@@ -82,9 +83,7 @@ export class MyTangram extends CGFobject {
             this.scene.translate(-3.64, -0.6, 0)
             this.scene.scale(1.5, 1.5, 1.5)
             this.scene.rotate(225 * Math.PI / 180, 0, 0, 1)
-            this.scene.setAmbient(128,128,128,0)
-            this.scene.setDiffuse(0, 0, 128, 0)
-            this.triangleBig.display()
+            this.triangleBig2.display()
             this.scene.popMatrix()
     
 }

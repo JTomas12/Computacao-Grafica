@@ -30,12 +30,7 @@ export class MyTriangleBig extends CGFobject {
             0, 1, 2,
             2,1,0
         ];
-        this.texCoords =[
-            1,0, //0
-            0.5,0.5,
-            1,1
-            
-        ]
+        this.texCoords =[0.5,0.5,1,0,1,1]
         this.normals = [
             0, 0, 1,  // Normal for vertex 0
             0, 0, 1,  // Normal for vertex 1
@@ -57,5 +52,7 @@ export class MyTriangleBig extends CGFobject {
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();
 	}
-    
+    settextcoords(textCoords){
+        this.texCoords = textCoords;
+    }
 }
