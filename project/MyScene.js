@@ -25,7 +25,7 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.sphere = new MySphere(this, 16, 8, 1, 1);
+    this.sphere = new MySphere(this, 20, 20, 1, 1);
     this.plane = new MyPlane(this,30);
 
     //Objects connected to MyInterface
@@ -78,7 +78,7 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     // Draw objects
 
     if (this.displaySphere) this.sphere.display();
-    
+
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
