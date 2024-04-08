@@ -27,6 +27,10 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 20, 20, 1, 1);
+    this.earthTexture = new CGFtexture(this, "images/earth.jpg");
+    this.material = new CGFappearance(this);
+    this.material.setEmission(1, 1, 1, 1)
+    this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
 
     //Objects connected to MyInterface
@@ -78,7 +82,12 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.displayAxis) this.axis.display();
     // Draw objects
 
-    if (this.displaySphere) this.sphere.display();
+    if (this.displaySphere) {
+     
+      this.material.apply();
+      this.sphere.display();
+
+    }
 
     // ---- BEGIN Primitive drawing section
 
