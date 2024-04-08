@@ -21,6 +21,7 @@ export class MyScene extends CGFscene {
     this.gl.clearDepth(100.0);
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
+    this.gl.disable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
     //Initialize scene objects

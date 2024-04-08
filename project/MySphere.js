@@ -19,12 +19,15 @@ export class MySphere extends CGFobject {
     
     initBuffers() {
         this.vertices = [];
+        this.texCoords = [];
+        this.normals = [];
     
         var delta_alfa = 2 * Math.PI / this.slices;
-        var delta_beta = Math.PI / (this.stacks + 1);
+        var delta_beta = Math.PI / (this.stacks );
     
         for (var i = 0; i <= this.stacks; i++) {
             var beta = -Math.PI / 2 + i * delta_beta;
+            this.texCoords.push(0, 1 - i / this.stacks);
     
             for (var j = 0; j <= this.slices; j++) {
                 var alfa = j * delta_alfa;
@@ -34,6 +37,10 @@ export class MySphere extends CGFobject {
                 var z = Math.sin(beta);
     
                 this.vertices.push(x, y, z);
+                this.normals.push(-x, -y, -z);
+                this.texCoords.push(0, 1);
+                
+
             }
         }
     
@@ -41,6 +48,7 @@ export class MySphere extends CGFobject {
         var index = 0;
         for (var i = 0; i < this.stacks; i++) {
             for (var j = 0; j < this.slices; j++) {
+                this.texCoords.push(i / this.slices, 1 - j / this.stacks);
                 if (this.inside == 1) {
                     this.indices.push(index, index + 1, index + this.slices + 1);
                     this.indices.push(index + 1, index + this.slices + 2, index + this.slices + 1);
@@ -53,7 +61,7 @@ export class MySphere extends CGFobject {
             index++;
         }
     
-        this.normals = [];
+
     
         //The defined indices (and corresponding vertices)
         //will be read in groups of three to draw triangles
