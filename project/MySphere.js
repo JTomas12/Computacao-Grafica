@@ -22,19 +22,19 @@ export class MySphere extends CGFobject {
         this.texCoords = [];
         this.normals = [];
     
-        var delta_alfa = 2 * Math.PI / this.slices;
-        var delta_beta = Math.PI / (this.stacks );
+        var delta_alfa = 2 * Math.PI / this.stacks;
+        var delta_beta = Math.PI / (this.slices );
     
         for (var i = 0; i <= this.stacks; i++) {
             var beta = -Math.PI / 2 + i * delta_beta;
             
     
             for (var j = 0; j <= this.slices; j++) {
-                var alfa = j * delta_alfa;
+                var alfa = j * delta_alfa ;
     
-                var x = - (Math.cos(beta) * Math.cos(alfa));
-                var z = Math.cos(beta) * Math.sin(alfa);
-                var y = - Math.sin(beta);
+                var x = -(Math.cos(beta) * Math.cos(alfa));
+                var y = -Math.sin(beta);
+                var z =  Math.cos(beta) * Math.sin(alfa);
     
                 this.vertices.push(x, y, z);
                 this.normals.push(-x, -y, -z);
