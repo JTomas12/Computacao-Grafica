@@ -22,8 +22,8 @@ export class MySphere extends CGFobject {
         this.texCoords = [];
         this.normals = [];
     
-        var delta_alfa = 2 * Math.PI / this.stacks;
-        var delta_beta = Math.PI / (this.slices );
+        var delta_alfa = 2 * Math.PI / this.slices;
+        var delta_beta = Math.PI / (this.stacks );
     
         for (var i = 0; i <= this.stacks; i++) {
             var beta = -Math.PI / 2 + i * delta_beta;
