@@ -27,18 +27,19 @@ export class MySphere extends CGFobject {
     
         for (var i = 0; i <= this.stacks; i++) {
             var beta = -Math.PI / 2 + i * delta_beta;
-            this.texCoords.push(0, 1 - i / this.stacks);
+            
     
             for (var j = 0; j <= this.slices; j++) {
                 var alfa = j * delta_alfa;
     
-                var x = Math.cos(beta) * Math.cos(alfa);
-                var y = Math.cos(beta) * Math.sin(alfa);
-                var z = Math.sin(beta);
+                var x = - (Math.cos(beta) * Math.cos(alfa));
+                var z = Math.cos(beta) * Math.sin(alfa);
+                var y = - Math.sin(beta);
     
                 this.vertices.push(x, y, z);
                 this.normals.push(-x, -y, -z);
-                this.texCoords.push(0, 1);
+                this.texCoords.push((j / this.slices), (i / this.stacks));
+                
                 
 
             }
@@ -48,7 +49,7 @@ export class MySphere extends CGFobject {
         var index = 0;
         for (var i = 0; i < this.stacks; i++) {
             for (var j = 0; j < this.slices; j++) {
-                this.texCoords.push(i / this.slices, 1 - j / this.stacks);
+                
                 if (this.inside == 1) {
                     this.indices.push(index, index + 1, index + this.slices + 1);
                     this.indices.push(index + 1, index + this.slices + 2, index + this.slices + 1);
