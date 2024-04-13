@@ -37,7 +37,11 @@ export class MySphere extends CGFobject {
                 var z =  Math.cos(beta) * Math.sin(alfa);
     
                 this.vertices.push(x, y, z);
-                this.normals.push(-x, -y, -z);
+                if (this.inside === 1) {
+                    this.normals.push(-x, -y, -z);
+                } else {
+                    this.normals.push(x, y, z);
+                }
                 this.texCoords.push((j / this.slices), (i / this.stacks));
                 
                 
