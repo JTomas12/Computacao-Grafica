@@ -2,6 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
+import { MyRock } from "./MyRock.js";
+
 /**
  * MyScene
  * @constructor
