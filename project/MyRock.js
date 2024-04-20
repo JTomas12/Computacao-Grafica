@@ -1,9 +1,11 @@
 import {CGFobject, CGFappearance, CGFtexture} from '../lib/CGF.js';
 
 /**
- * MyDiamond
+ * MyRock
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param slices - number of slices
+ * @param stacks - number of stacks
  */
 export class MyRock extends CGFobject {
     constructor(scene, slices , stacks) {
@@ -83,15 +85,17 @@ export class MyRock extends CGFobject {
     }
 
     initMaterials() {
-        this.grayMaterial = new CGFappearance(this.scene);
-        this.grayMaterial.setAmbient(0.5, 0.5, 0.5, 1.0);  
-        this.grayMaterial.setDiffuse(0.7, 0.7, 0.7, 1.0); 
-        this.grayMaterial.setSpecular(0.9, 0.9, 0.9, 1.0); 
-        this.grayMaterial.setShininess(10.0);              
+        this.rockTexture = new CGFtexture(this.scene, "images/rock_texture.jpg");
+        this.rockMaterial = new CGFappearance(this.scene);
+        this.rockMaterial.setAmbient(0.5, 0.5, 0.5, 1.0);  
+        this.rockMaterial.setDiffuse(0.7, 0.7, 0.7, 1.0); 
+        this.rockMaterial.setSpecular(0.9, 0.9, 0.9, 1.0); 
+        this.rockMaterial.setShininess(10.0); 
+        this.rockMaterial.setTexture(this.rockTexture);             
     }
     display() {
         this.scene.pushMatrix()
-        this.grayMaterial.apply()
+        this.rockMaterial.apply()
         this.drawElements(this.primitiveType);
         this.scene.popMatrix()
     }

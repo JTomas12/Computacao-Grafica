@@ -30,7 +30,8 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.sphere = new MyRockSet(this, 5);
+    this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
+    this.rockSet = new MyRockSet(this, 10);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
@@ -43,6 +44,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.displaySphere = false;
     this.displayPanorama = true;
+    this.displayRockSet = true;
     this.scaleFactor = 1;
 
     this.enableTextures(true);
@@ -91,13 +93,16 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     if (this.displaySphere) {
      
-      this.material.apply();
       this.sphere.display();
 
     }
 
     if (this.displayPanorama) {
       this.panorama.display();
+    }
+
+    if (this.displayRockSet) {
+      this.rockSet.display();
     }
 
     // ---- BEGIN Primitive drawing section
