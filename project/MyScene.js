@@ -3,6 +3,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
 import { MyRock } from "./MyRock.js";
+import { MyRockSet } from "./MyRockSet.js";
 
 /**
  * MyScene
@@ -29,7 +30,7 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.sphere = new MySphere(this, 30, 20,0, 1, 1);
+    this.sphere = new MyRockSet(this, 5);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
