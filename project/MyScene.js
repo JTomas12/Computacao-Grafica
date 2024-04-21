@@ -34,7 +34,7 @@ export class MyScene extends CGFscene {
     this.rockSet = new MyRockSet(this, 10);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
-    this.panorama = new MyPanoram(this, this.panoramTexture);
+    this.panorama = new MyPanoram(this, this.panoramTexture, this.rockSet);
     this.material = new CGFappearance(this);
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)

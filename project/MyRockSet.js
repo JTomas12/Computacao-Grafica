@@ -25,15 +25,15 @@ export class MyRockSet extends CGFobject {
             this.rocks.push({
                 rock: rock,
                 scale: {
-                    x: Math.random() * 0.5 + 0.2, 
-                    y: Math.random() * 0.5 + 0.2,  
-                    z: Math.random() * 0.5 + 0.2   
+                    x: Math.random() * 0.3 + 0.1,  
+                    y: Math.random() * 0.3 + 0.1,  
+                    z: Math.random() * 0.3 + 0.1   
                 },
                 rotation: Math.random() * Math.PI * 2, 
                 position: {
-                    x: Math.random() * 5 - 2.5,  
-                    y: i * 0.2,                  
-                    z: Math.random() * 5 - 2.5
+                    x: Math.random() * 2 - 1,  // Narrower range for x (-1 to 1)
+                    y: Math.random() * 0.5,    // Lower range for y to bring rocks closer vertically
+                    z: Math.random() * 2 - 1   // Narrower range for z (-1 to 1)
                 }
             });
         }
