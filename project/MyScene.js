@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
+import { MyFlower } from './MyFlower.js';
 /**
  * MyScene
  * @constructor
@@ -35,11 +36,12 @@ export class MyScene extends CGFscene {
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
-
+    this.flower = new MyFlower(this);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
-    this.displayPanorama = true;
+    this.displayPanorama = false;
+    this.displayFlower = true;
     this.scaleFactor = 1;
 
     this.enableTextures(true);
@@ -96,7 +98,9 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.displayPanorama) {
       this.panorama.display();
     }
-
+    if(this.displayFlower){
+      this.flower.display();
+    }
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();

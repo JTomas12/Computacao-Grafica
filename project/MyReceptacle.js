@@ -1,6 +1,6 @@
 import { MySphere } from './MySphere.js';
 
-export class Receptacle extends MySphere {
+export class MyReceptacle extends MySphere {
     constructor(scene, radius, slices, stacks, inside) {
         super(scene, slices, stacks, inside);
         this.radius = radius;
