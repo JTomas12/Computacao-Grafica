@@ -2,8 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
-import { MyPetal } from "./MyPetal.js";
-//import { MyFlower } from './MyFlower.js';
+import { MyStem } from "./MyStem.js";
+import { MyFlower } from './MyFlower.js';
 /**
  * MyScene
  * @constructor
@@ -37,8 +37,9 @@ export class MyScene extends CGFscene {
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
-    this.petal = new MyPetal(this,0);
-    //this.flower = new MyFlower(this,30,8,20,1,50,1,20,1);
+    //this.petal = new MyPetal(this,0);
+    this.flower = new MyFlower(this,1,5,0.5,[1,0,0],0.1,[0,1,0],20,[0,0,1]);
+    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
@@ -101,7 +102,7 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
       this.panorama.display();
     }
     if(this.displayPetal){
-      this.petal.display();
+      this.flower.display();
     }
     /*
     if(this.displayFlower){

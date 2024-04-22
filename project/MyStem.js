@@ -13,19 +13,30 @@ export class MyStem extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
-
+    
         let angle = 2 * Math.PI / this.slices;
-
+    
+        
+        let curvature = 0.1; 
+    
         for (let stack = 0; stack <= this.stacks; stack++) {
-            let z = stack / this.stacks;
+            let y = stack / this.stacks;
+            
+            let displacement = curvature * Math.sin(Math.PI * y); 
+    
             for (let slice = 0; slice < this.slices; slice++) {
-                let x = this.radius * Math.cos(slice * angle); // Multiply by radius
-                let y = this.radius * Math.sin(slice * angle); // Multiply by radius
-                
+                let x = this.radius * Math.cos(slice * angle) + displacement; 
+                let z = this.radius * Math.sin(slice * angle);
+    
                 this.vertices.push(x, y, z);
-                this.normals.push(x, y, 0);
+    
+                
+                let nx = Math.cos(slice * angle);
+                let nz = Math.sin(slice * angle);
+                this.normals.push(nx, 0, nz); 
             }
         }
+    
         for (let j = 0; j < this.stacks; j++) {
             for (let k = 0; k < this.slices; k++) {
                 let nextSlice = (k + 1) % this.slices;
@@ -33,16 +44,15 @@ export class MyStem extends CGFobject {
                 let next = j * this.slices + nextSlice;
                 let currentAbove = (j + 1) * this.slices + k;
                 let nextAbove = (j + 1) * this.slices + nextSlice;
+    
+                // These indices create quads as two triangles
                 this.indices.push(current, next, currentAbove);
                 this.indices.push(currentAbove, next, nextAbove);
-                this.indices.push(current, currentAbove, next);
-                this.indices.push(currentAbove, nextAbove, next);
             }
         }
-		//The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangles
-		this.primitiveType = this.scene.gl.TRIANGLES;
-
-		this.initGLBuffers();
-	}
+    
+        this.primitiveType = this.scene.gl.TRIANGLES;
+        this.initGLBuffers();
+    }
+    
 }
