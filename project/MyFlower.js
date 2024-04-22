@@ -32,6 +32,7 @@ export class MyFlower extends CGFobject {
         //this.stemMaterial.setAmbient(...stem_color); // Configurar a cor ambiente com base na cor do caule
         this.createPetals(number_of_petals);
     }
+    
     display(){
 
         this.scene.pushMatrix();

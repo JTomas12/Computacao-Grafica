@@ -26,7 +26,6 @@ export class MyStem extends CGFobject {
                 this.normals.push(x, y, 0);
             }
         }
-
         for (let j = 0; j < this.stacks; j++) {
             for (let k = 0; k < this.slices; k++) {
                 let nextSlice = (k + 1) % this.slices;
@@ -34,37 +33,16 @@ export class MyStem extends CGFobject {
                 let next = j * this.slices + nextSlice;
                 let currentAbove = (j + 1) * this.slices + k;
                 let nextAbove = (j + 1) * this.slices + nextSlice;
-
                 this.indices.push(current, next, currentAbove);
                 this.indices.push(currentAbove, next, nextAbove);
                 this.indices.push(current, currentAbove, next);
                 this.indices.push(currentAbove, nextAbove, next);
             }
         }
+		//The defined indices (and corresponding vertices)
+		//will be read in groups of three to draw triangles
+		this.primitiveType = this.scene.gl.TRIANGLES;
 
-        this.primitiveType = this.scene.gl.TRIANGLES;
-        this.initGLBuffers();
-    }
-    setRadius(radius) {
-        this.radius = radius;
-        this.updateRadius();
-    }
-
-    updateRadius() {
-        // Update vertices based on the new radius
-        for (let i = 0; i <= this.stacks; i++) {
-            let beta = -Math.PI / 2 + i * this.delta_beta;
-            for (let j = 0; j <= this.slices; j++) {
-                let alfa = j * this.delta_alfa;
-                let x = -(this.radius * Math.cos(beta) * Math.cos(alfa));
-                let y = -this.radius * Math.sin(beta);
-                let z = this.radius * Math.cos(beta) * Math.sin(alfa);
-                let index = (i * (this.slices + 1) + j) * 3;
-                this.vertices[index] = x;
-                this.vertices[index + 1] = y;
-                this.vertices[index + 2] = z;
-            }
-        }
-        this.updateVerticesGLBuffers();
-    }
+		this.initGLBuffers();
+	}
 }
