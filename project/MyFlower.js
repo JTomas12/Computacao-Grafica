@@ -14,8 +14,8 @@ export class MyFlower extends CGFobject {
         this.receptacle_radius = receptacle_radius;
         this.receptacle_color = receptacle_color;
         this.petal_color = petal_color;
-        this.stem = new MyStem(scene, stem_slices, 10, stem_radius);
-        this.receptacle = new MyReceptacle(scene, receptacle_radius, 10, 0.1);
+        this.stem = new MyStem(scene, stem_slices, stem_slices, stem_radius);
+        this.receptacle = new MyReceptacle(scene, receptacle_radius, 200 , 200, 0);
         // Material para as pétalas
         this.petalMaterial = new CGFappearance(this.scene);
         this.petalMaterial.setEmission(1, 1, 1, 1); // Emissão branca para uma aparência brilhante
