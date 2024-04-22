@@ -1,6 +1,6 @@
 import { CGFobject, CGFappearance } from '../lib/CGF.js';
 import { MyStem } from '../project/MyStem.js';
-import {MyReceptacle} from '../project/MyReceptacle.js';
+import { MySphere } from '../project/MySphere.js';
 import {MyPetal} from '../project/MyPetal.js';
 export class MyFlower extends CGFobject {
     constructor(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_slices, petal_color) {
@@ -15,7 +15,7 @@ export class MyFlower extends CGFobject {
         this.receptacle_color = receptacle_color;
         this.petal_color = petal_color;
         this.stem = new MyStem(scene, stem_slices, stem_slices, stem_radius);
-        this.receptacle = new MyReceptacle(scene, receptacle_radius, 200 , 200, 0);
+        this.sphere= new MySphere(scene, receptacle_radius, 30 , 20 ,20, 1,1,1);
         // Material para as pétalas
         this.petalMaterial = new CGFappearance(this.scene);
         this.petalMaterial.setEmission(1, 1, 1, 1); // Emissão branca para uma aparência brilhante
@@ -30,7 +30,7 @@ export class MyFlower extends CGFobject {
         this.stemMaterial = new CGFappearance(this.scene);
         this.stemMaterial.setEmission(1, 1, 1, 1); // Emissão branca para uma aparência brilhante
         //this.stemMaterial.setAmbient(...stem_color); // Configurar a cor ambiente com base na cor do caule
-        this.createPetals(number_of_petals);
+        //this.createPetals(number_of_petals);
     }
     
     display(){
@@ -47,4 +47,15 @@ export class MyFlower extends CGFobject {
         this.sphere.display();
 
     }
+    /*
+    createPetals(number_of_petals){
+        this.petals = [];
+        for (let i = 0; i < number_of_petals; i++) {
+            let angle = (2 * Math.PI * i) / number_of_petals; // Calculate angle for current petal
+            let x = this.receptacle_radius * Math.cos(angle); // Calculate x-coordinate based on angle
+            let z = this.receptacle_radius * Math.sin(angle); // Calculate z-coordinate based on angle
+            this.petals.push(new MyPetal(this.scene, this.outer_radius, angle, this.petal_color)); // Create petal at calculated position
+        }
+    }
+    */
 }
