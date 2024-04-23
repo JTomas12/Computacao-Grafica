@@ -5,6 +5,7 @@ import { MyPanoram } from "./MyPanoram.js";
 import { MyStem } from "./MyStem.js";
 import { MyFlower } from './MyFlower.js';
 import { MyPetal } from './MyPetal.js';
+import { MyGarden } from "./MyGarden.js";
 /**
  * MyScene
  * @constructor
@@ -12,7 +13,15 @@ import { MyPetal } from './MyPetal.js';
 export class MyScene extends CGFscene {
   constructor() {
     super();
+
+    this.gardenRows = 5;
+    this.gardenCols = 5;
   }
+
+  updateGarden() {
+    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
+  }
+  
   init(application) {
     super.init(application);
     
@@ -30,6 +39,7 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
+    this.speedFactor = 5;
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
@@ -40,6 +50,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.petal = new MyPetal(this,0);
     this.flower = new MyFlower(this,1,5,5,[1,0,0],1,[0,1,0],20,20,[0,0,1]); 
+    this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
     
     //Objects connected to MyInterface
@@ -106,7 +117,7 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if(this.displayFlower){
       this.flower.display();
     }
-    this.petal.display();
+    this.garden.display();
     /*
     if(this.displayFlower){
       this.flower.display();
