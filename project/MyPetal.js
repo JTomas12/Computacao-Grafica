@@ -27,7 +27,13 @@ export class MyPetal extends CGFobject {
         let newX = x * Math.cos(this.rotationAngle) - z * Math.sin(this.rotationAngle);
         let newZ = x * Math.sin(this.rotationAngle) + z * Math.cos(this.rotationAngle);
 
+
         this.vertices.push(newX, y, newZ); 
+        let new2X = x * Math.cos(this.rotationAngle+this.rotationAngle) - z * Math.sin(this.rotationAngle+this.rotationAngle);
+        let new2Z = x * Math.sin(this.rotationAngle+this.rotationAngle) + z * Math.cos(this.rotationAngle+this.rotationAngle);
+
+        
+        this.vertices.push(new2X, y, new2Z); 
         this.normals.push(0, 1, 0);
     }
 

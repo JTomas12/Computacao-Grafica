@@ -1,11 +1,12 @@
 import { CGFobject } from '../lib/CGF.js';
 
 export class MyStem extends CGFobject {
-    constructor(scene, slices, stacks, radius) {
+    constructor(scene, slices, stacks, radius, height) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
-        this.radius = radius; // New parameter for radius
+        this.radius = radius;
+        this.height= height; // New parameter for radius
         this.initBuffers();
     }
 
@@ -20,7 +21,7 @@ export class MyStem extends CGFobject {
         let curvature = 0.1; 
     
         for (let stack = 0; stack <= this.stacks; stack++) {
-            let y = stack / this.stacks;
+            let y = this.height *stack / this.stacks;
             
             let displacement = curvature * Math.sin(Math.PI * y); 
     

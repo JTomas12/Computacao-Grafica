@@ -4,6 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
 import { MyStem } from "./MyStem.js";
 import { MyFlower } from './MyFlower.js';
+import { MyPetal } from './MyPetal.js';
 /**
  * MyScene
  * @constructor
@@ -37,8 +38,9 @@ export class MyScene extends CGFscene {
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
-    //this.petal = new MyPetal(this,0);
-    this.flower = new MyFlower(this,1,5,0.5,[1,0,0],0.1,[0,1,0],20,[0,0,1]);
+    this.petal = new MyPetal(this,0);
+    this.flower = new MyFlower(this,1,5,5,[1,0,0],1,[0,1,0],20,20,[0,0,1]); 
+    //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
     
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -46,7 +48,7 @@ export class MyScene extends CGFscene {
     this.displayPanorama = false;
     this.displayFlower = true;
     this.scaleFactor = 1;
-    this.displayPetal=true;
+    //this.displayPetal=true;
     this.enableTextures(true);
 
 this.texture = new CGFtexture(this, "images/terrain.jpg");
@@ -101,9 +103,10 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.displayPanorama) {
       this.panorama.display();
     }
-    if(this.displayPetal){
+    if(this.displayFlower){
       this.flower.display();
     }
+    this.petal.display();
     /*
     if(this.displayFlower){
       this.flower.display();
