@@ -4,6 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
 import { MyRock } from "./MyRock.js";
 import { MyRockSet } from "./MyRockSet.js";
+import { MyBee } from "./MyBee.js";
 
 /**
  * MyScene
@@ -32,6 +33,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
     this.rockSet = new MyRockSet(this, 10);
+    this.bee = new MyBee(this, 0, 0, 0);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture, this.rockSet);
@@ -102,7 +104,7 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     if (this.displayRockSet) {
-      this.rockSet.display();
+      this.bee.display();
     }
 
     // ---- BEGIN Primitive drawing section

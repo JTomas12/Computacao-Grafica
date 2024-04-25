@@ -23,8 +23,8 @@ export class MyPanoram extends CGFobject {
         this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
         this.sphere.display();
         this.scene.scale(0.1, 0.1, 0.1);
-        this.scene.translate(-5, -2, 5); 
-        this.rockSet.display();
+        this.scene.translate(-5, -2, 0); 
+        //this.rockSet.display();
         this.scene.popMatrix();
     
     }
