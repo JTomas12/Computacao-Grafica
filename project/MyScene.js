@@ -55,7 +55,7 @@ export class MyScene extends CGFscene {
 
     const rotationAngle = Math.PI / 12; // Initial rotation angle
     //this.petal1 = new MyPetal1(this, rotationAngle);
-    this.flower = new MyFlower(this,1,5,5,[1,0,0],1,[0,1,0],20,20,[0,0,1]); 
+    this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1]); 
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
     this.petal1 = new MyPetal1(this, this.rotationAngle, this.prismAngle);
