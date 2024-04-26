@@ -4,7 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
 import { MyStem } from "./MyStem.js";
 import { MyFlower } from './MyFlower.js';
-import { MyPetal } from './MyPetal.js';
+import { MyPetal1 } from './MyPetal1.js';
 import { MyGarden } from "./MyGarden.js";
 /**
  * MyScene
@@ -16,12 +16,16 @@ export class MyScene extends CGFscene {
 
     this.gardenRows = 5;
     this.gardenCols = 5;
+    this.rotationAngle = Math.PI / 12;
+    this.prismAngle = Math.PI / 12;
   }
 
   updateGarden() {
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
-  
+  updatePetal() {
+    this.petal1 = new MyPetal1(this, this.rotationAngle,this.prismAngle);
+  } 
   init(application) {
     super.init(application);
     
@@ -48,24 +52,28 @@ export class MyScene extends CGFscene {
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
-    this.petal = new MyPetal(this,0);
+
+    const rotationAngle = Math.PI / 12; // Initial rotation angle
+    //this.petal1 = new MyPetal1(this, rotationAngle);
     this.flower = new MyFlower(this,1,5,5,[1,0,0],1,[0,1,0],20,20,[0,0,1]); 
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
-    
+    this.petal1 = new MyPetal1(this, this.rotationAngle, this.prismAngle);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
     this.displayPanorama = false;
-    this.displayFlower = true;
+    this.displayFlower = false;
     this.scaleFactor = 1;
+    this.displayGarden = false;
+    this.displayPetal = true;
     //this.displayPetal=true;
     this.enableTextures(true);
 
-this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.appearance = new CGFappearance(this);
-this.appearance.setTexture(this.texture);
-this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+  this.texture = new CGFtexture(this, "images/terrain.jpg");
+  this.appearance = new CGFappearance(this);
+  this.appearance.setTexture(this.texture);
+  this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
   }
   initLights() {
@@ -110,14 +118,18 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
       this.sphere.display();
 
     }
-
+    if(this.displayPetal){
+      this.petal1.display();
+    }
     if (this.displayPanorama) {
       this.panorama.display();
     }
     if(this.displayFlower){
       this.flower.display();
     }
-    this.garden.display();
+    if(this.displayGarden){
+      this.garden.display();
+    }
     /*
     if(this.displayFlower){
       this.flower.display();
