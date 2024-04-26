@@ -4,7 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyPanoram } from "./MyPanoram.js";
 import { MyStem } from "./MyStem.js";
 import { MyFlower } from './MyFlower.js';
-import { MyPetal1 } from './MyPetal1.js';
+import { MyPetal } from './MyPetal.js';
 import { MyGarden } from "./MyGarden.js";
 /**
  * MyScene
@@ -24,7 +24,7 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
   updatePetal() {
-    this.petal1 = new MyPetal1(this, this.rotationAngle,this.prismAngle);
+    this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1], this.rotationAngle, this.prismAngle); 
   } 
   init(application) {
     super.init(application);
@@ -52,13 +52,10 @@ export class MyScene extends CGFscene {
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
-
-    const rotationAngle = Math.PI / 12; // Initial rotation angle
-    //this.petal1 = new MyPetal1(this, rotationAngle);
-    this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1]); 
+    this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1], this.rotationAngle, this.prismAngle); 
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
-    this.petal1 = new MyPetal1(this, this.rotationAngle, this.prismAngle);
+    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
@@ -119,7 +116,7 @@ export class MyScene extends CGFscene {
 
     }
     if(this.displayPetal){
-      this.petal1.display();
+      this.petal.display();
     }
     if (this.displayPanorama) {
       this.panorama.display();

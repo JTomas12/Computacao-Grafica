@@ -1,53 +1,36 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFobject } from "../../../lib/CGF.js";
+import { MyTriangle } from "./MyTriangle.js";
+
+/**
+* MyPetal
+* @constructor
+* @param scene - Reference to MyScene object
+*/
 
 export class MyPetal extends CGFobject {
-    constructor(scene, rotationAngle = 0) {
+    constructor(scene, rotationAngle, prismAngle) {
         super(scene);
         this.rotationAngle = rotationAngle;
-
-        this.initBuffers();
+        this.prismAngle = prismAngle;
+        this.triangle = new MyTriangle(scene);
     }
 
-   initBuffers() {
-    this.vertices = [];
-    this.indices = [];
-    this.normals = [];
+    display() {
+        this.scene.pushMatrix();
+        this.scene.scale(0.3, 1, 1);
+        this.scene.rotate(this.rotationAngle, 1, 0, 0);
+        this.scene.rotate(-Math.PI/6, 1, 0, 0);
+        this.scene.rotate(Math.PI/4, 0, 0, 1);
+        this.triangle.display();
+        this.scene.popMatrix();
 
-    const numSegments = 3; 
-
-   
-    for (let i = 0; i <= numSegments; i++) {
-        let angle = (i / numSegments) * Math.PI; 
-        let radius = Math.sin(angle) * 0.5;
-        let x = radius * Math.cos(angle);
-        let y = 0;
-        let z = radius * Math.sin(angle);
-        
-        
-        let newX = x * Math.cos(this.rotationAngle) - z * Math.sin(this.rotationAngle);
-        let newZ = x * Math.sin(this.rotationAngle) + z * Math.cos(this.rotationAngle);
-
-
-        this.vertices.push(newX, y, newZ); 
-        let new2X = x * Math.cos(this.rotationAngle+this.rotationAngle) - z * Math.sin(this.rotationAngle+this.rotationAngle);
-        let new2Z = x * Math.sin(this.rotationAngle+this.rotationAngle) + z * Math.cos(this.rotationAngle+this.rotationAngle);
-
-        
-        this.vertices.push(new2X, y, new2Z); 
-        this.normals.push(0, 1, 0);
+        this.scene.pushMatrix();
+        this.scene.scale(0.3, 1, 1);
+        this.scene.rotate(this.rotationAngle, 1, 0, 0);
+        this.scene.rotate(this.prismAngle, 1, 0, 0);
+        this.scene.rotate(Math.PI/4, 0, 0, 1);
+        this.scene.rotate(Math.PI, 0, 0, 1);
+        this.triangle.display();
+        this.scene.popMatrix();
     }
-
-    
-    for (let i = 0; i < numSegments; i++) {
-        let baseIndex = i; 
-    
-        
-        this.indices.push(baseIndex, baseIndex + 1, (baseIndex + 2) % (numSegments + 1));
-    }
-
-    console.log(this.vertices);
-    this.primitiveType = this.scene.gl.TRIANGLES;
-    this.initGLBuffers();
-}
-
 }
