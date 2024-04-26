@@ -16,8 +16,8 @@ export class MyScene extends CGFscene {
 
     this.gardenRows = 5;
     this.gardenCols = 5;
-    this.rotationAngle = Math.PI / 12;
-    this.prismAngle = Math.PI / 12;
+    this.rotationAngle = 0;
+    this.prismAngle = 0;
   }
 
   updateGarden() {
