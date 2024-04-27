@@ -19,15 +19,15 @@ export class MyFlower extends CGFobject {
 
     initMaterials(receptacle_color, stem_color) {
         this.receptacleMaterial = new CGFappearance(this.scene);
-        this.receptacleMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.receptacleMaterial.setDiffuse(receptacle_color[0] / 255, receptacle_color[1] / 255, receptacle_color[2] / 255, 1);
-        this.receptacleMaterial.setSpecular(receptacle_color[0] / 255, receptacle_color[1] / 255, receptacle_color[2] / 255, 1);
+        this.receptacleMaterial.setAmbient(0.9, 0.9, 0.9, 1.0); // Default ambient color
+        this.receptacleMaterial.setDiffuse(receptacle_color[0] / 255, receptacle_color[1] / 255, receptacle_color[2] / 255, 1.0); // Default diffuse color
+        this.receptacleMaterial.setSpecular(receptacle_color[0] / 255, receptacle_color[1] / 255, receptacle_color[2] / 255, 1.0); // Default specular color
         this.receptacleMaterial.setShininess(10.0);
 
         this.stemMaterial = new CGFappearance(this.scene);
-        this.stemMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.stemMaterial.setDiffuse(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1);
-        this.stemMaterial.setSpecular(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1);
+        this.stemMaterial.setAmbient(0.9, 0.9, 0.9, 1.0); // Default ambient color
+        this.stemMaterial.setDiffuse(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1.0); // Default diffuse color
+        this.stemMaterial.setSpecular(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1.0); // Default specular color
         this.stemMaterial.setShininess(10.0);
     }
 

@@ -17,9 +17,9 @@ export class MyPetal extends CGFobject {
     }
     initMaterials(petalColor) {
         this.petalMaterial = new CGFappearance(this.scene);
-        this.petalMaterial.setAmbient(petalColor[0]/255, petalColor[1]/255, petalColor[2]/255, 1);
+        this.petalMaterial.setAmbient(0.9,0.9,0.9,1);
         this.petalMaterial.setDiffuse(petalColor[0]/255, petalColor[1]/255, petalColor[2]/255, 1);
-        this.petalMaterial.setSpecular(0.1,0.1,0.1, 1);
+        this.petalMaterial.setSpecular(petalColor[0]/255, petalColor[1]/255, petalColor[2]/255, 1);
         this.petalMaterial.setShininess(10.0);
     }
     display() {
