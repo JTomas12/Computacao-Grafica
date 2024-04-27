@@ -16,8 +16,8 @@ export class MyScene extends CGFscene {
 
     this.gardenRows = 5;
     this.gardenCols = 5;
-    this.rotationAngle = 0;
-    this.prismAngle = 0;
+    this.rotationAngle = Math.PI/12;
+    this.prismAngle = Math.PI/12;
   }
 
   updateGarden() {
@@ -25,6 +25,7 @@ export class MyScene extends CGFscene {
   }
   updatePetal() {
     this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1], this.rotationAngle, this.prismAngle); 
+    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.petalColor);
   } 
   init(application) {
     super.init(application);
@@ -55,7 +56,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1], this.rotationAngle, this.prismAngle); 
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
-    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle);
+    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,[0,0,1]);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
