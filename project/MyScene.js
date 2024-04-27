@@ -53,10 +53,10 @@ export class MyScene extends CGFscene {
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
-    this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1], this.rotationAngle, this.prismAngle); 
+    this.flower = new MyFlower(this,3,5,1.2,[0,0,0],0.3,[0,0,0],3,3,[0,0,0], this.rotationAngle, this.prismAngle); 
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
-    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,[0,0,1]);
+    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
