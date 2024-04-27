@@ -34,6 +34,7 @@ export class MyFlower extends CGFobject {
     display() {
         // Display stem
         this.scene.pushMatrix();
+        this.stemMaterial.apply(); // Apply stem material
         this.stem.display();
         this.scene.popMatrix();
 
@@ -43,14 +44,29 @@ export class MyFlower extends CGFobject {
         this.receptacleMaterial.apply(); // Apply receptacle material
         this.sphere.display();
         this.scene.popMatrix();
-
-        // Display petals
+        var angleIncrement = 2 * Math.PI / this.number_of_petals;
+        // Loop through each petal
         for (let i = 0; i < this.number_of_petals; i++) {
+            // Calculate the angle for this petal
+            const angle = i * angleIncrement;
+        
+            // Calculate the position of the petal around the flower
+            const x = Math.cos(angle) * this.receptacle_radius;
+            const y = Math.sin(angle) * this.receptacle_radius;
+        
+            // Push a matrix for transformation
             this.scene.pushMatrix();
-            this.scene.translate(0, this.stem_height + this.receptacle_radius, 0);
-            this.scene.rotate(i * 2 * Math.PI / this.number_of_petals, 0, 1, 0);
-            this.scene.scale(this.outer_radius - this.receptacle_radius, this.outer_radius - this.receptacle_radius, this.outer_radius - this.receptacle_radius);
+        
+            // Translate to the position of the current petal relative to the flower's position
+            this.scene.translate(x,  y +  this.stem_height, 0);
+        
+            // Rotate the petal to face outward from the center of the circle
+            this.scene.rotate(angle + Math.PI / 2, 0, 0, 1);
+        
+            // Display the petal
             this.petal.display();
+        
+            // Pop the matrix to restore previous transformations
             this.scene.popMatrix();
         }
     }

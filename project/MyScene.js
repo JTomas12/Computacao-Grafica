@@ -24,8 +24,8 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
   updatePetal() {
-    this.flower = new MyFlower(this,3,5,1.2,[1,0,0],0.3,[0,1,0],3,3,[0,0,1], this.rotationAngle, this.prismAngle); 
-    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.petalColor);
+    this.flower = new MyFlower(this,3,5,1.2,[128,0,0],0.3,[0,128,0],3,3,[0,0,128], this.rotationAngle, this.prismAngle);
+    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
   } 
   init(application) {
     super.init(application);
