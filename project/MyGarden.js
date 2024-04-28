@@ -41,6 +41,12 @@ export class MyGarden extends CGFobject {
     
 
     display() {
+
+        this.scene.pushMatrix();
+
+        this.scene.translate(-1, -1, 0);
+        this.scene.scale(0.5, 0.5, 0.5);
+
         // Método para desenhar todas as flores no jardim
         this.flowers.forEach(({flower, x, z}) => {
             this.scene.pushMatrix();
@@ -48,5 +54,7 @@ export class MyGarden extends CGFobject {
             flower.display(); // Desenha a flor
             this.scene.popMatrix();
         });
+
+        this.scene.popMatrix();
     }
 }
