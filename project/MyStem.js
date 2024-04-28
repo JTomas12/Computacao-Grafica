@@ -14,7 +14,7 @@ export class MyStem extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
-
+        this.texCoords = [];
         let angle = 2 * Math.PI / this.slices;
         let offsets = [];  
 
@@ -40,6 +40,7 @@ export class MyStem extends CGFobject {
                 let nx = Math.cos(slice * angle);
                 let nz = Math.sin(slice * angle);
                 this.normals.push(nx, 0, nz); 
+                this.texCoords.push(slice / this.slices, stack / this.stacks);
             }
         }
 

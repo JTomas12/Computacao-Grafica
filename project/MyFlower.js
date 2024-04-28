@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../lib/CGF.js';
 import { MyStem } from '../project/MyStem.js';
 import { MySphere } from '../project/MySphere.js';
 import { MyPetal } from '../project/MyPetal.js';
@@ -19,12 +19,17 @@ export class MyFlower extends CGFobject {
 
     initMaterials(receptacle_color, stem_color) {
         this.receptacleMaterial = new CGFappearance(this.scene);
+        const receptacle_texture = new CGFtexture(this.scene, 'images/flower_receptacle.jpg');
+        this.receptacleMaterial.setTexture(receptacle_texture);
+        this.receptacleMaterial.setTextureWrap('REPEAT', 'REPEAT');
         this.receptacleMaterial.setAmbient(0.9, 0.9, 0.9, 1.0); // Default ambient color
         this.receptacleMaterial.setDiffuse(receptacle_color[0] / 255, receptacle_color[1] / 255, receptacle_color[2] / 255, 1.0); // Default diffuse color
         this.receptacleMaterial.setSpecular(receptacle_color[0] / 255, receptacle_color[1] / 255, receptacle_color[2] / 255, 1.0); // Default specular color
         this.receptacleMaterial.setShininess(10.0);
 
         this.stemMaterial = new CGFappearance(this.scene);
+        const stem_texture = new CGFtexture(this.scene, 'images/stem_texture.jpg');
+        this.stemMaterial.setTexture(stem_texture);
         this.stemMaterial.setAmbient(0.9, 0.9, 0.9, 1.0); // Default ambient color
         this.stemMaterial.setDiffuse(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1.0); // Default diffuse color
         this.stemMaterial.setSpecular(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1.0); // Default specular color
