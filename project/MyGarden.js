@@ -22,12 +22,12 @@ export class MyGarden extends CGFobject {
                 const outer_radius = 0.4 + Math.random() * 0.2; // Raio externo das pétalas entre 0.4 e 0.6
                 const number_of_petals = Math.floor(Math.random() * 5) + 5; // Número de pétalas entre 5 e 10
                 const receptacle_radius = 0.15 + Math.random() * 0.15; // Raio do receptáculo entre 0.15 e 0.3
-                const receptacle_color = [Math.random(), Math.random() / 2, 0]; // Cor do receptáculo variando
+                const receptacle_color = [Math.random()*255, Math.random()*255 / 2, 0]; // Cor do receptáculo variando
                 const stem_radius = 0.03 + Math.random() * 0.03; // Raio do caule entre 0.03 e 0.06
-                const stem_color = [0, Math.random(), 0]; // Cor do caule com variação na intensidade de verde
+                const stem_color = [0, Math.random()*255, 0]; // Cor do caule com variação na intensidade de verde
                 const stem_stacks = Math.floor(Math.random() * 5) + 5; // Quantidade de stacks no caule entre 5 e 10
                 const stem_height = 0.5 + Math.random() * 0.5; // Altura do caule entre 0.5 e 1.0
-                const petal_color = [Math.random(), 0, Math.random()]; // Cor das pétalas variando entre tons de magenta e roxo
+                const petal_color = [Math.random()*255, 0, Math.random()*255]; // Cor das pétalas variando entre tons de magenta e roxo
                 const rotationAngle = Math.random() * Math.PI; // Ângulo de rotação das pétalas entre 0 e PI
                 const prismAngle = Math.random() * Math.PI / 6; // Ângulo de rotação do prisma entre 0 e PI/6
     
