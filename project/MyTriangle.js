@@ -6,6 +6,7 @@ import {CGFobject} from '../lib/CGF.js';
  * @param coords - Diamond texture coordinates
  */
 
+
 export class MyTriangle extends CGFobject {
 
     constructor(scene, coords) {

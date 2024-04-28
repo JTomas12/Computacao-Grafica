@@ -5,13 +5,14 @@ import {CGFobject} from '../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MySphere extends CGFobject {
-    constructor(scene, slices , stacks, inside, north, south) {
+    constructor(scene, radius,slices , stacks, inside, north, south) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
         this.inside = inside;
         this.north = north;
         this.south = south;
+        this.radius = radius;
         this.initBuffers();
         
     }
@@ -32,9 +33,9 @@ export class MySphere extends CGFobject {
             for (var j = 0; j <= this.slices; j++) {
                 var alfa = j * delta_alfa ;
     
-                var x = -(Math.cos(beta) * Math.cos(alfa));
-                var y = -Math.sin(beta);
-                var z =  Math.cos(beta) * Math.sin(alfa);
+                var x = -this.radius*(Math.cos(beta) * Math.cos(alfa));
+                var y = -this.radius*Math.sin(beta);
+                var z =  this.radius*Math.cos(beta) * Math.sin(alfa);
     
                 this.vertices.push(x, y, z);
                 if (this.inside === 1) {
@@ -81,3 +82,4 @@ export class MySphere extends CGFobject {
 	}
     */
 }
+

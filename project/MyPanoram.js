@@ -8,11 +8,11 @@ import { MySphere } from '../project/MySphere.js';
 export class MyPanoram extends CGFobject {
     constructor(scene, texture, rockSet) {
         super(scene);
-        this.sphere = new MySphere(scene, 200, 200, 1, 1, 1);
+        this.sphere = new MySphere(scene,200, 200, 200, 1, 1, 1);
         this.material = new CGFappearance(this.scene);
         this.material.setEmission(1, 1, 1, 1);
         this.material.setTexture(texture);
-        this.rockSet = rockSet;
+        //this.rockSet = rockSet;
 
     }
 		
@@ -24,7 +24,7 @@ export class MyPanoram extends CGFobject {
         this.sphere.display();
         this.scene.scale(0.1, 0.1, 0.1);
         this.scene.translate(-5, -2, 5); 
-        this.rockSet.display();
+        //this.rockSet.display();
         this.scene.popMatrix();
     
     }
