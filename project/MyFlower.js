@@ -13,6 +13,8 @@ export class MyFlower extends CGFobject {
         this.stem = new MyStem(scene, 20, stem_stacks, stem_radius, stem_height);
         this.sphere = new MySphere(scene, receptacle_radius, 30, 20, 20, 1, 1);
         this.petal_color = petal_color;
+        this.stem_color = stem_color;
+        this.receptacle_color = receptacle_color;
         this.petal = new MyPetal(scene, rotationAngle, prismAngle, petal_color);
         this.initMaterials(receptacle_color, stem_color);
     }
@@ -37,41 +39,34 @@ export class MyFlower extends CGFobject {
     }
 
     display() {
+        // Prepare materials just before rendering
+        this.initMaterials(this.receptacle_color, this.stem_color);
+
         // Display stem
         this.scene.pushMatrix();
-        this.stemMaterial.apply(); // Apply stem material
+        this.stemMaterial.apply();
         this.stem.display();
         this.scene.popMatrix();
 
         // Display receptacle (sphere)
         this.scene.pushMatrix();
         this.scene.translate(0, this.stem_height, 0);
-        this.receptacleMaterial.apply(); // Apply receptacle material
+        this.receptacleMaterial.apply();
         this.sphere.display();
         this.scene.popMatrix();
+
+        // Display petals
         var angleIncrement = 2 * Math.PI / this.number_of_petals;
-        // Loop through each petal
         for (let i = 0; i < this.number_of_petals; i++) {
-            // Calculate the angle for this petal
             const angle = i * angleIncrement;
-        
-            // Calculate the position of the petal around the flower
             const x = Math.cos(angle) * this.receptacle_radius;
             const y = Math.sin(angle) * this.receptacle_radius;
-        
-            // Push a matrix for transformation
+
             this.scene.pushMatrix();
-        
-            // Translate to the position of the current petal relative to the flower's position
-            this.scene.translate(x,  y +  this.stem_height, 0);
-        
-            // Rotate the petal to face outward from the center of the circle
+            this.scene.translate(x, y + this.stem_height, 0);
             this.scene.rotate(angle + Math.PI / 2, 0, 0, 1);
-        
-            // Display the petal
+            this.scene.scale(this.outer_radius - this.receptacle_radius, this.outer_radius - this.receptacle_radius, this.outer_radius - this.receptacle_radius);
             this.petal.display();
-        
-            // Pop the matrix to restore previous transformations
             this.scene.popMatrix();
         }
     }

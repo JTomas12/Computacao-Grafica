@@ -28,9 +28,12 @@ export class MyGarden extends CGFobject {
                 const stem_stacks = Math.floor(Math.random() * 5) + 5; // Quantidade de stacks no caule entre 5 e 10
                 const stem_height = 0.5 + Math.random() * 0.5; // Altura do caule entre 0.5 e 1.0
                 const petal_color = [Math.random(), 0, Math.random()]; // Cor das pétalas variando entre tons de magenta e roxo
+                const rotationAngle = Math.random() * Math.PI; // Ângulo de rotação das pétalas entre 0 e PI
+                const prismAngle = Math.random() * Math.PI / 6; // Ângulo de rotação do prisma entre 0 e PI/6
     
                 
-                const flower = new MyFlower(this.scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color);
+                const flower = new MyFlower(this.scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle);
+                
                 this.flowers.push({flower, x, z}); 
             }
         }
