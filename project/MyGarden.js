@@ -44,7 +44,7 @@ export class MyGarden extends CGFobject {
 
         this.scene.pushMatrix();
 
-        this.scene.translate(-1, -1, 0);
+        this.scene.translate(-5, -1, 0);
         this.scene.scale(0.5, 0.5, 0.5);
 
         // Método para desenhar todas as flores no jardim

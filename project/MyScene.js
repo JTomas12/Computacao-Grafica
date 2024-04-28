@@ -8,6 +8,8 @@ import { MyStem } from "./MyStem.js";
 import { MyFlower } from './MyFlower.js';
 import { MyPetal } from './MyPetal.js';
 import { MyGarden } from "./MyGarden.js";
+import { MyBee } from "./MyBee.js";
+
 /**
  * MyScene
  * @constructor
@@ -54,6 +56,7 @@ export class MyScene extends CGFscene {
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
+    this.bee = new MyBee(this, 10, 0, 0);
     this.material = new CGFappearance(this);
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
@@ -72,6 +75,7 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
     this.displayGarden = true;
     this.displayPetal = false;
+    this.displayBee = false;
     //this.displayPetal=true;
     this.enableTextures(true);
 
@@ -129,6 +133,11 @@ export class MyScene extends CGFscene {
       this.panorama.display();
     }
 
+    
+    if(this.displayBee){
+      this.bee.display();
+    }
+
     if (this.displayRockSet) {
       this.rockSet.display();
     }
@@ -139,6 +148,7 @@ export class MyScene extends CGFscene {
     if(this.displayGarden){
       this.garden.display();
     }
+
     /*
     if(this.displayFlower){
       this.flower.display();
