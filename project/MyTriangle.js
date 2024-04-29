@@ -39,7 +39,11 @@ export class MyTriangle extends CGFobject {
             0, 0, -1, // Normal for vertex 2, back face
             
         ];
-
+		this.texCoords = [
+			1, 1, // 0
+			0, 0, // 1
+			1, 0, // 2
+		];
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
 		this.primitiveType = this.scene.gl.TRIANGLES;

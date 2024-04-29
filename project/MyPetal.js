@@ -1,6 +1,7 @@
 import { CGFobject } from "../../../lib/CGF.js";
 import { MyTriangle } from "./MyTriangle.js";
-import { CGFappearance } from '../lib/CGF.js';
+import { CGFappearance, CGFtexture } from '../lib/CGF.js';
+
 /**
 * MyPetal
 * @constructor
@@ -13,6 +14,7 @@ export class MyPetal extends CGFobject {
         this.rotationAngle = rotationAngle;
         this.prismAngle = prismAngle;
         this.triangle = new MyTriangle(scene);
+        this.texture = new CGFtexture(this.scene, 'images/petal_texture.jpg');
         this.initMaterials(petalColor);
     }
     initMaterials(petalColor) {
@@ -21,6 +23,7 @@ export class MyPetal extends CGFobject {
         this.petalMaterial.setDiffuse(petalColor[0]/255, petalColor[1]/255, petalColor[2]/255, 1.0);
         this.petalMaterial.setSpecular(petalColor[0]/255, petalColor[1]/255, petalColor[2]/255, 1.0);
         this.petalMaterial.setShininess(10.0);
+        this.petalMaterial.setTexture(this.texture);
     }
     display() {
         this.scene.pushMatrix();
