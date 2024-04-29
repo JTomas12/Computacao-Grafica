@@ -17,8 +17,14 @@ export class MyBee extends CGFobject {
         this.eye = new MySphere(scene,1, 16, 8, 0, 1, 1);
         this.paw = new MySphere(scene,1, 16, 8, 0, 1, 1);
         this.sting = new MyCone(scene, 16, 8);
+        
+        this.scale = 1;
+        this.orientation = 0;
+        this.speed = 0;
         this.position = {x: x, y: y, z: z};
+        this.defaultposition = {x: x, y: y, z: z};
         this.initMaterials();
+        
         
     }
 		
@@ -183,5 +189,43 @@ export class MyBee extends CGFobject {
         this.scene.popMatrix();
 
 
+    }
+    turn(v) {
+        this.orientation += v
+    }
+
+    accelerate(v) {
+        this.speed = Math.max(this.speed + v, 0)
+    }
+    reset() {
+        this.speed = 0
+        this.orientation = 0
+        this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
+    }
+    handleMovement() {
+        this.position.x += this.speed * Math.sin(this.orientation)
+        this.position.z += this.speed * Math.cos(this.orientation)
+    }
+    update(t) {
+        this.handleMovement()
+        this.scene.updateBee(this.position.x, this.position.y, this.position.z)
+
+    }
+    handlekeys(factor,timesinceAppStart) {
+        if (this.scene.gui.isKeyPressed("KeyW")) {
+            this.accelerate(0.01)
+        }
+        if (this.scene.gui.isKeyPressed("KeyS")) {
+            this.accelerate(-0.01)
+        }
+        if (this.scene.gui.isKeyPressed("KeyA")) {
+            this.turn(0.01)
+        }
+        if (this.scene.gui.isKeyPressed("KeyD")) {
+            this.turn(-0.01)
+        }
+        if (this.scene.gui.isKeyPressed("KeyR")) {
+            this.reset()
+        }
     }
 }

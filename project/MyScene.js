@@ -23,7 +23,29 @@ export class MyScene extends CGFscene {
     this.rotationAngle = Math.PI/12;
     this.prismAngle = Math.PI/12;
   }
-
+  checkkeys() {
+    var text = "Keys pressed: ";
+    var keysPressed = false;
+    if(this.gui.isKeyPressed("KeyW")){
+      text += " W ";
+      keysPressed = true;
+    }
+    if(this.gui.isKeyPressed("KeyS")){
+      text += " S ";
+      keysPressed = true;
+    }
+    if(this.gui.isKeyPressed("KeyA")){
+      text += " A ";
+      keysPressed = true;
+    }
+    if(this.gui.isKeyPressed("KeyD")){
+      text += " D ";
+      keysPressed = true;
+    }
+    if(keysPressed){
+      console.log(text);
+    }
+  }
   updateGarden() {
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
