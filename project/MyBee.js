@@ -89,6 +89,7 @@ export class MyBee extends CGFobject {
         this.scene.translate(this.position.x, this.position.y, this.position.z);
         this.scene.rotate(this.orientation, 0, 1, 0);
         this.drawElements();
+        console.log(this.wingRotation);
         this.scene.popMatrix()
     }
     drawElements() {
@@ -134,12 +135,14 @@ export class MyBee extends CGFobject {
 
         //Wings
         this.scene.pushMatrix();
-        this.scene.translate(1.2, 0.3, 0);
-        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.translate(1.2, 0.3, 0); // Positioning right wing
+        this.scene.rotate(Math.PI / 2, 0, 1, 0); // Orient the wing
+        this.scene.rotate(this.wingRotation, 0, 0, 1); // Apply dynamic rotation
         this.scene.scale(0.5, 0.1, 1.2);
         this.wingsMaterial.apply();
         this.wing.display();
-        this.scene.translate(0, 0, -2);
+        this.scene.translate(0, 0, -2); // Position the second wing symmetrically
+        this.scene.rotate(-2 * this.wingRotation, 0, 0, 1); // Opposite rotation for symmetry
         this.wing.display();
         this.scene.popMatrix();
 
@@ -215,16 +218,16 @@ export class MyBee extends CGFobject {
     updateParams() {
 
       
-        this.position.y = this.animator.y
+        //this.position.y = this.animator.y
 
-        this.orientation += 0.05; // Incremental change in radians; adjust as needed
+        //this.orientation += 0.05; // Incremental change in radians; adjust as needed
         // Normalize the orientation to prevent overflow
         if (this.orientation > 2 * Math.PI) {
             this.orientation -= 2 * Math.PI;
         }
 
-        this.position.x = this.animator.x
-        this.position.z = this.animator.z
+        //this.position.x = this.animator.x
+        //this.position.z = this.animator.z
         this.wingRotation = this.animator.wingAngle
     }
 }
