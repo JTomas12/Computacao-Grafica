@@ -49,8 +49,9 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
-    this.rockSet = new MyRockSet(this, 10);
-    this.speedFactor = 5;
+    this.rockSet = new MyRockSet(this, 100);
+    this.rock = new MyRock(this, 16, 8);
+    this.speedFactor = 1;
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
@@ -78,6 +79,9 @@ export class MyScene extends CGFscene {
     this.displayBee = false;
     //this.displayPetal=true;
     this.enableTextures(true);
+
+    this.appStartTime = Date.now();
+    this.setUpdatePeriod(50);
 
   this.texture = new CGFtexture(this, "images/terrain.jpg");
   this.appearance = new CGFappearance(this);
@@ -166,4 +170,11 @@ export class MyScene extends CGFscene {
 
     // ---- END Primitive drawing section
   }
+
+  update(time) {
+
+    let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
+    this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
+
+  } 
 }

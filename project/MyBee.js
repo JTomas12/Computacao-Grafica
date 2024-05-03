@@ -1,6 +1,7 @@
 import {CGFobject, CGFappearance, CGFtexture} from '../lib/CGF.js';
 import { MySphere } from '../project/MySphere.js';
 import { MyCone } from './MyCone.js';
+import { MyAnimatorMovement } from './animator/MyAnimatorMov.js';
 
 /**
  * MyBee
@@ -17,8 +18,16 @@ export class MyBee extends CGFobject {
         this.eye = new MySphere(scene,1, 16, 8, 0, 1, 1);
         this.paw = new MySphere(scene,1, 16, 8, 0, 1, 1);
         this.sting = new MyCone(scene, 16, 8);
-        this.position = {x: x, y: y, z: z};
+        this.position = {x: x, y: y + 3, z: z};
+        this.wingRotation = Math.PI / 8;
+        this.oscillationOffset = 0;
+        this.orientation = 1;
+        this.speed = 0;
+        this.lastSpeedFactor = 1;
+        this.scale = 1;
         this.initMaterials();
+        this.animator = new MyAnimatorMovement(1, 2*Math.PI, 100, true, true);
+
         
     }
 		
@@ -78,6 +87,7 @@ export class MyBee extends CGFobject {
     display() {
         this.scene.pushMatrix()
         this.scene.translate(this.position.x, this.position.y, this.position.z);
+        this.scene.rotate(this.orientation, 0, 1, 0);
         this.drawElements();
         this.scene.popMatrix()
     }
@@ -183,5 +193,38 @@ export class MyBee extends CGFobject {
         this.scene.popMatrix();
 
 
+    }
+
+    update(elapsedTime, scaleFactor, speedFactor) {
+
+        this.scale = scaleFactor;
+
+
+        if (speedFactor !== this.lastSpeedFactor && this.speed != 0) {
+            this.speed += (speedFactor - this.lastSpeedFactor);
+            this.lastSpeedFactor = speedFactor;
+        }
+
+        this.animator.update(elapsedTime, {x: this.position.x, y: this.position.y, z: this.position.z, speed: this.speed, orientation: this.orientation, wingAngle: this.wingRotation})
+
+
+        this.updateParams()
+        
+    }
+
+    updateParams() {
+
+      
+        this.position.y = this.animator.y
+
+        this.orientation += 0.05; // Incremental change in radians; adjust as needed
+        // Normalize the orientation to prevent overflow
+        if (this.orientation > 2 * Math.PI) {
+            this.orientation -= 2 * Math.PI;
+        }
+
+        this.position.x = this.animator.x
+        this.position.z = this.animator.z
+        this.wingRotation = this.animator.wingAngle
     }
 }

@@ -95,6 +95,7 @@ export class MyRock extends CGFobject {
     }
     display() {
         this.scene.pushMatrix()
+        this.scene.scale(0.5, 0.5, 0.5);
         this.rockMaterial.apply()
         this.drawElements(this.primitiveType);
         this.scene.popMatrix()
