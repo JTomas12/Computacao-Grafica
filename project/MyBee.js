@@ -213,7 +213,7 @@ export class MyBee extends CGFobject {
     reset() {
         this.speed = 0
         this.orientation = 0
-        this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
+        this.position = {x: this.defaultposition.x, y: this.defaultposition.y, z: this.defaultposition.z}
     }
     
     handlekeys(factor /*, elapsedTime*/) {
@@ -254,12 +254,6 @@ export class MyBee extends CGFobject {
 
       
         this.position.y = this.animator.y
-
-        this.orientation += 0.05; // Incremental change in radians; adjust as needed
-        // Normalize the orientation to prevent overflow
-        if (this.orientation > 2 * Math.PI) {
-            this.orientation -= 2 * Math.PI;
-        }
 
         this.position.x = this.animator.x
         this.position.z = this.animator.z
