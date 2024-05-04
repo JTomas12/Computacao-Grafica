@@ -16,9 +16,8 @@ export class MyAnimatorMovement extends MyAnimator {
 
     updatePositionObj(elapsedTime, vector) {
         
-        const radius = 1;
-        this.x = vector.x + radius * Math.cos(vector.orientation);
-        this.z = vector.z + radius * Math.sin(vector.orientation);
+        this.x = vector.x + vector.speed * Math.cos(vector.orientation);
+        this.z = vector.z + vector.speed * Math.sin(vector.orientation);
 
         this.y = this.animVal + Math.sin(elapsedTime * 5) * 1;
 

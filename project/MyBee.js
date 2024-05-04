@@ -216,16 +216,12 @@ export class MyBee extends CGFobject {
         this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
     }
     
-    update(elapsed_time, beescaleFactor ,speedFactor) {
-        this.scale = beescaleFactor
-        this.handlekeys(speedFactor,elapsed_time)
-    }
-    handlekeys(factor,timesinceAppStart) {
+    handlekeys(factor /*, elapsedTime*/) {
         if (this.scene.gui.isKeyPressed("KeyW")) {
             this.accelerate(factor)
         }
         if (this.scene.gui.isKeyPressed("KeyS")) {
-            this.accelerate(factor)
+            this.accelerate(-factor)
         }
         if (this.scene.gui.isKeyPressed("KeyA")) {
             this.turn(factor)
@@ -240,7 +236,7 @@ export class MyBee extends CGFobject {
     update(elapsedTime, scaleFactor, speedFactor) {
 
         this.scale = scaleFactor;
-
+        this.handlekeys(speedFactor, elapsedTime);
 
         if (speedFactor !== this.lastSpeedFactor && this.speed != 0) {
             this.speed += (speedFactor - this.lastSpeedFactor);

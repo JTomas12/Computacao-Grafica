@@ -67,7 +67,7 @@ export class MyInterface extends CGFinterface {
     processKeyUp(event){
       this.activeKeys[event.code]=false;
     }
-    iskeyPressed(keyCode){
+    isKeyPressed(keyCode){
       return this.activeKeys[keyCode] || false;
     }
 }

@@ -75,7 +75,6 @@ export class MyScene extends CGFscene {
     this.speedFactor = 1;
     this.beescaleFactor = 1;
     this.rock = new MyRock(this, 16, 8);
-    this.speedFactor = 1;
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
