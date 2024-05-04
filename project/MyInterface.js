@@ -52,6 +52,7 @@ export class MyInterface extends CGFinterface {
         petalFolder.add(this.scene, 'prismAngle', -Math.PI, Math.PI).name('Prism Angle').onChange(() => {
           this.scene.updatePetal();
         });
+        this.initKeys();
         return true;
     }
     initKeys(){
@@ -61,6 +62,7 @@ export class MyInterface extends CGFinterface {
     }
     processKeyDown(event){
       this.activeKeys[event.code]=true;
+      console.log(event.code);
     }
     processKeyUp(event){
       this.activeKeys[event.code]=false;

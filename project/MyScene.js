@@ -133,7 +133,7 @@ export class MyScene extends CGFscene {
 
   update(time){
     var elapsed_time = (time- this.starttime)/1000.0;
-    this.bee.update(elapsed_time, this.speedFactor);
+    this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
