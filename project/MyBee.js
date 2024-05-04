@@ -141,14 +141,21 @@ export class MyBee extends CGFobject {
 
         //Wings
         this.scene.pushMatrix();
-        this.scene.translate(1.2, 0.3, 0); // Positioning right wing
-        this.scene.rotate(Math.PI / 2, 0, 1, 0); // Orient the wing
-        this.scene.rotate(this.wingRotation, 0, 0, 1); // Apply dynamic rotation
-        this.scene.scale(0.5, 0.1, 1.2);
+        this.scene.translate(0.6, 0.1, 0); 
+        this.scene.rotate(-Math.PI / 2, 0, 0, 1); 
+        this.scene.rotate(this.wingRotation, 0, 0, 1); 
+        this.scene.scale(0.1, 1.1, 0.5);
         this.wingsMaterial.apply();
         this.wing.display();
-        this.scene.translate(0, 0, -2); // Position the second wing symmetrically
-        this.scene.rotate(-2 * this.wingRotation, 0, 0, 1); // Opposite rotation for symmetry
+        this.scene.popMatrix();
+
+        // Asa esquerda
+        this.scene.pushMatrix();
+        this.scene.translate(-0.6, 0.1, -0.1); 
+        this.scene.rotate(Math.PI / 2, 0, 0, 1); 
+        this.scene.rotate(-this.wingRotation, 0, 0, 1); 
+        this.scene.scale(0.1, 1.1, 0.5);
+        this.wingsMaterial.apply();
         this.wing.display();
         this.scene.popMatrix();
 
