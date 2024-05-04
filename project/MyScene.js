@@ -72,7 +72,8 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
     this.rockSet = new MyRockSet(this, 10);
-    this.speedFactor = 5;
+    this.speedFactor = 1;
+    this.beescaleFactor = 1;
     this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
@@ -101,11 +102,12 @@ export class MyScene extends CGFscene {
     //this.displayPetal=true;
     this.enableTextures(true);
 
-  this.texture = new CGFtexture(this, "images/terrain.jpg");
-  this.appearance = new CGFappearance(this);
-  this.appearance.setTexture(this.texture);
-  this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.starttime= Date.now();
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -127,6 +129,11 @@ export class MyScene extends CGFscene {
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
+  }
+
+  update(time){
+    var elapsed_time = (time- this.starttime)/1000.0;
+    this.bee.update(elapsed_time, this.speedFactor);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
