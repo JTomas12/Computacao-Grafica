@@ -1,6 +1,7 @@
 import {CGFobject, CGFappearance, CGFtexture} from '../lib/CGF.js';
 import { MySphere } from '../project/MySphere.js';
 import { MyCone } from './MyCone.js';
+import { MyAnimatorMovement } from './animator/MyAnimatorMov.js';
 
 /**
  * MyBee
@@ -23,7 +24,15 @@ export class MyBee extends CGFobject {
         this.speed = 0;
         this.position = {x: x, y: y, z: z};
         this.defaultposition = {x: x, y: y, z: z};
+        this.wingRotation = Math.PI / 8;
+        this.oscillationOffset = 0;
+        this.orientation = 1;
+        this.speed = 0;
+        this.lastSpeedFactor = 1;
+        this.scale = 1;
         this.initMaterials();
+        this.animator = new MyAnimatorMovement(1, 2*Math.PI, 100, true, true);
+
         
         
     }
@@ -84,7 +93,9 @@ export class MyBee extends CGFobject {
     display() {
         this.scene.pushMatrix()
         this.scene.translate(this.position.x, this.position.y, this.position.z);
+        this.scene.rotate(this.orientation, 0, 1, 0);
         this.drawElements();
+        console.log(this.wingRotation);
         this.scene.popMatrix()
     }
     drawElements() {
@@ -130,12 +141,14 @@ export class MyBee extends CGFobject {
 
         //Wings
         this.scene.pushMatrix();
-        this.scene.translate(1.2, 0.3, 0);
-        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.translate(1.2, 0.3, 0); // Positioning right wing
+        this.scene.rotate(Math.PI / 2, 0, 1, 0); // Orient the wing
+        this.scene.rotate(this.wingRotation, 0, 0, 1); // Apply dynamic rotation
         this.scene.scale(0.5, 0.1, 1.2);
         this.wingsMaterial.apply();
         this.wing.display();
-        this.scene.translate(0, 0, -2);
+        this.scene.translate(0, 0, -2); // Position the second wing symmetrically
+        this.scene.rotate(-2 * this.wingRotation, 0, 0, 1); // Opposite rotation for symmetry
         this.wing.display();
         this.scene.popMatrix();
 
@@ -202,10 +215,7 @@ export class MyBee extends CGFobject {
         this.orientation = 0
         this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
     }
-    handleMovement() {
-        this.position.x += this.speed * Math.sin(this.orientation)
-        this.position.z += this.speed * Math.cos(this.orientation)
-    }
+    
     update(elapsed_time, beescaleFactor ,speedFactor) {
         this.scale = beescaleFactor
         this.handlekeys(speedFactor,elapsed_time)
@@ -226,5 +236,37 @@ export class MyBee extends CGFobject {
         if (this.scene.gui.isKeyPressed("KeyR")) {
             this.reset()
         }
+    }
+    update(elapsedTime, scaleFactor, speedFactor) {
+
+        this.scale = scaleFactor;
+
+
+        if (speedFactor !== this.lastSpeedFactor && this.speed != 0) {
+            this.speed += (speedFactor - this.lastSpeedFactor);
+            this.lastSpeedFactor = speedFactor;
+        }
+
+        this.animator.update(elapsedTime, {x: this.position.x, y: this.position.y, z: this.position.z, speed: this.speed, orientation: this.orientation, wingAngle: this.wingRotation})
+
+
+        this.updateParams()
+        
+    }
+
+    updateParams() {
+
+      
+        this.position.y = this.animator.y
+
+        this.orientation += 0.05; // Incremental change in radians; adjust as needed
+        // Normalize the orientation to prevent overflow
+        if (this.orientation > 2 * Math.PI) {
+            this.orientation -= 2 * Math.PI;
+        }
+
+        this.position.x = this.animator.x
+        this.position.z = this.animator.z
+        this.wingRotation = this.animator.wingAngle
     }
 }
