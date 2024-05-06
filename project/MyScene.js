@@ -71,11 +71,11 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
-    this.rockSet = new MyRockSet(this, 10);
+    this.rockSet = new MyRockSet(this, 20);
     this.speedFactor = 1;
     this.beescaleFactor = 1;
     this.rock = new MyRock(this, 16, 8);
-    this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
+    this.garden = new MyGarden(this, 5, 5);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
@@ -88,7 +88,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this,3,5,1.2,[128,128,0],0.3,[0,128,0],3,3,[0,0,128], this.rotationAngle, this.prismAngle); 
     //this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
-    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
+    //this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
@@ -159,9 +159,7 @@ export class MyScene extends CGFscene {
       this.sphere.display();
 
     }
-    if(this.displayPetal){
-      this.petal.display();
-    }
+
     if (this.displayPanorama) {
       this.panorama.display();
     }

@@ -55,7 +55,8 @@ export class MyRockSet extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, 2); // Adjust initial translate as needed
+        this.scene.rotate(-Math.PI / 2, 0, 1, 0);
+        this.scene.scale(2, 2, 2);
 
         for (let {rock, scale, rotation, position} of this.rocks) {
             this.scene.pushMatrix();
