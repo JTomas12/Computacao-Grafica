@@ -234,12 +234,6 @@ export class MyBee extends CGFobject {
     handlekeys(factor /*, elapsedTime*/) {
         if (this.scene.gui.isKeyPressed("KeyW")) {
             this.accelerate(factor,this.scene.beemaxSpeed,this.scene.accelerationRate,this.scene.decelerationRate)
-            console.log(this.speed)
-            console.log(this.accelerationRate)
-            console.log(this.decelerationRate)
-            console.log(this.position.x)
-            console.log(this.position.z)
-            console.log(this.position.y)
         }
         if (this.scene.gui.isKeyPressed("KeyS")) {
             this.accelerate(-factor,this.scene.beemaxSpeed,this.scene.accelerationRate,this.scene.decelerationRate)
