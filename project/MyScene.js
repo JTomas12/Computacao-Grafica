@@ -73,6 +73,7 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
     this.rockSet = new MyRockSet(this, 20);
     this.speedFactor = 1;
+    this.beemaxSpeed = 1;
     this.beescaleFactor = 1;
     this.decelerationRate = 0.5;
     this.accelerationRate = 0.5;
