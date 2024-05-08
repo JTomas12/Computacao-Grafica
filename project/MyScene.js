@@ -23,7 +23,29 @@ export class MyScene extends CGFscene {
     this.rotationAngle = Math.PI/12;
     this.prismAngle = Math.PI/12;
   }
-
+  checkkeys() {
+    var text = "Keys pressed: ";
+    var keysPressed = false;
+    if(this.gui.isKeyPressed("KeyW")){
+      text += " W ";
+      keysPressed = true;
+    }
+    if(this.gui.isKeyPressed("KeyS")){
+      text += " S ";
+      keysPressed = true;
+    }
+    if(this.gui.isKeyPressed("KeyA")){
+      text += " A ";
+      keysPressed = true;
+    }
+    if(this.gui.isKeyPressed("KeyD")){
+      text += " D ";
+      keysPressed = true;
+    }
+    if(keysPressed){
+      console.log(text);
+    }
+  }
   updateGarden() {
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
@@ -49,9 +71,11 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
-    this.rockSet = new MyRockSet(this, 10);
-    this.speedFactor = 5;
-    this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
+    this.rockSet = new MyRockSet(this, 20);
+    this.speedFactor = 1;
+    this.beescaleFactor = 1;
+    this.rock = new MyRock(this, 16, 8);
+    this.garden = new MyGarden(this, 5, 5);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
@@ -64,7 +88,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this,3,5,1.2,[128,128,0],0.3,[0,128,0],3,3,[0,0,128], this.rotationAngle, this.prismAngle); 
     //this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
-    this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
+    //this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
@@ -79,11 +103,15 @@ export class MyScene extends CGFscene {
     //this.displayPetal=true;
     this.enableTextures(true);
 
-  this.texture = new CGFtexture(this, "images/terrain.jpg");
-  this.appearance = new CGFappearance(this);
-  this.appearance.setTexture(this.texture);
-  this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.appStartTime = Date.now();
+    this.setUpdatePeriod(50);
 
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.starttime= Date.now();
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -106,6 +134,11 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
+  update(time){
+    var elapsed_time = (time- this.starttime)/1000.0;
+    this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
+  }
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -126,9 +159,7 @@ export class MyScene extends CGFscene {
       this.sphere.display();
 
     }
-    if(this.displayPetal){
-      this.petal.display();
-    }
+
     if (this.displayPanorama) {
       this.panorama.display();
     }
@@ -166,4 +197,11 @@ export class MyScene extends CGFscene {
 
     // ---- END Primitive drawing section
   }
+
+  update(time) {
+
+    let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
+    this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
+
+  } 
 }
