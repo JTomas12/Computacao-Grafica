@@ -36,6 +36,9 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayPetal').name('Display Petal');
 
         this.gui.add(this.scene, 'displayBee').name('Display Bee');
+        const beeFolder = this.gui.addFolder('Bee Settings');
+        beeFolder.add(this.scene, 'decelerationRate', 0.1, 1).name('Deceleration Rate');
+        beeFolder.add(this.scene, 'accelerationRate', 0.1, 1).name('Acceleration Rate');
         const gardenFolder = this.gui.addFolder('Garden Settings');
         gardenFolder.add(this.scene, 'gardenRows', 1, 10).step(1).name('Rows').onChange(() => {
           this.scene.updateGarden();
