@@ -1,5 +1,5 @@
-import { CGFobject } from '../lib/CGF.js';
-import { MyPetal } from './MyPetal.js';
+import { CGFobject } from '../../lib/CGF.js';
+import { MyPetal } from '../objects/MyPetal.js';
 
 export class MyStem extends CGFobject {
     constructor(scene, slices, stacks, radius, height) {

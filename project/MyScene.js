@@ -1,14 +1,14 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
-import { MyPlane } from "./MyPlane.js";
-import { MySphere } from "./MySphere.js";
-import { MyPanoram } from "./MyPanoram.js";
-import { MyRock } from "./MyRock.js";
-import { MyRockSet } from "./MyRockSet.js";
-import { MyStem } from "./MyStem.js";
-import { MyFlower } from './MyFlower.js';
-import { MyPetal } from './MyPetal.js';
-import { MyGarden } from "./MyGarden.js";
-import { MyBee } from "./MyBee.js";
+import { MyPlane } from "./geometric/MyPlane.js";
+import { MySphere } from "./geometric/MySphere.js";
+import { MyPanoram } from "./objects/MyPanoram.js";
+import { MyRock } from "./objects/MyRock.js";
+import { MyRockSet } from "./objects/MyRockSet.js";
+import { MyStem } from "./geometric/MyStem.js";
+import { MyFlower } from './objects/MyFlower.js';
+import { MyPetal } from './objects/MyPetal.js';
+import { MyGarden } from "./objects/MyGarden.js";
+import { MyBee } from "./objects/MyBee.js";
 
 /**
  * MyScene

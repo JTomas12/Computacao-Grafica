@@ -1,7 +1,7 @@
-import { CGFobject, CGFappearance, CGFtexture } from '../lib/CGF.js';
-import { MyStem } from '../project/MyStem.js';
-import { MySphere } from '../project/MySphere.js';
-import { MyPetal } from '../project/MyPetal.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
+import { MyStem } from '../geometric/MyStem.js';
+import { MySphere } from '../geometric/MySphere.js';
+import { MyPetal } from './MyPetal.js';
 
 export class MyFlower extends CGFobject {
     constructor(scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle) {

@@ -1,5 +1,5 @@
-import {CGFobject, CGFappearance} from '../lib/CGF.js';
-import { MySphere } from '../project/MySphere.js';
+import {CGFobject, CGFappearance} from '../../lib/CGF.js';
+import { MySphere } from '../geometric/MySphere.js';
 /**
  * MyDiamond
  * @constructor

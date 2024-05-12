@@ -1,7 +1,7 @@
-import {CGFobject, CGFappearance, CGFtexture} from '../lib/CGF.js';
-import { MySphere } from '../project/MySphere.js';
-import { MyCone } from './MyCone.js';
-import { MyAnimatorMovement } from './animator/MyAnimatorMov.js';
+import {CGFobject, CGFappearance, CGFtexture} from '../../lib/CGF.js';
+import { MySphere } from '../geometric/MySphere.js';
+import { MyCone } from '../geometric/MyCone.js';
+import { MyAnimatorMovement } from '../animator/MyAnimatorMov.js';
 
 /**
  * MyBee

@@ -1,6 +1,6 @@
 import { CGFobject } from "../../../lib/CGF.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { CGFappearance, CGFtexture } from '../lib/CGF.js';
+import { MyTriangle } from "../geometric/MyTriangle.js";
+import { CGFappearance, CGFtexture } from '../../lib/CGF.js';
 
 /**
 * MyPetal
