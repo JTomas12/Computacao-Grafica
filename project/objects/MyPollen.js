@@ -12,8 +12,9 @@ import { MySphere } from '../geometric/MySphere.js';
 export class MyPollen extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.sphere = new MySphere(scene, 0.5, 20, 20, 0, 1, 1);
+        this.sphere = new MySphere(scene, 0.5, 20, 20, 0, 2, 2);
         this.initMaterials();
+        this.randomAngle = Math.random() * 2 * Math.PI;
     }
 
 
@@ -31,8 +32,8 @@ export class MyPollen extends CGFobject {
 
     display() {
         this.scene.pushMatrix()
-        this.scene.translate(0, 4, -1);
-        this.scene.scale(0.5,1, 0.5);
+        this.scene.translate(0, 0, 0);
+        this.scene.rotate(this.randomAngle, 0, 0, 1);
         this.pollenMaterial.apply();
         this.sphere.display();
         this.scene.popMatrix()

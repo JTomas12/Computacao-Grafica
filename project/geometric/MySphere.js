@@ -28,13 +28,14 @@ export class MySphere extends CGFobject {
     
         for (var i = 0; i <= this.stacks; i++) {
             var beta = -Math.PI / 2 + i * delta_beta;
+            var radiusY = i < this.stacks / 2 ? this.radius * this.north : this.radius * this.south
             
     
             for (var j = 0; j <= this.slices; j++) {
                 var alfa = j * delta_alfa ;
     
                 var x = -this.radius*(Math.cos(beta) * Math.cos(alfa));
-                var y = -this.radius*Math.sin(beta);
+                var y = -radiusY*Math.sin(beta);
                 var z =  this.radius*Math.cos(beta) * Math.sin(alfa);
     
                 this.vertices.push(x, y, z);

@@ -2,6 +2,7 @@ import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 import { MyStem } from '../geometric/MyStem.js';
 import { MySphere } from '../geometric/MySphere.js';
 import { MyPetal } from './MyPetal.js';
+import { MyPollen } from './MyPollen.js';
 
 export class MyFlower extends CGFobject {
     constructor(scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle) {
@@ -14,6 +15,7 @@ export class MyFlower extends CGFobject {
         this.sphere = new MySphere(scene, receptacle_radius, 30, 20, 20, 1, 1);
         this.petal_color = petal_color;
         this.petal = new MyPetal(scene, rotationAngle, prismAngle, petal_color);
+        this.pollen = new MyPollen(scene);
         this.initMaterials(receptacle_color, stem_color);
     }
 
@@ -49,6 +51,12 @@ export class MyFlower extends CGFobject {
         this.receptacleMaterial.apply(); // Apply receptacle material
         this.sphere.display();
         this.scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(0, this.stem_height, this.receptacle_radius);
+        this.scene.scale(0.3, 0.3, 0.3);
+        this.pollen.display();
+        this.scene.popMatrix();
+
         var angleIncrement = 2 * Math.PI / this.number_of_petals;
         // Loop through each petal
         for (let i = 0; i < this.number_of_petals; i++) {

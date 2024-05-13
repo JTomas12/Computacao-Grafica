@@ -79,7 +79,6 @@ export class MyScene extends CGFscene {
     this.decelerationRate = 0.5;
     this.accelerationRate = 0.5;
     this.rock = new MyRock(this, 16, 8);
-    this.pollen = new MyPollen(this);
     this.garden = new MyGarden(this, 5, 5);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
@@ -180,7 +179,6 @@ export class MyScene extends CGFscene {
 
     if(this.displayFlower){
       this.flower.display();
-      this.pollen.display();
     }
     if(this.displayGarden){
       this.garden.display();
