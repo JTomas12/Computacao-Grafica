@@ -2,7 +2,7 @@ import { CGFobject } from "../../../lib/CGF.js";
 import { MyTriangle } from "../geometric/MyTriangle.js";
 import { CGFappearance, CGFtexture } from '../../lib/CGF.js';
 
-export class MyGrassLeaf extends CGFobject{
+export class MyGrassBlade extends CGFobject{
     constructor(scene,height){
         super(scene);
         this.height = height;
