@@ -10,7 +10,7 @@ import { MyPetal } from './objects/MyPetal.js';
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/MyBee.js";
 import { MyPollen } from "./objects/MyPollen.js";
-
+import { MyTerrain } from "./objects/MyTerrain.js";
 /**
  * MyScene
  * @constructor
@@ -94,6 +94,7 @@ export class MyScene extends CGFscene {
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
     //this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
     //Objects connected to MyInterface
+    this.terrain = new MyTerrain(this, 20, 20, 20);
     this.displayAxis = true;
     this.displaySphere = false;
     this.displayPanorama = true;
@@ -104,6 +105,7 @@ export class MyScene extends CGFscene {
     this.displayGarden = true;
     this.displayPetal = false;
     this.displayBee = false;
+    this.displayTerrain = false;
     //this.displayPetal=true;
     this.enableTextures(true);
 
@@ -183,7 +185,9 @@ export class MyScene extends CGFscene {
     if(this.displayGarden){
       this.garden.display();
     }
-
+    if(this.displayTerrain){
+      this.terrain.display();
+    }
     /*
     if(this.displayFlower){
       this.flower.display();
