@@ -1,12 +1,11 @@
 import { CGFobject } from "../../lib/CGF.js";
 import { MyGrassLeaf } from "./MyGrassLeaf.js";
 export class MyTerrain extends CGFobject{
-    constructor(scene, width, parts, notriangles){
+    constructor(scene, width, parts){
         super(scene);
         this.width = width;
         this.parts = parts;
-        this.notriangles = notriangles;
-        this.mygrassLeaf = new MyGrassLeaf(scene, 1);
+        this.mygrassLeaf = new MyGrassLeaf(scene, 5);
         this.initBuffers();
     }
     initBuffers(){

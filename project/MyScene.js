@@ -98,14 +98,14 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.displaySphere = false;
     this.displayPanorama = true;
-    this.displayRockSet = true;
+    this.displayRockSet = false;
     this.displayPanorama = false;
     this.displayFlower = false;
     this.scaleFactor = 1;
-    this.displayGarden = true;
+    this.displayGarden = false;
     this.displayPetal = false;
     this.displayBee = false;
-    this.displayTerrain = false;
+    this.displayTerrain = true;
     //this.displayPetal=true;
     this.enableTextures(true);
 
