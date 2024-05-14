@@ -65,22 +65,37 @@ export class MyGrassBlade extends CGFobject {
 
 		];
 		this.normals = [
-        	0, 0, 1,  // Normal for vertex 0
-        	0, 0, 1,  // Normal for vertex 1
-        	0, 0, 1,  // Normal for vertex 2
-            
-    
-        	0, 0, -1, // Normal for vertex 0, back face
-        	0, 0, -1, // Normal for vertex 1, back face
-        	0, 0, -1, // Normal for vertex 2, back face
-
-        	0, 0, 1,  // Normal for vertex 3
-        	0, 0, 1,  // Normal for vertex 4
-        	0, 0, 1,  // Normal for vertex 5
-
-        	0, 0, -1,  // Normal for vertex 3
-        	0, 0, -1,  // Normal for vertex 4
-        	0, 0, -1,  // Normal for vertex 5
+        	0, 0, 1,   
+        	0, 0, 1,   
+        	0, 0, 1,
+            0, 0, 1,  
+        	0, 0, 1,  
+        	0, 0, 1,  
+			0, 0, 1,   
+        	0, 0, 1,   
+        	0, 0, 1,   
+			0, 0, 1,   
+        	0, 0, 1,   
+        	0, 0, 1,   
+			0, 0, 1,   
+        	0, 0, 1,  
+        	0, 0, 1,   
+        	0, 0, -1, 
+        	0, 0, -1, 
+        	0, 0, -1, 
+        	0, 0, -1,  
+        	0, 0, -1,  
+        	0, 0, -1,
+			0, 0, -1, 
+        	0, 0, -1, 
+        	0, 0, -1, 
+        	0, 0, -1,  
+        	0, 0, -1,  
+        	0, 0, -1,  
+			0,0,-1,
+			0, 0, -1,  
+        	0, 0, -1,  
+			0,0,-1,  
             
         ];
 		this.texCoords = [

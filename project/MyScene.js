@@ -118,6 +118,13 @@ export class MyScene extends CGFscene {
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     this.starttime= Date.now();
+
+    // shaders
+    this.testShaders = [
+      new CGFshader(this.gl, "shaders/grass.vert", "shaders/grass.frag"),
+      //new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag"),
+    ];
+    this.setUpdatePeriod(50);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -142,9 +149,45 @@ export class MyScene extends CGFscene {
   }
 
   update(time){
-    var elapsed_time = (time- this.starttime)/1000.0;
-    this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
+    //var elapsed_time = (time- this.starttime)/1000.0;
+    //this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
+    this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 100 });
+    console.log("something");
   }
+
+  // called when a new shader is selected, updated from the TP5 code, to be revised
+	onSelectedShaderChanged(v) {
+		// update shader code
+		this.vShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[v].vertexURL) + "</xmp>";
+		this.fShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[v].fragmentURL) + "</xmp>";
+
+		// update scale factor
+		this.onScaleFactorChanged(this.scaleFactor);
+	}
+
+	// called when a new object is selected
+	onSelectedObjectChanged(v) {
+		// update wireframe mode when the object changes
+		this.onWireframeChanged(this.wireframe);
+	}
+
+	// updates the selected object's wireframe mode
+	onWireframeChanged(v) {
+		if (v)
+			this.objects[this.selectedObject].setLineMode();
+		else
+			this.objects[this.selectedObject].setFillMode();
+
+	}
+
+	// called when the scale factor changes on the interface
+	onScaleFactorChanged(v) {
+		this.testShaders[this.selectedExampleShader].setUniformsValues({ normScale: this.scaleFactor });
+	}
+
+
+
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -204,12 +247,8 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     // ---- END Primitive drawing section
+    // restore default shader (will be needed for drawing the axis in next frame)
+		this.setActiveShader(this.defaultShader);
   }
 
-  update(time) {
-
-    let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
-    this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
-
-  } 
 }

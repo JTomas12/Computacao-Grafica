@@ -16,7 +16,7 @@ export class MyGrassLeaf extends CGFobject{
         this.grassMaterial.setDiffuse(0, 1, 0, 1.0);
         this.grassMaterial.setSpecular(0, 1, 0, 1.0);
         this.grassMaterial.setShininess(10.0);
-        this.grassMaterial.setTexture(this.texture);
+        //this.grassMaterial.setTexture(this.texture);
     }
     initBuffers(){
         this.vertices = [];

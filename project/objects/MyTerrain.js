@@ -6,8 +6,9 @@ export class MyTerrain extends CGFobject{
         this.width = width;
         this.parts = parts;
         this.mygrassLeaf = new MyGrassLeaf(scene, 5);
-        this.initBuffers();
+        //this.initBuffers();
     }
+    /*
     initBuffers(){
         this.vertices = [];
         this.indices = [];
@@ -34,6 +35,7 @@ export class MyTerrain extends CGFobject{
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
+    */
     display(){
         
 
