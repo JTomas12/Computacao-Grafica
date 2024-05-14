@@ -18,7 +18,7 @@ export class MyRockSet extends CGFobject {
         let levelWidth = levels;  // Start with the full width for the base level
 
         for (let level = 0; level < levels && totalRocks < this.numRocks; level++) {
-            let numRocksInLevel = levelWidth;
+            let numRocksInLevel = levelWidth*2;
             currentX = -numRocksInLevel / 2 * 0.2;  // Center the rocks in the current level
 
             for (let i = 0; i < numRocksInLevel; i++) {

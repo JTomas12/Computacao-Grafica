@@ -10,6 +10,7 @@ import { MyPetal } from './objects/MyPetal.js';
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/MyBee.js";
 import { MyPollen } from "./objects/MyPollen.js";
+import { MyHive } from "./objects/MyHive.js";
 
 /**
  * MyScene
@@ -72,7 +73,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
-    this.rockSet = new MyRockSet(this, 20);
+    this.rockSet = new MyRockSet(this, 50);
     this.speedFactor = 1;
     this.beemaxSpeed = 1;
     this.beescaleFactor = 1;
@@ -85,6 +86,7 @@ export class MyScene extends CGFscene {
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
     this.bee = new MyBee(this, 10, 0, 0);
+    this.hive = new MyHive(this);
     this.material = new CGFappearance(this);
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
@@ -104,6 +106,7 @@ export class MyScene extends CGFscene {
     this.displayGarden = true;
     this.displayPetal = false;
     this.displayBee = false;
+    this.displayHive = true;
     //this.displayPetal=true;
     this.enableTextures(true);
 
@@ -175,6 +178,10 @@ export class MyScene extends CGFscene {
 
     if (this.displayRockSet) {
       this.rockSet.display();
+    }
+
+    if(this.displayHive){
+      this.hive.display();
     }
 
     if(this.displayFlower){
