@@ -37,6 +37,7 @@ export class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'displayBee').name('Display Bee');
         this.gui.add(this.scene, 'displayTerrain').name('Display Terrain');
+        this.gui.add(this.scene, 'showShaderCode').name('Show Shader Code').onChange(this.scene.onShaderCodeVizChanged.bind(this.scene));
         const beeFolder = this.gui.addFolder('Bee Settings');
         beeFolder.add(this.scene, 'decelerationRate', 0.1, 1).name('Deceleration Rate');
         beeFolder.add(this.scene, 'accelerationRate', 0.1, 1).name('Acceleration Rate');
@@ -57,6 +58,7 @@ export class MyInterface extends CGFinterface {
         petalFolder.add(this.scene, 'prismAngle', -Math.PI, Math.PI).name('Prism Angle').onChange(() => {
           this.scene.updatePetal();
         });
+        
         this.initKeys();
         return true;
     }

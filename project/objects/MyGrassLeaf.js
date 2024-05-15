@@ -37,7 +37,6 @@ export class MyGrassLeaf extends CGFobject{
                 //this.scene.translate(i * 2, j * 2, 0); // ajuste conforme necessário
                 this.scene.scale(1, this.height,1); // ajuste a altura conforme necessário
                 this.grassblade.display(); // certifique-se de que MyTriangle tem um método de exibição adequado
-                this.scene.scale(0.2, this.height,0.2); // ajuste a altura conforme necessário
                 this.scene.translate(0, 0, 1); // ajuste conforme necessário
                 this.scene.popMatrix();
             }

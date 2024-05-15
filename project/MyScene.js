@@ -23,6 +23,7 @@ export class MyScene extends CGFscene {
     this.gardenCols = 5;
     this.rotationAngle = Math.PI/12;
     this.prismAngle = Math.PI/12;
+    this.showShaderCode = false;
   }
   checkkeys() {
     var text = "Keys pressed: ";
@@ -116,7 +117,8 @@ export class MyScene extends CGFscene {
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
+    this.onShaderCodeVizChanged(this.showShaderCode);
+		this.onSelectedShaderChanged(this.selectedExampleShader);
     this.starttime= Date.now();
 
     // shaders
@@ -155,6 +157,12 @@ export class MyScene extends CGFscene {
     console.log("something");
   }
 
+  onShaderCodeVizChanged(v) {
+		if (v)
+			this.shadersDiv.style.display = "block";
+		else
+			this.shadersDiv.style.display = "none";
+	}
   // called when a new shader is selected, updated from the TP5 code, to be revised
 	onSelectedShaderChanged(v) {
 		// update shader code
