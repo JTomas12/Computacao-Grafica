@@ -8,34 +8,7 @@ export class MyTerrain extends CGFobject{
         this.mygrassLeaf = new MyGrassLeaf(scene, 5);
         //this.initBuffers();
     }
-    /*
-    initBuffers(){
-        this.vertices = [];
-        this.indices = [];
-        this.normals = [];
-        this.texCoords = [];
-
-        this.delta = this.width / this.parts;
-
-        for(let i = 0; i <= this.parts; i++){
-            for(let j = 0; j <= this.parts; j++){
-                this.vertices.push(j*this.delta, 0, i*this.delta);
-                this.normals.push(0, 1, 0);
-                this.texCoords.push(j/this.parts, i/this.parts);
-            }
-        }
-
-        for(let i = 0; i < this.parts; i++){
-            for(let j = 0; j < this.parts; j++){
-                this.indices.push(i*(this.parts+1) + j, i*(this.parts+1) + j+1, (i+1)*(this.parts+1) + j);
-                this.indices.push(i*(this.parts+1) + j+1, (i+1)*(this.parts+1) + j+1, (i+1)*(this.parts+1) + j);
-            }
-        }
-
-        this.primitiveType = this.scene.gl.TRIANGLES;
-        this.initGLBuffers();
-    }
-    */
+    
     display(){
         
 
@@ -45,8 +18,10 @@ export class MyTerrain extends CGFobject{
                 this.scene.translate(i, 0, j);
                 this.mygrassLeaf.display();
                 this.scene.popMatrix();
+                this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedExampleShader]);
             }
-            
+            this.scene.setActiveShader(this.scene.defaultShader);
         }
+        
     }
 }

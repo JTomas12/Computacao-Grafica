@@ -13,12 +13,19 @@ uniform sampler2D uSampler2;
 uniform float normScale;
 
 void main() {
-    vec3 offset=vec3(0.0,0.0,0.0);
+    vec3 offset = vec3(0.0, 0.0, 0.0);
     
     vTextureCoord = aTextureCoord;
 
-    if (texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).b > 0.5)
-        offset=aVertexNormal*normScale*0.1*sin(timeFactor);
+    // Calculate time factor independently of the texture
+    float time = mod(timeFactor * 0.1, 3.14);
 
-    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
+    // Calculate offset along z-axis using sine function to create oscillation
+    offset.z = sin(time) * 5.0; // Adjust multiplier to control amplitude of oscillation
+
+    // Apply the offset to the vertex position
+    vec4 finalVertexPosition = vec4(aVertexPosition + offset, 1.0);
+
+    // Transform the vertex position to clip space
+    gl_Position = uPMatrix * uMVMatrix * finalVertexPosition;
 }

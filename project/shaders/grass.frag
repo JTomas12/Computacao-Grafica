@@ -9,11 +9,16 @@ uniform sampler2D uSampler2;
 uniform float timeFactor;
 
 void main() {
-	vec4 color = texture2D(uSampler, vTextureCoord+vec2(timeFactor*.01,0.0));
-	vec4 filter = texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord);
+    // Define a time factor to control the speed of the color transition
+    float time = mod(timeFactor * 0.1, 3.14); // Adjust the multiplier to control the speed
 
-	if (filter.b > 0.5)
-		color=vec4(0.52, 0.18, 0.11, 1.0);
-	
-	gl_FragColor = color;
+    vec3 green = vec3(0.0, 0.5 +(sin(time) *0.5), 0.0); // Pure green color with varying brightness
+
+    vec3 color = vec3(0.0, green.g, 0.0); 
+
+    // Set color with alpha value
+    vec4 finalColor = vec4(color, 1.0);
+
+    // Output the final color
+    gl_FragColor = finalColor;
 }

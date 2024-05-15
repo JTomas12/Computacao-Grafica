@@ -15,6 +15,19 @@ import { MyTerrain } from "./objects/MyTerrain.js";
  * MyScene
  * @constructor
  */
+
+/**
+ * getStringFromUrl(url)
+ * Function to load a text file from a URL (used to display shader sources)
+ */
+
+function getStringFromUrl(url) {
+	var xmlHttpReq = new XMLHttpRequest();
+    xmlHttpReq.open("GET", url, false);
+    xmlHttpReq.send();
+    return xmlHttpReq.responseText;
+}
+
 export class MyScene extends CGFscene {
   constructor() {
     super();
@@ -23,6 +36,7 @@ export class MyScene extends CGFscene {
     this.gardenCols = 5;
     this.rotationAngle = Math.PI/12;
     this.prismAngle = Math.PI/12;
+    this.selectedExampleShader = 0;
     this.showShaderCode = false;
   }
   checkkeys() {
@@ -117,8 +131,14 @@ export class MyScene extends CGFscene {
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    
+    this.shadersDiv = document.getElementById("shaders");
+		this.vShaderDiv = document.getElementById("vshader");
+		this.fShaderDiv = document.getElementById("fshader");
+
     this.onShaderCodeVizChanged(this.showShaderCode);
-		this.onSelectedShaderChanged(this.selectedExampleShader);
+		//this.onSelectedShaderChanged(this.selectedExampleShader);
+    
     this.starttime= Date.now();
 
     // shaders
@@ -156,37 +176,24 @@ export class MyScene extends CGFscene {
     this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 100 });
     console.log("something");
   }
-
+  
   onShaderCodeVizChanged(v) {
-		if (v)
-			this.shadersDiv.style.display = "block";
-		else
-			this.shadersDiv.style.display = "none";
+		if (this.shadersDiv) { // Check if shadersDiv is defined
+      console.log("shadersDiv is defined");
+      if (v){
+        
+        this.shadersDiv.style.display = "block";
+        this.vShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[0].vertexURL) + "</xmp>";
+		    this.fShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[0].fragmentURL) + "</xmp>";
+      
+        } else
+        {this.shadersDiv.style.display = "none";}
+    } else {
+      console.error("shadersDiv is not defined or accessible.");
+    }
 	}
   // called when a new shader is selected, updated from the TP5 code, to be revised
-	onSelectedShaderChanged(v) {
-		// update shader code
-		this.vShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[v].vertexURL) + "</xmp>";
-		this.fShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[v].fragmentURL) + "</xmp>";
-
-		// update scale factor
-		this.onScaleFactorChanged(this.scaleFactor);
-	}
-
-	// called when a new object is selected
-	onSelectedObjectChanged(v) {
-		// update wireframe mode when the object changes
-		this.onWireframeChanged(this.wireframe);
-	}
-
-	// updates the selected object's wireframe mode
-	onWireframeChanged(v) {
-		if (v)
-			this.objects[this.selectedObject].setLineMode();
-		else
-			this.objects[this.selectedObject].setFillMode();
-
-	}
+	
 
 	// called when the scale factor changes on the interface
 	onScaleFactorChanged(v) {
@@ -238,7 +245,9 @@ export class MyScene extends CGFscene {
     }
     if(this.displayTerrain){
       this.terrain.display();
+      
     }
+    
     /*
     if(this.displayFlower){
       this.flower.display();
@@ -256,7 +265,7 @@ export class MyScene extends CGFscene {
 
     // ---- END Primitive drawing section
     // restore default shader (will be needed for drawing the axis in next frame)
-		this.setActiveShader(this.defaultShader);
+    this.setActiveShader(this.defaultShader);
   }
 
 }
