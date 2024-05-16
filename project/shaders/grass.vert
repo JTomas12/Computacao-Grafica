@@ -11,7 +11,7 @@ uniform float timeFactor;
 
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler2;
-
+uniform float randomOscilation;
 uniform float normScale;
 
 void main() {
@@ -23,7 +23,7 @@ void main() {
         
     if (aVertexPosition.y != -1.0) {
         // Apply the sin function to the z-component of the offset, but negate it
-        offset = vec3(-aVertexPosition.x, -aVertexNormal.y, aVertexPosition.z + 0.5 * sin(time));
+        offset = vec3(-aVertexPosition.x, -aVertexNormal.y, aVertexPosition.z + aVertexPosition.y*aVertexPosition.y  + 0.5 * sin(time));
     }
     
     // Apply the offset to the vertex position

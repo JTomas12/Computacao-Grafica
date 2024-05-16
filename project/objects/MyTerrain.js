@@ -29,7 +29,8 @@ export class MyTerrain extends CGFobject{
         for(let i = 0; i < this.width; i+=1){
             for(let j = 0; j < this.width; j+=1){
                 this.scene.pushMatrix();
-                this.scene.translate(i, 0, j+1);
+                this.scene.translate(i, 10, j+1);
+                this.scene.scale(1,10,1);
                 this.grassMaterial.apply();
                 this.mygrassLeaf.display();
                 this.scene.popMatrix();

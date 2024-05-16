@@ -172,9 +172,10 @@ export class MyScene extends CGFscene {
   }
 
   update(time){
-    //var elapsed_time = (time- this.starttime)/1000.0;
+    //let elapsed_time = (time- this.starttime)/1000.0;
     //this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
-    this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 1000 });
+    this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 1000, randomOscilation: Math.random() });
+    
     console.log("something");
   }
   
