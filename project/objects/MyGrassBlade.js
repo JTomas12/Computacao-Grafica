@@ -101,9 +101,21 @@ export class MyGrassBlade extends CGFobject {
             
         ];
 		this.texCoords = [
-			1, 1, // 0
-			0, 0, // 1
-			1, 0, // 2
+			0, 0,   // For vertex 0
+			0.142, 0.142, // For vertex 1
+			0.285, 0.285, // For vertex 2
+			0.428, 0.428, // For vertex 3
+			0.571, 0.571, // For vertex 4
+			0.714, 0.714, // For vertex 5
+			0.857, 0.857, // For vertex 6
+			1, 1,   // For vertex 7
+			0.857, 0.857, // For vertex 8
+			0.714, 0.714, // For vertex 9
+			0.571, 0.571, // For vertex 10
+			0.428, 0.428, // For vertex 11
+			0.285, 0.285, // For vertex 12
+			0.142, 0.142, // For vertex 13
+			0, 0    // For vertex 14
 		];
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
