@@ -14,7 +14,6 @@ export class MyGrassBlade extends CGFobject {
     constructor(scene, coords) {
 		super(scene);
 		this.initBuffers();
-		this.texture = new CGFtexture(this.scene, 'images/grass_texture.jpg');
         //this.initMaterials();
 		if (coords != undefined)
 			this.updateTexCoords(coords);

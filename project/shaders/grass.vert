@@ -17,15 +17,18 @@ void main() {
     
     vTextureCoord = aTextureCoord;
 
-    // Calculate time factor independently of the texture
-    float time = mod(timeFactor * 0.1, 3.14);
-
-    // Calculate offset along z-axis using sine function to create oscillation
-    offset.z = sin(time) * 5.0; // Adjust multiplier to control amplitude of oscillation
-
+    if (aVertexPosition.y > -1.0) {
+        // Calculate time factor independently of the texture
+        float time = mod(timeFactor * 0.1, 3.14);
+        
+        // Calculate offset along z-axis using sine function to create oscillation
+        offset.z = normScale * 0.1 * sin(time);
+    
+    }
     // Apply the offset to the vertex position
     vec4 finalVertexPosition = vec4(aVertexPosition + offset, 1.0);
-
+    
     // Transform the vertex position to clip space
     gl_Position = uPMatrix * uMVMatrix * finalVertexPosition;
+    
 }
