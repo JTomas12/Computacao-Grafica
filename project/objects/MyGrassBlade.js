@@ -1,4 +1,6 @@
 import {CGFobject} from '../../lib/CGF.js';
+import {CGFtexture} from '../../lib/CGF.js';
+import {CGFappearance} from '../../lib/CGF.js';
 /**
  * MyDiamond
  * @constructor
@@ -12,10 +14,12 @@ export class MyGrassBlade extends CGFobject {
     constructor(scene, coords) {
 		super(scene);
 		this.initBuffers();
+		this.texture = new CGFtexture(this.scene, 'images/grass_texture.jpg');
+        //this.initMaterials();
 		if (coords != undefined)
 			this.updateTexCoords(coords);
 	}
-
+	
     initBuffers() {
 		this.vertices = [
    			-1,-1,0, //0
@@ -113,4 +117,5 @@ export class MyGrassBlade extends CGFobject {
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();
 	}
+	
 }
