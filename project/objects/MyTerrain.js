@@ -25,13 +25,15 @@ export class MyTerrain extends CGFobject{
             for(let j = 0; j < this.width; j+=1){
                 this.scene.pushMatrix();
                 this.grassMaterial.apply();
-                this.scene.translate(i, 0, j);
+                this.scene.translate(i, 0, j+1);
                 this.mygrassLeaf.display();
                 this.scene.popMatrix();
                 this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedExampleShader]);
             }
             this.scene.setActiveShader(this.scene.defaultShader);
         }
-        
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, 1);
+        this.scene.popMatrix();
     }
 }
