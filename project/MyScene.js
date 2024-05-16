@@ -147,6 +147,7 @@ export class MyScene extends CGFscene {
       //new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag"),
     ];
     this.setUpdatePeriod(50);
+    
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -173,7 +174,7 @@ export class MyScene extends CGFscene {
   update(time){
     //var elapsed_time = (time- this.starttime)/1000.0;
     //this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
-    this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 100 });
+    this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 1000 });
     console.log("something");
   }
   
@@ -265,7 +266,7 @@ export class MyScene extends CGFscene {
 
     // ---- END Primitive drawing section
     // restore default shader (will be needed for drawing the axis in next frame)
-    this.setActiveShader(this.defaultShader);
+    //this.setActiveShader(this.defaultShader);
   }
 
 }

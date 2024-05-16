@@ -7,6 +7,8 @@ uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 uniform float timeFactor;
 
+
+
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler2;
 
@@ -17,18 +19,16 @@ void main() {
     
     vTextureCoord = aTextureCoord;
 
-    if (aVertexPosition.y > -1.0) {
-        // Calculate time factor independently of the texture
-        float time = mod(timeFactor * 0.1, 3.14);
+    float time = timeFactor * 0.1;
         
-        // Calculate offset along z-axis using sine function to create oscillation
-        offset.z = normScale * 0.1 * sin(time);
-    
+    if (aVertexPosition.y != -1.0) {
+        // Apply the sin function to the z-component of the offset, but negate it
+        offset = vec3(-aVertexPosition.x, -aVertexNormal.y, aVertexPosition.z + 0.5 * sin(time));
     }
+    
     // Apply the offset to the vertex position
     vec4 finalVertexPosition = vec4(aVertexPosition + offset, 1.0);
     
     // Transform the vertex position to clip space
     gl_Position = uPMatrix * uMVMatrix * finalVertexPosition;
-    
 }

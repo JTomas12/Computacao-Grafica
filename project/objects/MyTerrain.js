@@ -25,7 +25,7 @@ export class MyTerrain extends CGFobject{
     
     display(){
         
-
+        this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedExampleShader]);
         for(let i = 0; i < this.width; i+=1){
             for(let j = 0; j < this.width; j+=1){
                 this.scene.pushMatrix();
@@ -33,12 +33,13 @@ export class MyTerrain extends CGFobject{
                 this.grassMaterial.apply();
                 this.mygrassLeaf.display();
                 this.scene.popMatrix();
-                this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedExampleShader]);
+                
             }
-            this.scene.setActiveShader(this.scene.defaultShader);
+            
         }
+        this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, 1);
+        this.scene.translate(0, 0, 2);
         this.scene.popMatrix();
     }
 }
