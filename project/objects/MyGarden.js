@@ -32,7 +32,7 @@ export class MyGarden extends CGFobject {
                 const prismAngle = Math.random() * Math.PI / 6; // Ângulo de rotação do prisma entre 0 e PI/6
     
                 
-                const flower = new MyFlower(this.scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle);
+                const flower = new MyFlower(this.scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle, true);
                 
                 this.flowers.push({flower, x, z}); 
             }

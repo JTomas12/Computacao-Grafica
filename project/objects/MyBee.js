@@ -249,6 +249,7 @@ export class MyBee extends CGFobject {
         this.ascending = false;
         this.descending = false;
         this.firstFKeyPress = false;
+        this.scene.resetPollen();
         this.position = {x: this.defaultposition.x, y: this.defaultposition.y, z: this.defaultposition.z}
     }
     
@@ -291,7 +292,10 @@ export class MyBee extends CGFobject {
         if (this.position.y > this.flowerPosition.y) {
             this.position.y = this.lerp(this.position.y, this.flowerPosition.y, 0.1);
             if(this.position.y < this.flowerPosition.y + 0.5){
-                this.pollenPresent = true;
+                if (this.scene.isPollenPresent()) {
+                    this.pollen = this.scene.pickPollen();
+                    this.pollenPresent = !!this.pollen; 
+                }
                 this.speed = 0;
             }
         }

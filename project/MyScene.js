@@ -24,6 +24,21 @@ export class MyScene extends CGFscene {
     this.gardenCols = 5;
     this.rotationAngle = Math.PI/12;
     this.prismAngle = Math.PI/12;
+    this.pollenPresentInFlower = true;
+  }
+  pickPollen() {
+
+    if (this.pollenPresentInFlower) {
+      this.pollenPresentInFlower = false;
+      return new MyPollen(this); 
+    }
+    return null; 
+  }
+  isPollenPresent() {
+    return this.pollenPresentInFlower;
+  }
+  resetPollen() {
+    this.pollenPresentInFlower = true;
   }
   checkkeys() {
     var text = "Keys pressed: ";
@@ -87,11 +102,12 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanoram(this, this.panoramTexture);
     this.bee = new MyBee(this, 0, 20, 0, false);
     this.hive = new MyHive(this);
+    this.pollen = new MyPollen(this);
     this.material = new CGFappearance(this);
     this.material.setEmission(1, 1, 1, 1)
     this.material.setTexture(this.earthTexture)
     this.plane = new MyPlane(this,30);
-    this.flower = new MyFlower(this,3,5,1.2,[128,128,0],0.3,[0,128,0],3,3,[0,0,128], this.rotationAngle, this.prismAngle); 
+    this.flower = new MyFlower(this,3,5,1.2,[128,128,0],0.3,[0,128,0],3,3,[0,0,128], this.rotationAngle, this.prismAngle, false); 
     //this.garden = new MyGarden(this, this.speedFactor, this.speedFactor);
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
     //this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
@@ -99,15 +115,14 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.displaySphere = false;
     this.displayPanorama = true;
-    this.displayRockSet = true;
+    this.displayRockSet = false;
     this.displayPanorama = false;
-    this.displayFlower = false;
+    this.displayFlower = true;
     this.scaleFactor = 1;
     this.displayGarden = true;
     this.displayPetal = false;
     this.displayBee = false;
-    this.displayHive = true;
-    //this.displayPetal=true;
+    this.displayHive = false;
     this.enableTextures(true);
 
     this.appStartTime = Date.now();
@@ -189,6 +204,13 @@ export class MyScene extends CGFscene {
     }
     if(this.displayGarden){
       this.garden.display();
+    }
+    if(this.pollenPresentInFlower){
+      this.pushMatrix();
+      this.translate(0, 3, 1.3);
+      this.scale(0.3, 0.3, 0.3);
+      this.pollen.display();
+      this.popMatrix();
     }
 
     /*
