@@ -14,6 +14,9 @@ uniform sampler2D uSampler2;
 uniform float randomOscilation;
 uniform float normScale;
 
+
+
+
 void main() {
     vec3 offset = vec3(0.0, 0.0, 0.0);
     
@@ -21,11 +24,20 @@ void main() {
 
     float time = timeFactor * 0.1;
         
-    if (aVertexPosition.y != -1.0) {
-        // Apply the sin function to the z-component of the offset, but negate it
-        offset = vec3(-aVertexPosition.x, -aVertexNormal.y, aVertexPosition.z + aVertexPosition.y*aVertexPosition.y  + 0.5 * sin(time));
-    }
     
+
+    if (aVertexPosition.y > -1.0) {
+        // Apply the sin function to the z-component of the offset, but negate it
+        offset = vec3(-aVertexPosition.x, -aVertexNormal.y,  (aVertexPosition.y*aVertexPosition.y  +3.0* sin(time))/3.0 );
+    }
+    if (aVertexPosition.y > -0.5) {
+        // Apply the sin function to the z-component of the offset, but negate it
+        offset = vec3(-aVertexPosition.x, -aVertexNormal.y,  (aVertexPosition.y*aVertexPosition.y   + 2.0*sin(2.0*time ))/2.0);
+    }
+     if (aVertexPosition.y > -0.2) {
+        // Apply the sin function to the z-component of the offset, but negate it
+        offset = vec3(-aVertexPosition.x, -1.5*aVertexNormal.y, aVertexPosition.y*aVertexPosition.y*aVertexPosition.y - sin(3.0*time ));
+    }
     // Apply the offset to the vertex position
     vec4 finalVertexPosition = vec4(aVertexPosition + offset, 1.0);
     
