@@ -1,6 +1,7 @@
 import {CGFobject, CGFappearance, CGFtexture} from '../../lib/CGF.js';
 import { MySphere } from '../geometric/MySphere.js';
 import { MyCone } from '../geometric/MyCone.js';
+import { MyPollen } from './MyPollen.js';
 import { MyAnimatorMovement } from '../animator/MyAnimatorMov.js';
 
 /**
@@ -9,7 +10,7 @@ import { MyAnimatorMovement } from '../animator/MyAnimatorMov.js';
  * @param scene - Reference to MyScene object
  */
 export class MyBee extends CGFobject {
-    constructor(scene, x, y, z) {
+    constructor(scene, x, y, z, pollenPresent) {
         super(scene);
         this.head = new MySphere(scene,1, 16, 8, 0, 1, 1);
         this.body = new MySphere(scene,1, 16, 8, 0, 1, 1);
@@ -18,18 +19,25 @@ export class MyBee extends CGFobject {
         this.eye = new MySphere(scene,1, 16, 8, 0, 1, 1);
         this.paw = new MySphere(scene,1, 16, 8, 0, 1, 1);
         this.sting = new MyCone(scene, 16, 8);
+        this.pollen = new MyPollen(scene);
         
         this.scale = 1;
-        this.orientation = 0;
         this.speed = 0;
         this.position = {x: x, y: y, z: z};
         this.defaultposition = {x: x, y: y, z: z};
         this.wingRotation = Math.PI / 8;
         this.oscillationOffset = 0;
         this.orientation = 1;
+        this.lastOrientation = 1;
         this.speed = 0;
+        this.lastSpeed = 0;
         this.lastSpeedFactor = 1;
         this.scale = 1;
+        this.flowerPosition = {x: 0, y: 5, z: 0};
+        this.descending = false;
+        this.ascending = false;
+        this.pollenPresent = pollenPresent;
+        this.firstFKeyPress = false;
         this.initMaterials();
         this.animator = new MyAnimatorMovement(1, 2*Math.PI, 100, true, true);
 
@@ -91,11 +99,18 @@ export class MyBee extends CGFobject {
 
     }
     display() {
-        this.scene.pushMatrix()
+        this.scene.pushMatrix();
         this.scene.translate(this.position.x, this.position.y, this.position.z);
         this.scene.rotate(this.orientation, 0, 1, 0);
         this.drawElements();
-        console.log(this.wingRotation);
+        if(this.pollenPresent){
+            this.scene.pushMatrix();
+            this.scene.translate(0.2, -0.5, 0.5);
+            this.scene.rotate(Math.PI / 3, 0, 0, 1);
+            this.scene.scale(0.3, 0.3, 0.3);
+            this.pollen.display();
+            this.scene.popMatrix();
+        }
         this.scene.popMatrix()
     }
     drawElements() {
@@ -227,7 +242,13 @@ export class MyBee extends CGFobject {
     }
     reset() {
         this.speed = 0
+        this.lastSpeed = 0
         this.orientation = 0
+        this.lastOrientation = 0
+        this.pollenPresent = false;
+        this.ascending = false;
+        this.descending = false;
+        this.firstFKeyPress = false;
         this.position = {x: this.defaultposition.x, y: this.defaultposition.y, z: this.defaultposition.z}
     }
     
@@ -247,6 +268,51 @@ export class MyBee extends CGFobject {
         if (this.scene.gui.isKeyPressed("KeyR")) {
             this.reset()
         }
+        if (this.scene.gui.isKeyPressed("KeyF")) {
+            if (!this.firstFKeyPress) {
+                this.firstFKeyPress = true;
+                this.lastSpeed = this.speed;
+                this.lastOrientation = this.orientation;
+            }
+            this.descending = true;
+            this.descendToFlower();
+        }
+        if (this.scene.gui.isKeyPressed("KeyP")) {
+            this.ascending = true;
+            this.descending = false; 
+            this.speed = this.lastSpeed;
+            this.orientation = this.lastOrientation;
+            this.ascendToDefault();
+        }
+    }
+
+
+    descendToFlower() {
+        if (this.position.y > this.flowerPosition.y) {
+            this.position.y = this.lerp(this.position.y, this.flowerPosition.y, 0.1);
+            if(this.position.y < this.flowerPosition.y + 0.5){
+                this.pollenPresent = true;
+                this.speed = 0;
+            }
+        }
+         else {
+            this.position.y = this.flowerPosition.y;
+        }
+    }
+    ascendToDefault() {
+        if (this.position.y < this.defaultposition.y) {
+            this.position.y = this.lerp(this.position.y, this.defaultposition.y, 0.1);
+            if(this.position.y > this.defaultposition.y - 0.5){
+                this.ascending = false;
+            }
+        } else {
+            this.position.y = this.defaultposition.y;
+            this.ascending = false;
+        }
+    }
+
+    lerp(start, end, t) {
+        return start * (1 - t) + end * t;
     }
     update(elapsedTime, scaleFactor, speedFactor) {
 
@@ -258,7 +324,8 @@ export class MyBee extends CGFobject {
             this.lastSpeedFactor = speedFactor;
         }
 
-        this.animator.update(elapsedTime, {x: this.position.x, y: this.position.y, z: this.position.z, speed: this.speed, orientation: this.orientation, wingAngle: this.wingRotation})
+        this.animator.update(elapsedTime, {x: this.position.x, y: this.position.y, z: this.position.z, speed: this.speed, orientation: this.orientation, wingAngle: this.wingRotation, descending : this.descending,
+            ascending: this.ascending})
 
 
         this.updateParams()
@@ -268,7 +335,9 @@ export class MyBee extends CGFobject {
     updateParams() {
 
       
-        this.position.y = this.animator.y
+        if (!this.descending && !this.ascending) {  
+            this.position.y = this.animator.y;
+        }
 
         this.position.x = this.animator.x
         this.position.z = this.animator.z

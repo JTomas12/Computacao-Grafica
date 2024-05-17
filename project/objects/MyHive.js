@@ -1,6 +1,7 @@
 import {CGFobject, CGFappearance, CGFtexture} from '../../lib/CGF.js';
 import { MyPrism } from '../geometric/MyPrism.js';
 import { MyUnitCube } from '../geometric/MyUnitCube.js';
+import { MyPollen } from './MyPollen.js';
 
 /**
  * MyHive
@@ -9,12 +10,13 @@ import { MyUnitCube } from '../geometric/MyUnitCube.js';
  */
 
 export class MyHive extends CGFobject {
-    constructor(scene) {
+    constructor(scene, pollenPresent) {
         super(scene);
         this.texture1 = new CGFtexture(this.scene, "./images/white_wood.jpg");
         this.texture2 = new CGFtexture(this.scene, "./images/hive_texture.jpg");
         this.prim = new MyPrism(scene, 3, 1);
         this.cube = new MyUnitCube(scene, this.texture2, this.texture1, this.texture1, this.texture1, this.texture1, this.texture1);
+        this.pollenPresent = pollenPresent;
 
         this.initMaterials();
     }

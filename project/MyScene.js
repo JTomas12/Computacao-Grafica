@@ -85,7 +85,7 @@ export class MyScene extends CGFscene {
     this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
-    this.bee = new MyBee(this, 10, 0, 0);
+    this.bee = new MyBee(this, 0, 20, 0, false);
     this.hive = new MyHive(this);
     this.material = new CGFappearance(this);
     this.material.setEmission(1, 1, 1, 1)

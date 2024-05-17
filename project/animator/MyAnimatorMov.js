@@ -19,7 +19,11 @@ export class MyAnimatorMovement extends MyAnimator {
         this.x = vector.x + vector.speed * Math.sin(vector.orientation);
         this.z = vector.z + vector.speed * Math.cos(vector.orientation);
 
-        this.y = this.animVal + Math.sin(elapsedTime * 5) * 1;
+        if (!vector.descending && !vector.ascending) {  
+            this.y = 20 + Math.sin(elapsedTime * 5) * 1;
+        } else {
+            this.y = vector.y;  
+        }
 
 
         this.wingAngle = Math.PI / 8 * Math.sin(elapsedTime * 3);
