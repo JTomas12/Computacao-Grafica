@@ -17,6 +17,7 @@ export class MyHive extends CGFobject {
         this.prim = new MyPrism(scene, 3, 1);
         this.cube = new MyUnitCube(scene, this.texture2, this.texture1, this.texture1, this.texture1, this.texture1, this.texture1);
         this.pollenPresent = pollenPresent;
+        this.pollen = new MyPollen(scene);
 
         this.initMaterials();
     }
@@ -58,6 +59,15 @@ export class MyHive extends CGFobject {
         this.cubeMaterial.apply();
         this.cube.display();
         this.scene.popMatrix();
+
+        if(this.pollenPresent){
+            this.scene.pushMatrix();
+            this.scene.translate(0, 0.6, 0.5);
+            this.scene.rotate(Math.PI/2, 1, 0, 0);
+            this.scene.scale(0.3, 0.3, 0.3);
+            this.pollen.display();
+            this.scene.popMatrix();
+        }
 
         this.scene.popMatrix();
     }

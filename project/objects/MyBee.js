@@ -34,8 +34,10 @@ export class MyBee extends CGFobject {
         this.lastSpeedFactor = 1;
         this.scale = 1;
         this.flowerPosition = {x: 0, y: 5, z: 0};
+        this.hivePosition = {x: 0, y: 2, z: 1};
         this.descending = false;
         this.ascending = false;
+        this.headingToHive = false;
         this.pollenPresent = pollenPresent;
         this.firstFKeyPress = false;
         this.initMaterials();
@@ -248,6 +250,7 @@ export class MyBee extends CGFobject {
         this.pollenPresent = false;
         this.ascending = false;
         this.descending = false;
+        this.headingToHive = false;
         this.firstFKeyPress = false;
         this.scene.resetPollen();
         this.position = {x: this.defaultposition.x, y: this.defaultposition.y, z: this.defaultposition.z}
@@ -281,9 +284,15 @@ export class MyBee extends CGFobject {
         if (this.scene.gui.isKeyPressed("KeyP")) {
             this.ascending = true;
             this.descending = false; 
+            this.headingToHive = false;
             this.speed = this.lastSpeed;
             this.orientation = this.lastOrientation;
             this.ascendToDefault();
+        }
+        if (this.scene.gui.isKeyPressed("KeyO")) {
+            if(this.pollenPresent && this.speed != 0){
+                this.headingToHive = true;
+            }
         }
     }
 
@@ -315,6 +324,43 @@ export class MyBee extends CGFobject {
         }
     }
 
+    moveToHive() {
+
+        if (this.headingToHive) {
+            const direction = {
+                x: this.hivePosition.x - this.position.x,
+                y: this.hivePosition.y - this.position.y,
+                z: this.hivePosition.z - this.position.z
+            };
+            const magnitude = Math.sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+            if (magnitude > 0) {
+                direction.x /= magnitude;
+                direction.y /= magnitude;
+                direction.z /= magnitude;
+            }
+            this.position.x += direction.x * this.speed;
+            this.position.y += direction.y * this.speed;
+            this.position.z += direction.z * this.speed;
+
+            this.orientation = Math.atan2(direction.x, direction.z);
+
+            console.log(magnitude);
+
+
+            if (magnitude < 1) {
+                this.position.x = this.hivePosition.x;
+                this.position.y = this.hivePosition.y;
+                this.position.z = this.hivePosition.z;
+                if(this.pollenPresent && !this.scene.isPollenPresentInHive()){
+                    this.scene.dropPollen();
+                    this.pollenPresent = false;
+                }
+                this.orientation = -2;
+                this.speed = 0;
+            }
+        }
+    }
+
     lerp(start, end, t) {
         return start * (1 - t) + end * t;
     }
@@ -328,11 +374,14 @@ export class MyBee extends CGFobject {
             this.lastSpeedFactor = speedFactor;
         }
 
+
+
         this.animator.update(elapsedTime, {x: this.position.x, y: this.position.y, z: this.position.z, speed: this.speed, orientation: this.orientation, wingAngle: this.wingRotation, descending : this.descending,
-            ascending: this.ascending})
+            ascending: this.ascending, headingToHive: this.headingToHive});
 
 
-        this.updateParams()
+        this.updateParams();
+        this.moveToHive();
         
     }
 

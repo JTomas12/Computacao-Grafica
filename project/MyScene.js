@@ -25,6 +25,7 @@ export class MyScene extends CGFscene {
     this.rotationAngle = Math.PI/12;
     this.prismAngle = Math.PI/12;
     this.pollenPresentInFlower = true;
+    this.pollenPresentInHive = false;
   }
   pickPollen() {
 
@@ -37,8 +38,16 @@ export class MyScene extends CGFscene {
   isPollenPresent() {
     return this.pollenPresentInFlower;
   }
+  dropPollen() {
+    this.pollenPresentInHive = true;
+  }
+  isPollenPresentInHive() {
+    return this.pollenPresentInHive;
+  }
   resetPollen() {
     this.pollenPresentInFlower = true;
+    this.pollenPresentInHive = false;
+
   }
   checkkeys() {
     var text = "Keys pressed: ";
@@ -101,7 +110,7 @@ export class MyScene extends CGFscene {
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
     this.bee = new MyBee(this, 0, 20, 0, false);
-    this.hive = new MyHive(this);
+    this.hive = new MyHive(this, false);
     this.pollen = new MyPollen(this);
     this.material = new CGFappearance(this);
     this.material.setEmission(1, 1, 1, 1)
@@ -208,6 +217,14 @@ export class MyScene extends CGFscene {
     if(this.pollenPresentInFlower){
       this.pushMatrix();
       this.translate(0, 3, 1.3);
+      this.scale(0.3, 0.3, 0.3);
+      this.pollen.display();
+      this.popMatrix();
+    }
+    if(this.pollenPresentInHive){
+      this.pushMatrix();
+      this.translate(-0.2, 1.8, 0.3);
+      this.rotate(Math.PI/2, 1, 0, 0);
       this.scale(0.3, 0.3, 0.3);
       this.pollen.display();
       this.popMatrix();
