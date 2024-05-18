@@ -106,7 +106,7 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, 16, 8);
     this.garden = new MyGarden(this, 5, 5);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
-    this.panoramTexture = new CGFtexture(this, "images/panoram.jpg");
+    this.panoramTexture = new CGFtexture(this, "images/panoram1.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
     this.bee = new MyBee(this, 0, 20, 0, false);
@@ -210,6 +210,9 @@ export class MyScene extends CGFscene {
 
     if(this.displayFlower){
       this.flower.display();
+    }
+    else{
+      this.pollenPresentInFlower = false;
     }
     if(this.displayGarden){
       this.garden.display();

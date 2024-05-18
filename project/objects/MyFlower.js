@@ -19,7 +19,7 @@ export class MyFlower extends CGFobject {
         this.pollen = new MyPollen(scene);
         this.initMaterials(receptacle_color, stem_color);
     }
-
+    
     initMaterials(receptacle_color, stem_color) {
         this.receptacleMaterial = new CGFappearance(this.scene);
         const receptacle_texture = new CGFtexture(this.scene, 'images/flower_receptacle.jpg');
