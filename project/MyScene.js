@@ -11,6 +11,7 @@ import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/MyBee.js";
 import { MyPollen } from "./objects/MyPollen.js";
 import { MyHive } from "./objects/MyHive.js";
+import { MyLeaf } from "./geometric/MyLeaf.js";
 
 /**
  * MyScene
@@ -109,6 +110,7 @@ export class MyScene extends CGFscene {
     this.panoramTexture = new CGFtexture(this, "images/panoram1.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
+    this.leaf= new MyLeaf(this);
     this.bee = new MyBee(this, 0, 20, 0, false);
     this.hive = new MyHive(this, false);
     this.pollen = new MyPollen(this);
@@ -123,12 +125,12 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displaySphere = false;
-    this.displayPanorama = true;
+    this.displayPanorama = false;
     this.displayRockSet = false;
     this.displayPanorama = false;
-    this.displayFlower = true;
+    this.displayFlower = false;
     this.scaleFactor = 1;
-    this.displayGarden = true;
+    this.displayGarden = false;
     this.displayPetal = false;
     this.displayBee = false;
     this.displayHive = false;
@@ -232,7 +234,7 @@ export class MyScene extends CGFscene {
       this.pollen.display();
       this.popMatrix();
     }
-
+    this.leaf.display();
     /*
     if(this.displayFlower){
       this.flower.display();

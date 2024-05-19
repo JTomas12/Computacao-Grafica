@@ -3,7 +3,7 @@ import { MyStem } from '../geometric/MyStem.js';
 import { MySphere } from '../geometric/MySphere.js';
 import { MyPetal } from './MyPetal.js';
 import { MyPollen } from './MyPollen.js';
-
+import { MyLeaf } from '../geometric/MyLeaf.js';
 export class MyFlower extends CGFobject {
     constructor(scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle, pollenPresent) {
         super(scene);
@@ -17,6 +17,7 @@ export class MyFlower extends CGFobject {
         this.petal_color = petal_color;
         this.petal = new MyPetal(scene, rotationAngle, prismAngle, petal_color);
         this.pollen = new MyPollen(scene);
+        this.leaf= new MyLeaf(scene);
         this.initMaterials(receptacle_color, stem_color);
     }
     

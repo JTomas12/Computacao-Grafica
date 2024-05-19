@@ -1,6 +1,6 @@
 import { CGFobject } from '../../lib/CGF.js';
-import { MyPetal } from '../objects/MyPetal.js';
 
+import { MyLeaf } from './MyLeaf.js';
 export class MyStem extends CGFobject {
     constructor(scene, slices, stacks, radius, height) {
         super(scene);
@@ -8,7 +8,8 @@ export class MyStem extends CGFobject {
         this.stacks = stacks;
         this.radius = radius;
         this.height= height; 
-        this.petal = new MyPetal(scene, Math.PI/12, Math.PI/12, [0,0,128]);
+        //this.petal = new MyPetal(scene, Math.PI/12, Math.PI/12, [0,0,128]);
+        this.leaf = new MyLeaf(scene);
         this.initBuffers();
     }
 
@@ -59,27 +60,13 @@ export class MyStem extends CGFobject {
             }
         }
 
-        for (let j = 1; j < this.stacks; j++) {
-            for (let k = 0; k < this.slices; k++) {
-                if (j < this.stacks) {
-                    let angle = 2 * Math.PI * k / this.slices;
-                    this.addLeaf(j, angle);
-                }
-            }
-        }
+        
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
 
-    addLeaf(stackIndex, rotationAngle) {
-        this.scene.pushMatrix();
-        let y = this.height * stackIndex / this.stacks;
-        this.scene.translate(0, y, 0);
-        this.scene.rotate(rotationAngle, 0, 1, 0);
-        this.scene.rotate(Math.PI / 2, 1, 0, 0); // Orient the leaf correctly
-        this.petal.display();
-        this.scene.popMatrix();
-    }
+   
+    
     
 }
