@@ -5,11 +5,12 @@ import { MyPetal } from './MyPetal.js';
 import { MyPollen } from './MyPollen.js';
 import { MyLeaf } from '../geometric/MyLeaf.js';
 export class MyFlower extends CGFobject {
-    constructor(scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle, pollenPresent) {
+    constructor(scene, outer_radius, number_of_petals, receptacle_radius, receptacle_color, stem_radius, stem_color, stem_stacks, stem_height, petal_color, rotationAngle, prismAngle, pollenPresent, leaf_color, leaf_height) {
         super(scene);
         this.number_of_petals = number_of_petals;
         this.outer_radius = outer_radius;
         this.receptacle_radius = receptacle_radius;
+        this.stem_radius = stem_radius;
         this.stem_height = stem_height;
         this.pollenPresent = pollenPresent;
         this.stem = new MyStem(scene, 20, stem_stacks, stem_radius, stem_height);
@@ -18,10 +19,12 @@ export class MyFlower extends CGFobject {
         this.petal = new MyPetal(scene, rotationAngle, prismAngle, petal_color);
         this.pollen = new MyPollen(scene);
         this.leaf= new MyLeaf(scene);
-        this.initMaterials(receptacle_color, stem_color);
+        this.leaf_color = leaf_color; 
+        this.leaf_height = leaf_height;  
+        this.initMaterials(receptacle_color, stem_color,leaf_color);
     }
     
-    initMaterials(receptacle_color, stem_color) {
+    initMaterials(receptacle_color, stem_color,leaf_color) {
         this.receptacleMaterial = new CGFappearance(this.scene);
         const receptacle_texture = new CGFtexture(this.scene, 'images/flower_receptacle.jpg');
         this.receptacleMaterial.setTexture(receptacle_texture);
@@ -38,10 +41,40 @@ export class MyFlower extends CGFobject {
         this.stemMaterial.setDiffuse(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1.0); // Default diffuse color
         this.stemMaterial.setSpecular(stem_color[0] / 255, stem_color[1] / 255, stem_color[2] / 255, 1.0); // Default specular color
         this.stemMaterial.setShininess(10.0);
+
+        this.leafMaterial = new CGFappearance(this.scene);
+        const leaf_texture = new CGFtexture(this.scene, 'images/leaf_texture.jpg');
+        this.leafMaterial.setAmbient(0.9, 0.9, 0.9, 1.0); // Default ambient color
+        this.leafMaterial.setDiffuse(leaf_color[0]/255, leaf_color[1]/255, leaf_color[2]/255, 1.0); // Default diffuse color
+        this.leafMaterial.setSpecular(leaf_color[0]/255, leaf_color[1]/255, leaf_color[2]/255, 1.0); // Default specular color
+        this.leafMaterial.setShininess(10.0);
+        this.leafMaterial.setTexture(leaf_texture);
     }
 
     display() {
         // Display stem
+        let numLeaves = Math.ceil(this.stem.stacks / 2); // Number of leaves to place
+        let stepSize = this.stem.stacks / numLeaves; // Uniform step size
+        let orientation = 1; // Initial orientation
+
+        for (let i = 0; i < numLeaves-1; i++) {
+            this.scene.pushMatrix();
+            //this.scene.scale(this.leaf_height, this.leaf_height, 1 + this.leaf_height / 2,1);
+            // Calculate translation position based on uniform step size
+            let yTranslation = (i + 1) * stepSize * this.stem_height / this.stem.stacks;
+            
+            console.log(this.stem_radius);
+            console.log(this.receptacle_radius);
+            this.scene.translate(orientation * this.stem_radius, yTranslation, 0);
+            this.scene.rotate(orientation * Math.PI / 2, 0, 0, 1);
+            
+            this.leafMaterial.apply();
+            this.leaf.display();
+    
+            this.scene.popMatrix();
+            orientation = -orientation;
+        }
+
         this.scene.pushMatrix();
         this.stemMaterial.apply(); // Apply stem material
         this.stem.display();
