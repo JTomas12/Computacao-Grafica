@@ -62,9 +62,6 @@ export class MyFlower extends CGFobject {
             //this.scene.scale(this.leaf_height, this.leaf_height, 1 + this.leaf_height / 2,1);
             // Calculate translation position based on uniform step size
             let yTranslation = (i + 1) * stepSize * this.stem_height / this.stem.stacks;
-            
-            console.log(this.stem_radius);
-            console.log(this.receptacle_radius);
             this.scene.translate(orientation * this.stem_radius, yTranslation, 0);
             this.scene.rotate(orientation * Math.PI / 2, 0, 0, 1);
             
