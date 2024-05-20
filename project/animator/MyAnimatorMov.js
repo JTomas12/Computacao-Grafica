@@ -33,6 +33,6 @@ export class MyAnimatorMovement extends MyAnimator {
         }
 
 
-        this.wingAngle = Math.PI / 8 * Math.sin(elapsedTime * 3);
+        this.wingAngle = Math.PI / 8 * Math.sin(elapsedTime * 10);
     }
 }

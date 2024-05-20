@@ -158,7 +158,7 @@ export class MyBee extends CGFobject {
 
         //Wings
         this.scene.pushMatrix();
-        this.scene.translate(0.6, 0.1, 0); 
+        this.scene.translate(0.8, 0.1, 0); 
         this.scene.rotate(-Math.PI / 2, 0, 0, 1); 
         this.scene.rotate(this.wingRotation, 0, 0, 1); 
         this.scene.scale(0.1, 1.1, 0.5);
@@ -168,7 +168,7 @@ export class MyBee extends CGFobject {
 
         // Asa esquerda
         this.scene.pushMatrix();
-        this.scene.translate(-0.6, 0.1, -0.1); 
+        this.scene.translate(-0.8, 0.1, -0.1); 
         this.scene.rotate(Math.PI / 2, 0, 0, 1); 
         this.scene.rotate(-this.wingRotation, 0, 0, 1); 
         this.scene.scale(0.1, 1.1, 0.5);

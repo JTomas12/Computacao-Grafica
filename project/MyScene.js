@@ -213,6 +213,7 @@ export class MyScene extends CGFscene {
 
     if(this.displayFlower){
       this.flower.display();
+      this.pollenPresentInFlower = true;
     }
     else{
       this.pollenPresentInFlower = false;
