@@ -34,7 +34,7 @@ export class MyBee extends CGFobject {
         this.lastSpeedFactor = 1;
         this.scale = 1;
         this.flowerPosition = {x: 0, y: 5, z: 0};
-        this.hivePosition = {x: 0, y: 3, z: 1.5};
+        this.hivePosition = {x: -10, y: 5, z: 2};
         this.descending = false;
         this.ascending = false;
         this.headingToHive = false;

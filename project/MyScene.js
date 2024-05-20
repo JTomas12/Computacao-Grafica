@@ -118,6 +118,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
     this.rockSet = new MyRockSet(this, 50);
+    this.rockSet2 = new MyRockSet(this, 50);
     this.speedFactor = 1;
     this.beemaxSpeed = 1;
     this.beescaleFactor = 1;
@@ -126,7 +127,7 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, 16, 8);
     this.garden = new MyGarden(this, 5, 5);
     this.sphere = new MySphere(this, 1, 20,20,1, 1, 1);
-    this.panoramTexture = new CGFtexture(this, "images/panoram1.jpg");
+    this.panoramTexture = new CGFtexture(this, "images/panoram2.jpg");
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.panorama = new MyPanoram(this, this.panoramTexture);
     this.leaf= new MyLeaf(this);
@@ -293,7 +294,7 @@ export class MyScene extends CGFscene {
     if(this.pollenPresentInFlower){
       this.pushMatrix();
       this.translate(0, 3, 1.3);
-      this.scale(0.3, 0.3, 0.3);
+      this.scale(0.5, 0.5, 0.5);
       this.pollen.display();
       this.popMatrix();
     }
@@ -308,9 +309,9 @@ export class MyScene extends CGFscene {
     }
     if(this.pollenPresentInHive){
       this.pushMatrix();
-      this.translate(-0.2, 3.1, 0.5);
+      this.translate(-10.5, 4.7, 1.2);
       this.rotate(Math.PI/2, 1, 0, 0);
-      this.scale(0.3, 0.3, 0.3);
+      this.scale(0.5, 0.5, 0.5);
       this.pollen.display();
       this.popMatrix();
     }

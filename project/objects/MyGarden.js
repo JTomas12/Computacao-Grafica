@@ -46,7 +46,7 @@ export class MyGarden extends CGFobject {
 
         this.scene.pushMatrix();
 
-        this.scene.translate(-5, -1, 0);
+        this.scene.translate(5, 0, 0);
         this.scene.scale(2, 2, 2);
         
         

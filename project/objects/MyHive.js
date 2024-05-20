@@ -44,8 +44,8 @@ export class MyHive extends CGFobject {
 
         this.scene.pushMatrix();
 
-        this.scene.translate(-0.2, 2, -0.2);
-        this.scene.scale(2, 2, 2);
+        this.scene.translate(-10.5, 3, -0.2);
+        this.scene.scale(3, 3, 3);
 
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 0, 0, 1);
