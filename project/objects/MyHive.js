@@ -44,7 +44,7 @@ export class MyHive extends CGFobject {
 
         this.scene.pushMatrix();
 
-        this.scene.translate(-10.5, 3, -0.2);
+        this.scene.translate(-11, 3, -0.2);
         this.scene.scale(3, 3, 3);
 
         this.scene.pushMatrix();

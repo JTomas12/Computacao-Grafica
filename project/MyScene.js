@@ -278,6 +278,11 @@ export class MyScene extends CGFscene {
 
     if (this.displayRockSet) {
       this.rockSet.display();
+      this.pushMatrix();
+      this.translate(-23, 0, 0);
+      this.rotate(Math.PI, 0, 1, 0);
+      this.rockSet2.display();
+      this.popMatrix();
     }
 
     if(this.displayHive){

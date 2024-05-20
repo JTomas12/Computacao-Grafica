@@ -308,7 +308,7 @@ export class MyBee extends CGFobject {
     descendToFlower() {
         if (this.position.y > this.flowerPosition.y) {
             this.position.y = this.lerp(this.position.y, this.flowerPosition.y, 0.1);
-            if(this.position.y < this.flowerPosition.y + 0.5){
+            if(this.position.y < this.flowerPosition.y + 0.5 && this.position.z < this.flowerPosition.z + 1 && this.position.z > this.flowerPosition.z - 1 && this.position.x < this.flowerPosition.x + 1 && this.position.x > this.flowerPosition.x - 1){
                 if (this.scene.isPollenPresent()) {
                     this.pollen = this.scene.pickPollen();
                     this.pollenPresent = !!this.pollen; 
