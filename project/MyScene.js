@@ -314,7 +314,7 @@ export class MyScene extends CGFscene {
     }
     if(this.pollenPresentInHive){
       this.pushMatrix();
-      this.translate(-10.5, 4.7, 1.2);
+      this.translate(-10.8, 4.7, 1.2);
       this.rotate(Math.PI/2, 1, 0, 0);
       this.scale(0.5, 0.5, 0.5);
       this.pollen.display();
