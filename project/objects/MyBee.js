@@ -266,10 +266,10 @@ export class MyBee extends CGFobject {
             this.accelerate(-factor,this.scene.beemaxSpeed,this.scene.accelerationRate,this.scene.decelerationRate)
         }
         if (this.scene.gui.isKeyPressed("KeyA")) {
-            this.turn(factor)
+            this.turn(factor/8)
         }
         if (this.scene.gui.isKeyPressed("KeyD")) {
-            this.turn(-factor)
+            this.turn(-factor/8)
         }
         if (this.scene.gui.isKeyPressed("KeyR")) {
             this.reset()
@@ -306,55 +306,18 @@ export class MyBee extends CGFobject {
 
 
     descendToFlower() {
-        if (this.descending) {
-            const flowerPos = this.flowerPosition;
-    
-            const direction = {
-                x: flowerPos.x - this.position.x,
-                y: flowerPos.y - this.position.y,
-                z: flowerPos.z - this.position.z
-            };
-    
-            const magnitude = Math.sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-            if (magnitude > 0) {
-                direction.x /= magnitude;
-                direction.y /= magnitude;
-                direction.z /= magnitude;
-            }
-    
-            this.orientation = 1/Math.atan2((direction.x), (direction.z));
-            
-            this.position.y += direction.y * this.speed;
-
-            if(!this.isFlowerOriented()){
-                
-                this.position.z += direction.z * this.speed*this.orientation;
-                if(this.position.x >= flowerPos.x){
-                    this.position.x += -direction.x * this.speed*this.orientation;
-                } else{
-                this.position.x += direction.x * this.speed*this.orientation; }
-            } else {
-             this.position.z -= direction.z * this.speed*this.orientation;
-                if(this.position.x >= flowerPos.x){
-                    this.position.x += -direction.x * this.speed*this.orientation;
-                } else{
-                    
-                    this.position.x += direction.x * this.speed*this.orientation; }
-            }
-
-            this.scene.pushMatrix();    
-            this.scene.rotate(Math.PI, 0, 1, 1);
-            this.scene.popMatrix();
-    
-            if (magnitude < 1) {
+        if (this.position.y > this.flowerPosition.y) {
+            this.position.y = this.lerp(this.position.y, this.flowerPosition.y, 0.1);
+            if(this.position.y < this.flowerPosition.y + 0.5 && this.position.z < this.flowerPosition.z + 1 && this.position.z > this.flowerPosition.z - 1 && this.position.x < this.flowerPosition.x + 1 && this.position.x > this.flowerPosition.x - 1){
                 if (this.scene.isPollenPresent()) {
                     this.pollen = this.scene.pickPollen();
                     this.pollenPresent = !!this.pollen; 
                 }
                 this.speed = 0;
-                this.position.y = this.flowerPosition.y;
-                
             }
+        }
+         else {
+            this.position.y = this.flowerPosition.y;
         }
     }
     
@@ -375,7 +338,7 @@ export class MyBee extends CGFobject {
         let z_dif= this.flowerPosition.z - this.position.z;
         let mod_orientation = this.orientation % (2*Math.PI);
         let bool_orientation = (mod_orientation >= 0 && mod_orientation <= Math.PI/2) || (mod_orientation >= 3*Math.PI/2 && mod_orientation <= 2*Math.PI);
-        return ((bool_orientation)&&(z_dif>0) ) || (!bool_orientation && z_dif<0);
+        return ((bool_orientation)&&(z_dif>=0) ) || (!bool_orientation && z_dif<=0);
     }
     
     isHiveOriented(){

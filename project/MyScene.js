@@ -96,7 +96,7 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
   }
   updatePetal() {
-    this.flower = new MyFlower(this,3,5,1.2,[128,0,0],0.3,[0,128,0],3,3,[0,0,128], this.rotationAngle, this.prismAngle);
+    this.flower = new MyFlower(this,3,5,1.2,[128,0,0],0.3,[0,128,0],3,3,[0,0,128], this.rotationAngle, this.prismAngle,false, [0,255,0],5);
     this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
   } 
   init(application) {
@@ -117,10 +117,10 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
-   // this.rockSet = new MyRockSet(this, 30);
-   // this.rockSet2 = new MyRockSet(this, 30);
-   // this.rockSet3 = new MyRockSet(this, 30);
-    //this.rockSet4 = new MyRockSet(this, 30);
+    this.rockSet = new MyRockSet(this, 10);
+    this.rockSet2 = new MyRockSet(this, 10);
+    this.rockSet3 = new MyRockSet(this, 10);
+    this.rockSet4 = new MyRockSet(this, 10);
     this.speedFactor = 1;
     this.beemaxSpeed = 1;
     this.beescaleFactor = 1;
@@ -145,7 +145,7 @@ export class MyScene extends CGFscene {
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
     //this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
     //Objects connected to MyInterface
-    this.terrain = new MyTerrain(this, 20, 20, 20);
+    this.terrain = new MyTerrain(this, 50);
     this.displayAxis = true;
     this.displaySphere = false;
     this.displayPanorama = true;
@@ -166,9 +166,9 @@ export class MyScene extends CGFscene {
     this.appStartTime = Date.now();
     this.setUpdatePeriod(50);
 
-    //this.texture = new CGFtexture(this, "images/terrain.jpg");
-    //this.appearance = new CGFappearance(this);
-    //this.appearance.setTexture(this.texture);
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
     //this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     
     this.shadersDiv = document.getElementById("shaders");
@@ -214,8 +214,7 @@ export class MyScene extends CGFscene {
     let elapsed_time = (time- this.starttime)/1000.0;
     this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
     this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 1000, randomOscilation: Math.random() });
-    
-    console.log("something");
+  
   }
   
   onShaderCodeVizChanged(v) {
@@ -345,7 +344,7 @@ export class MyScene extends CGFscene {
 
     // ---- END Primitive drawing section
     // restore default shader (will be needed for drawing the axis in next frame)
-    //this.setActiveShader(this.defaultShader);
+    this.setActiveShader(this.defaultShader);
   }
 
 }

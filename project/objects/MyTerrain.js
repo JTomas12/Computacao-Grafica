@@ -3,10 +3,10 @@ import { MyGrassBlade } from "./MyGrassBlade.js";
 import {CGFappearance} from '../../lib/CGF.js';
 import {CGFtexture} from '../../lib/CGF.js';
 export class MyTerrain extends CGFobject{
-    constructor(scene, width, parts){
+    constructor(scene, width){
         super(scene);
         this.width = width;
-        this.parts = parts;
+        
         this.mygrassLeaf = new MyGrassBlade(scene);
         //this.initBuffers();
         this.initMaterials();
@@ -29,7 +29,7 @@ export class MyTerrain extends CGFobject{
         for(let i = 0; i < this.width; i+=1){
             for(let j = 0; j < this.width; j+=1){
                 this.scene.pushMatrix();
-                this.scene.translate(i, 20, j+1);
+                this.scene.translate(-25+i, 20, -25+j+1);
                 this.scene.scale(0.2,20,1);
                 this.grassMaterial.apply();
                 this.mygrassLeaf.display();
@@ -40,7 +40,7 @@ export class MyTerrain extends CGFobject{
         }
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, 2);
+        this.scene.translate(-25, 0, -25);
         this.scene.popMatrix();
     }
 }
