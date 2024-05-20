@@ -16,7 +16,7 @@ export class MyAnimatorMovement extends MyAnimator {
 
     updatePositionObj(elapsedTime, vector) {
 
-        if (!vector.headingToHive) {  
+        if (!vector.headingToHive && !vector.descending && !vector.ascending) {  
             this.x = vector.x + vector.speed * Math.sin(vector.orientation);
             this.z = vector.z + vector.speed * Math.cos(vector.orientation);
         }

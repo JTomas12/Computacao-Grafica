@@ -117,10 +117,10 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
-    this.rockSet = new MyRockSet(this, 30);
-    this.rockSet2 = new MyRockSet(this, 30);
-    this.rockSet3 = new MyRockSet(this, 30);
-    this.rockSet4 = new MyRockSet(this, 30);
+   // this.rockSet = new MyRockSet(this, 30);
+   // this.rockSet2 = new MyRockSet(this, 30);
+   // this.rockSet3 = new MyRockSet(this, 30);
+    //this.rockSet4 = new MyRockSet(this, 30);
     this.speedFactor = 1;
     this.beemaxSpeed = 1;
     this.beescaleFactor = 1;
@@ -166,10 +166,10 @@ export class MyScene extends CGFscene {
     this.appStartTime = Date.now();
     this.setUpdatePeriod(50);
 
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
-    this.appearance = new CGFappearance(this);
-    this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    //this.texture = new CGFtexture(this, "images/terrain.jpg");
+    //this.appearance = new CGFappearance(this);
+    //this.appearance.setTexture(this.texture);
+    //this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     
     this.shadersDiv = document.getElementById("shaders");
 		this.vShaderDiv = document.getElementById("vshader");
