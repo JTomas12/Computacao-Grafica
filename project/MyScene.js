@@ -129,7 +129,7 @@ export class MyScene extends CGFscene {
     this.displayPanorama = false;
     this.displayRockSet = false;
     this.displayPanorama = false;
-    this.displayFlower = false;
+    this.displayFlower = true;
     this.scaleFactor = 1;
     this.displayGarden = false;
     this.displayPetal = false;
@@ -213,11 +213,8 @@ export class MyScene extends CGFscene {
 
     if(this.displayFlower){
       this.flower.display();
-      this.pollenPresentInFlower = true;
     }
-    else{
-      this.pollenPresentInFlower = false;
-    }
+
     if(this.displayGarden){
       this.garden.display();
     }
@@ -230,7 +227,7 @@ export class MyScene extends CGFscene {
     }
     if(this.pollenPresentInHive){
       this.pushMatrix();
-      this.translate(-0.2, 1.8, 0.3);
+      this.translate(-0.2, 3.1, 0.5);
       this.rotate(Math.PI/2, 1, 0, 0);
       this.scale(0.3, 0.3, 0.3);
       this.pollen.display();
