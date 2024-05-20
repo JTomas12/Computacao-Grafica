@@ -13,10 +13,24 @@ import { MyPollen } from "./objects/MyPollen.js";
 import { MyHive } from "./objects/MyHive.js";
 import { MyLeaf } from "./geometric/MyLeaf.js";
 
+import { MyTerrain } from "./objects/MyTerrain.js";
 /**
  * MyScene
  * @constructor
  */
+
+/**
+ * getStringFromUrl(url)
+ * Function to load a text file from a URL (used to display shader sources)
+ */
+
+function getStringFromUrl(url) {
+	var xmlHttpReq = new XMLHttpRequest();
+    xmlHttpReq.open("GET", url, false);
+    xmlHttpReq.send();
+    return xmlHttpReq.responseText;
+}
+
 export class MyScene extends CGFscene {
   constructor() {
     super();
@@ -27,6 +41,8 @@ export class MyScene extends CGFscene {
     this.prismAngle = Math.PI/12;
     this.pollenPresentInFlower = true;
     this.pollenPresentInHive = false;
+    this.selectedExampleShader = 0;
+    this.showShaderCode = false;
     
   }
   pickPollen() {
@@ -50,6 +66,8 @@ export class MyScene extends CGFscene {
     this.pollenPresentInFlower = true;
     this.pollenPresentInHive = false;
 
+    this.selectedExampleShader = 0;
+    this.showShaderCode = false;
   }
   checkkeys() {
     var text = "Keys pressed: ";
@@ -124,8 +142,11 @@ export class MyScene extends CGFscene {
     //(scene, outer_radius,number_of_petals, receptacle_radius, receptacle_color , stem_radius ,stem_color, stem_stacks,stem_height, petal_color) 
     //this.petal = new MyPetal(this, this.rotationAngle, this.prismAngle,this.flower.petal_color);
     //Objects connected to MyInterface
+    this.terrain = new MyTerrain(this, 20, 20, 20);
     this.displayAxis = true;
     this.displaySphere = false;
+    this.displayPanorama = true;
+    this.displayRockSet = false;
     this.displayPanorama = false;
     this.displayRockSet = false;
     this.displayPanorama = false;
@@ -135,6 +156,8 @@ export class MyScene extends CGFscene {
     this.displayPetal = false;
     this.displayBee = false;
     this.displayHive = false;
+    this.displayTerrain = true;
+    //this.displayPetal=true;
     this.enableTextures(true);
 
     this.appStartTime = Date.now();
@@ -144,8 +167,23 @@ export class MyScene extends CGFscene {
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    
+    this.shadersDiv = document.getElementById("shaders");
+		this.vShaderDiv = document.getElementById("vshader");
+		this.fShaderDiv = document.getElementById("fshader");
 
+    this.onShaderCodeVizChanged(this.showShaderCode);
+		//this.onSelectedShaderChanged(this.selectedExampleShader);
+    
     this.starttime= Date.now();
+
+    // shaders
+    this.testShaders = [
+      new CGFshader(this.gl, "shaders/grass.vert", "shaders/grass.frag"),
+      //new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag"),
+    ];
+    this.setUpdatePeriod(50);
+    
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -170,9 +208,39 @@ export class MyScene extends CGFscene {
   }
 
   update(time){
-    var elapsed_time = (time- this.starttime)/1000.0;
-    this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
+    //let elapsed_time = (time- this.starttime)/1000.0;
+    //this.bee.update(elapsed_time, this.beescaleFactor ,this.speedFactor);
+    this.testShaders[0].setUniformsValues({ timeFactor: time / 100 % 1000, randomOscilation: Math.random() });
+    
+    console.log("something");
   }
+  
+  onShaderCodeVizChanged(v) {
+		if (this.shadersDiv) { // Check if shadersDiv is defined
+      console.log("shadersDiv is defined");
+      if (v){
+        
+        this.shadersDiv.style.display = "block";
+        this.vShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[0].vertexURL) + "</xmp>";
+		    this.fShaderDiv.innerHTML = "<xmp>" + getStringFromUrl(this.testShaders[0].fragmentURL) + "</xmp>";
+      
+        } else
+        {this.shadersDiv.style.display = "none";}
+    } else {
+      console.error("shadersDiv is not defined or accessible.");
+    }
+	}
+  // called when a new shader is selected, updated from the TP5 code, to be revised
+	
+
+	// called when the scale factor changes on the interface
+	onScaleFactorChanged(v) {
+		this.testShaders[this.selectedExampleShader].setUniformsValues({ normScale: this.scaleFactor });
+	}
+
+
+
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -229,6 +297,15 @@ export class MyScene extends CGFscene {
       this.pollen.display();
       this.popMatrix();
     }
+    if(this.displayTerrain){
+      this.terrain.display();
+      
+    }
+    
+    
+    if(this.displayFlower){
+      this.flower.display();
+    }
     if(this.pollenPresentInHive){
       this.pushMatrix();
       this.translate(-0.2, 3.1, 0.5);
@@ -249,12 +326,8 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     // ---- END Primitive drawing section
+    // restore default shader (will be needed for drawing the axis in next frame)
+    //this.setActiveShader(this.defaultShader);
   }
 
-  update(time) {
-
-    let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
-    this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
-
-  } 
 }
