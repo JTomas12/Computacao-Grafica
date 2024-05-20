@@ -331,28 +331,51 @@ export class MyBee extends CGFobject {
             this.ascending = false;
         }
     }
-
+    
+    isHiveOriented(){
+        let z_dif= this.hivePosition.z - this.position.z;
+        let mod_orientation = this.orientation % (2*Math.PI);
+        let bool_orientation = (mod_orientation >= 0 && mod_orientation <= Math.PI/2) || (mod_orientation >= 3*Math.PI/2 && mod_orientation <= 2*Math.PI);
+        return ((bool_orientation)&&(z_dif>0) ) || (!bool_orientation && z_dif<0);
+    }
+    
     moveToHive() {
 
-        if (this.headingToHive) {
+        if (this.headingToHive ) {
             const direction = {
                 x: this.hivePosition.x - this.position.x,
                 y: this.hivePosition.y - this.position.y,
                 z: this.hivePosition.z - this.position.z
             };
+            
             const magnitude = Math.sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
             if (magnitude > 0) {
                 direction.x /= magnitude;
                 direction.y /= magnitude;
                 direction.z /= magnitude;
             }
-            this.position.x += direction.x * this.speed;
+            this.orientation = 1/Math.atan2((direction.x), (direction.z));
+            
             this.position.y += direction.y * this.speed;
-            this.position.z += direction.z * this.speed;
-
-            this.orientation = Math.atan2(direction.x, direction.z);
-
-            console.log(magnitude);
+            if(!this.isHiveOriented()){
+                
+                this.position.z += direction.z * this.speed*this.orientation;
+                if(this.position.x >= this.hivePosition.x){
+                    this.position.x += -direction.x * this.speed*this.orientation;
+                } else{
+                this.position.x += direction.x * this.speed*this.orientation; }
+            } else {
+             this.position.z -= direction.z * this.speed*this.orientation;
+                if(this.position.x >= this.hivePosition.x){
+                    this.position.x += -direction.x * this.speed*this.orientation;
+                } else{
+                    
+                    this.position.x += direction.x * this.speed*this.orientation; }
+            }
+            this.scene.pushMatrix();    
+            this.scene.rotate(Math.PI, 0, 1, 1);
+            this.scene.popMatrix();
+            //console.log(magnitude);
 
 
             if (magnitude < 1) {
