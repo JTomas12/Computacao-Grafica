@@ -188,6 +188,10 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) this.axis.display();
     // Draw objects
 
+    if (!this.displayFlower) {
+      this.pollenPresentInFlower = false;
+    }
+
     if (this.displaySphere) {
      
       this.sphere.display();
@@ -234,11 +238,6 @@ export class MyScene extends CGFscene {
       this.popMatrix();
     }
     //this.leaf.display();
-    /*
-    if(this.displayFlower){
-      this.flower.display();
-    }
-    */
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();

@@ -40,6 +40,7 @@ export class MyBee extends CGFobject {
         this.headingToHive = false;
         this.pollenPresent = pollenPresent;
         this.firstFKeyPress = false;
+        this.firstOKeyPress = false;
         this.initMaterials();
         this.animator = new MyAnimatorMovement(1, 2*Math.PI, 100, true, true);
 
@@ -252,6 +253,7 @@ export class MyBee extends CGFobject {
         this.descending = false;
         this.headingToHive = false;
         this.firstFKeyPress = false;
+        this.firstOKeyPress = false;
         this.scene.resetPollen();
         this.position = {x: this.defaultposition.x, y: this.defaultposition.y, z: this.defaultposition.z}
     }
@@ -290,6 +292,12 @@ export class MyBee extends CGFobject {
             this.ascendToDefault();
         }
         if (this.scene.gui.isKeyPressed("KeyO")) {
+
+            if(!this.firstOKeyPress){
+                this.firstOKeyPress = true;
+                this.lastSpeed = this.speed;
+                this.lastOrientation = this.orientation;
+            }
             if(this.pollenPresent && this.speed != 0){
                 this.headingToHive = true;
             }
