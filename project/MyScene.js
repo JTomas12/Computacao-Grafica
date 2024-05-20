@@ -117,8 +117,10 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.sphere = new MySphere(this, 16, 8, 0, 1, 1);
-    this.rockSet = new MyRockSet(this, 50);
-    this.rockSet2 = new MyRockSet(this, 50);
+    this.rockSet = new MyRockSet(this, 30);
+    this.rockSet2 = new MyRockSet(this, 30);
+    this.rockSet3 = new MyRockSet(this, 30);
+    this.rockSet4 = new MyRockSet(this, 30);
     this.speedFactor = 1;
     this.beemaxSpeed = 1;
     this.beescaleFactor = 1;
@@ -282,6 +284,16 @@ export class MyScene extends CGFscene {
       this.translate(-23, 0, 0);
       this.rotate(Math.PI, 0, 1, 0);
       this.rockSet2.display();
+      this.popMatrix();
+      this.pushMatrix();
+      this.translate(-12, 0, -12);
+      this.rotate(Math.PI/2, 0, 1, 0);
+      this.rockSet3.display();
+      this.popMatrix();
+      this.pushMatrix();
+      this.translate(-12, 0, 12);
+      this.rotate(-Math.PI/2, 0, 1, 0);
+      this.rockSet4.display();
       this.popMatrix();
     }
 
