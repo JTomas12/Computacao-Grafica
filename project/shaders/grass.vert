@@ -25,6 +25,7 @@ void main() {
     float time = timeFactor * 0.1;
         
     
+    //For each vertex position intervals, a different oscilation formula is applied. The values were being conformed, so the definition does not follow any formula , however, it is expected that, as the y-position is higher, the oscilation should be higher as well in z
 
     if (aVertexPosition.y > -1.0) {
         // Apply the sin function to the z-component of the offset, but negate it

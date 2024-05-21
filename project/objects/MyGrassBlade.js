@@ -20,6 +20,7 @@ export class MyGrassBlade extends CGFobject {
 	}
 	
     initBuffers() {
+		//Setting up the vertices for a 3D Petal
 		this.vertices = [
 			-1,-1,0,     //0
 			-6/7,-6/7,0, //1

@@ -19,9 +19,9 @@ export class MyPanoram extends CGFobject {
     display() {
         this.scene.pushMatrix();
 
-        this.material.apply();
+        this.material.apply(); // Apply the material , essentially the texture
     
-        this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
+        this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]); // Sets the position of the sphere to the camera position (perspectve on the center of the panoram, "diving into the panoram")
         this.sphere.display();
         this.scene.popMatrix();  
     
