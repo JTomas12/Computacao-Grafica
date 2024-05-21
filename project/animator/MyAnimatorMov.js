@@ -10,10 +10,12 @@ export class MyAnimatorMovement extends MyAnimator {
         this.wingAngle = 0;
     }
 
+    // Define the movement function using a sine wave based on the elapsed time
     movementFunction(elapsedTime) {
         return Math.sin(elapsedTime / this.startVal);
     }
 
+    // Update the object position based on the elapsed time and vector parameters
     updatePositionObj(elapsedTime, vector) {
 
         if (!vector.headingToHive ) {  
@@ -33,6 +35,7 @@ export class MyAnimatorMovement extends MyAnimator {
         }
 
 
+        // Update wing angle based on elapsed time to create a flapping motion
         this.wingAngle = Math.PI / 8 * Math.sin(elapsedTime * 10);
     }
 }

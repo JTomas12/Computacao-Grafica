@@ -9,9 +9,9 @@ export class MySphere extends CGFobject {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
-        this.inside = inside;
-        this.north = north;
-        this.south = south;
+        this.inside = inside; // 1 if the sphere is inside out, 0 otherwise
+        this.north = north; // 1 if the north pole is flat, 0 otherwise
+        this.south = south; // 1 if the south pole is flat, 0 otherwise
         this.radius = radius;
         this.initBuffers();
         
@@ -23,12 +23,13 @@ export class MySphere extends CGFobject {
         this.texCoords = [];
         this.normals = [];
     
+        //The number of divisions in the x and y axis
         var delta_alfa = 2 * Math.PI / this.slices;
         var delta_beta = Math.PI / (this.stacks );
     
         for (var i = 0; i <= this.stacks; i++) {
             var beta = -Math.PI / 2 + i * delta_beta;
-            var radiusY = i < this.stacks / 2 ? this.radius * this.north : this.radius * this.south
+            var radiusY = i < this.stacks / 2 ? this.radius * this.north : this.radius * this.south; // Radius of the sphere at the current height
             
     
             for (var j = 0; j <= this.slices; j++) {
@@ -39,6 +40,8 @@ export class MySphere extends CGFobject {
                 var z =  this.radius*Math.cos(beta) * Math.sin(alfa);
     
                 this.vertices.push(x, y, z);
+
+                // If inside is 1, flip the normals
                 if (this.inside === 1) {
                     this.normals.push(-x, -y, -z);
                 } else {

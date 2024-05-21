@@ -18,6 +18,7 @@ export class MyRock extends CGFobject {
     }
 		
     
+    // Initialize the buffers for the rock's vertices, normals, texture coordinates, and indices
     initBuffers() {
         this.vertices = [];
         this.texCoords = [];
@@ -37,8 +38,8 @@ export class MyRock extends CGFobject {
                 var y = Math.sin(beta);
                 var z = Math.cos(beta) * Math.sin(alfa);
 
-                var noise = 0.95 + Math.random() * 0.1; // Fator de irregularidade
-                var x = x * noise;
+                var noise = 0.95 + Math.random() * 0.1; // Introduce some noise to the rock's shape
+                var x = x * noise; 
                 var y = y * noise;
                 var z = z * noise;
 
@@ -48,7 +49,7 @@ export class MyRock extends CGFobject {
                 var normalX = x + (Math.random() * 2 - 1) * noise;
                 var normalY = y + (Math.random() * 2 - 1) * noise;
                 var normalZ = z + (Math.random() * 2 - 1) * noise;
-                var length = Math.sqrt(normalX * normalX + normalY * normalY + normalZ * normalZ);
+                var length = Math.sqrt(normalX * normalX + normalY * normalY + normalZ * normalZ); // Normalize the normal vector
                 normalX /= length;
                 normalY /= length;
                 normalZ /= length;
@@ -84,6 +85,7 @@ export class MyRock extends CGFobject {
         this.initGLBuffers();
     }
 
+    // Initialize the rock's material
     initMaterials() {
         this.rockTexture = new CGFtexture(this.scene, "images/rock_texture.jpg");
         this.rockMaterial = new CGFappearance(this.scene);
@@ -93,6 +95,8 @@ export class MyRock extends CGFobject {
         this.rockMaterial.setShininess(10.0); 
         this.rockMaterial.setTexture(this.rockTexture);             
     }
+
+    // Display the rock
     display() {
         this.scene.pushMatrix()
         this.scene.scale(0.5, 0.5, 0.5);

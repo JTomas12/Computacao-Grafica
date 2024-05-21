@@ -12,12 +12,12 @@ import { MySphere } from '../geometric/MySphere.js';
 export class MyPollen extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.sphere = new MySphere(scene, 0.5, 20, 20, 0, 2, 2);
+        this.sphere = new MySphere(scene, 0.5, 20, 20, 0, 2, 2); // Create a sphere with radius 0.5 and an enlongated shape
         this.initMaterials();
-        this.randomAngle = Math.random() * 2 * Math.PI;
+        this.randomAngle = Math.random() * 2 * Math.PI; // Random angle for the pollen to rotate
     }
 
-
+    // Initializes the pollen material
     initMaterials() {
 
         this.pollenMaterial = new CGFappearance(this.scene);
@@ -30,11 +30,11 @@ export class MyPollen extends CGFobject {
 
     }
 
+    // Display the pollen
     display() {
         this.scene.pushMatrix()
-        this.scene.translate(0, 0, 0);
-        this.scene.rotate(this.randomAngle, 0, 0, 1);
-        this.pollenMaterial.apply();
+        this.scene.rotate(this.randomAngle, 0, 0, 1); // Rotate the pollen
+        this.pollenMaterial.apply(); // Apply the pollen material
         this.sphere.display();
         this.scene.popMatrix()
     }

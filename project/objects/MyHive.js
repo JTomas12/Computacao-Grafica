@@ -14,7 +14,7 @@ export class MyHive extends CGFobject {
         super(scene);
         this.texture1 = new CGFtexture(this.scene, "./images/white_wood.jpg");
         this.texture2 = new CGFtexture(this.scene, "./images/hive_texture.jpg");
-        this.prim = new MyPrism(scene, 3, 1);
+        this.prim = new MyPrism(scene, 3, 1); 
         this.cube = new MyUnitCube(scene, this.texture2, this.texture1, this.texture1, this.texture1, this.texture1, this.texture1);
         this.pollenPresent = pollenPresent;
         this.pollen = new MyPollen(scene);
@@ -40,13 +40,16 @@ export class MyHive extends CGFobject {
 
     }
 
+    // Display the hive, including the cube, prism, and pollen if present
     display() {
 
         this.scene.pushMatrix();
 
+        // Translate and scale the entire hive
         this.scene.translate(-11, 3, -0.2);
         this.scene.scale(3, 3, 3);
 
+        // Display the prism part of the hive
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 0, 0, 1);
         this.scene.scale(0.4, 0.7, 0.5);
@@ -55,12 +58,13 @@ export class MyHive extends CGFobject {
         this.prim.display();
         this.scene.popMatrix();
 
-
+        // Display the cube part of the hive
         this.scene.pushMatrix();
         this.cubeMaterial.apply();
         this.cube.display();
         this.scene.popMatrix();
 
+        // Display the pollen if present
         if(this.pollenPresent){
             this.scene.pushMatrix();
             this.scene.translate(0, 0.6, 0.5);

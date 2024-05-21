@@ -1,4 +1,6 @@
 export class MyAnimator {
+
+    // Constructor to initialize the animation with start and end values, duration, loop flag, and active state
     constructor(startVal, endVal, animDurationSecs, loop, active) {
         this.startVal = startVal;
         this.endVal = endVal;
@@ -11,24 +13,29 @@ export class MyAnimator {
         this.lastIteration = false;
     }
 
+    // Abstract method to be implemented by subclasses
     movementFunction(time) {
         throw new Error('Subclass must implement abstract method');
     }
 
+    // Abstract method to be implemented by subclasses
     updatePositionObj(timeSinceAnimationStart, vector) {
         throw new Error('Subclass must implement abstract method');
     }
 
+    // Enable the animation
     enable(timeSinceAppStart) {
         this.active = true;
         this.last = timeSinceAppStart;
         this.lastIteration = false;
     }
 
+    // Disable the animation
     disable() {
         this.active = false;
     }
 
+    // Update the animation based on elapsed time and update the position vector accordingly
     update(elapsedTimeSecs, vector) {
 
         if (this.active) {

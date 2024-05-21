@@ -28,19 +28,19 @@ export class MyBee extends CGFobject {
         this.wingRotation = Math.PI / 8;
         this.oscillationOffset = 0;
         this.orientation = 1;
-        this.lastOrientation = 1;
+        this.lastOrientation = 1; // Last orientation used
         this.speed = 0;
-        this.lastSpeed = 0;
-        this.lastSpeedFactor = 1;
+        this.lastSpeed = 0; // Last speed used
+        this.lastSpeedFactor = 1; // Last speed factor used
         this.scale = 1;
         this.flowerPosition = {x: 0, y: 5, z: 0};
         this.hivePosition = {x: -10, y: 5, z: 2};
-        this.descending = false;
-        this.ascending = false;
-        this.headingToHive = false;
-        this.pollenPresent = pollenPresent;
-        this.firstFKeyPress = false;
-        this.firstOKeyPress = false;
+        this.descending = false; // Is bee descending
+        this.ascending = false; // Is bee ascending
+        this.headingToHive = false; // Is bee heading to the hive
+        this.pollenPresent = pollenPresent; // Pollen status in flower
+        this.firstFKeyPress = false; // First time the F key is pressed
+        this.firstOKeyPress = false; // First time the O key is pressed
         this.initMaterials();
         this.animator = new MyAnimatorMovement(1, 2*Math.PI, 100, true, true);
 
@@ -228,10 +228,14 @@ export class MyBee extends CGFobject {
 
 
     }
+
+    // Rotate the bee by a specified value
     turn(v) {
         this.orientation += v
     }
 
+
+    // Accelerate or decelerate the bee, capping speed at maxSpeed and adjusting based on acceleration and deceleration rates
     accelerate(v, maxSpeed,beeaccelerationRate,beedecelerationRate) {
     
         // Acceleration
@@ -243,6 +247,8 @@ export class MyBee extends CGFobject {
             this.speed = Math.max(this.speed + v * beedecelerationRate, 0);
         }
     }
+
+    // Reset bee's position, speed, orientation, and pollen status to default values
     reset() {
         this.speed = 0
         this.lastSpeed = 0
@@ -258,6 +264,7 @@ export class MyBee extends CGFobject {
         this.position = {x: this.defaultposition.x, y: this.defaultposition.y, z: this.defaultposition.z}
     }
     
+    // Handle keyboard inputs to control the bee's actions
     handlekeys(factor /*, elapsedTime*/) {
         if (this.scene.gui.isKeyPressed("KeyW")) {
             this.accelerate(factor,this.scene.beemaxSpeed,this.scene.accelerationRate,this.scene.decelerationRate)
@@ -304,7 +311,7 @@ export class MyBee extends CGFobject {
         }
     }
 
-
+    // Handle the descent of the bee to the flower position
     descendToFlower() {
         if (this.position.y > this.flowerPosition.y) {
             this.position.y = this.lerp(this.position.y, this.flowerPosition.y, 0.1);
@@ -321,7 +328,7 @@ export class MyBee extends CGFobject {
         }
     }
     
-    
+    // Handle the ascent of the bee back to its default position
     ascendToDefault() {
         if (this.position.y < this.defaultposition.y) {
             this.position.y = this.lerp(this.position.y, this.defaultposition.y, 0.1);
@@ -334,6 +341,7 @@ export class MyBee extends CGFobject {
         }
     }
 
+    // Check if the bee is oriented towards the flower
     isFlowerOriented(){
         let z_dif= this.flowerPosition.z - this.position.z;
         let mod_orientation = this.orientation % (2*Math.PI);
@@ -341,6 +349,7 @@ export class MyBee extends CGFobject {
         return ((bool_orientation)&&(z_dif>=0) ) || (!bool_orientation && z_dif<=0);
     }
     
+    // Check if the bee is oriented towards the hive
     isHiveOriented(){
         let z_dif= this.hivePosition.z - this.position.z;
         let mod_orientation = this.orientation % (2*Math.PI);
@@ -348,6 +357,7 @@ export class MyBee extends CGFobject {
         return ((bool_orientation)&&(z_dif>0) ) || (!bool_orientation && z_dif<0);
     }
     
+    // Move the bee towards the hive when it's carrying pollen and it has speed
     moveToHive() {
 
         if (this.headingToHive ) {
@@ -401,9 +411,12 @@ export class MyBee extends CGFobject {
         }
     }
 
+    // Linearly interpolate between start and end by a factor of t
     lerp(start, end, t) {
         return start * (1 - t) + end * t;
     }
+
+    // Update the bee's state based on elapsed time and control inputs
     update(elapsedTime, scaleFactor, speedFactor) {
 
         this.scale = scaleFactor;
@@ -425,6 +438,7 @@ export class MyBee extends CGFobject {
         
     }
 
+    // Update the bee's parameters based on the animator's parameters
     updateParams() {
 
       
